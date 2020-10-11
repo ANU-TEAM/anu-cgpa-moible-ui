@@ -1,4 +1,6 @@
+import 'package:anucgpa/models/YearsListModel.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import './screens/YearsScreen.dart';
 
 void main() {
@@ -16,7 +18,10 @@ class MyApp extends StatelessWidget {
         primaryColor: Colors.yellow[800],
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: YearsPage(),
+      home: ChangeNotifierProvider(
+        create: (context) => YearsListModel(),
+        child: YearsScreen(),
+      ),
     );
   }
 }
