@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
       ),
       home: AnimatedSplashScreen(
         duration: 3000,
-        splash: AssetImage("assets/images/anulogo.png"),
+        splash: Image.asset("assets/images/anulogo.png"),
         splashTransition: SplashTransition.fadeTransition,
         pageTransitionType: PageTransitionType.scale,
         backgroundColor: Colors.yellow[800],
