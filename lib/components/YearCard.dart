@@ -75,7 +75,7 @@ class YearCard extends StatelessWidget {
                         height: 10,
                       ),
                       Text(
-                        "${this.yearCgpa}",
+                        "${this.yearCgpa.toStringAsFixed(2)}",
                         style: TextStyle(
                             color: Colors.yellow[700],
                             fontSize: 54,

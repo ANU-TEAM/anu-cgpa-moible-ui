@@ -1,5 +1,6 @@
 import 'package:anucgpa/components/YearCard.dart';
 import 'package:anucgpa/models/YearsListModel.dart';
+import 'package:anucgpa/screens/YearDetailScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
@@ -38,22 +39,32 @@ class YearsScreen extends StatelessWidget {
                   itemBuilder: (BuildContext context, int index) {
                     return Padding(
                       padding: const EdgeInsets.symmetric(vertical: 8.0),
-                      child: Container(
-                        child: Slidable(
-                          actionPane: SlidableDrawerActionPane(),
-                          actionExtentRatio: 0.25,
-                          closeOnScroll: false,
-                          child: yearsList.years[index],
-                          secondaryActions: <Widget>[
-                            IconSlideAction(
-                              caption: 'Delete',
-                              color: Colors.red[700],
-                              icon: Icons.delete,
-                              onTap: () {
-                                yearsList.remove(index);
-                              },
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => YearDetailScreen(
+                                  year: yearsList.years[index]),
                             ),
-                          ],
+                          );
+                        },
+                        child: Container(
+                          child: Slidable(
+                            actionPane: SlidableDrawerActionPane(),
+                            actionExtentRatio: 0.25,
+                            child: yearsList.years[index],
+                            secondaryActions: <Widget>[
+                              IconSlideAction(
+                                caption: 'Delete',
+                                color: Colors.red[700],
+                                icon: Icons.delete,
+                                onTap: () {
+                                  yearsList.remove(index);
+                                },
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     );
@@ -65,8 +76,7 @@ class YearsScreen extends StatelessWidget {
           floatingActionButton: FloatingActionButton(
             onPressed: () {
               yearsList.add(YearCard(
-                  yearNumber: yearsList.years.length + 1, yearCgpa: 2));
-              print(yearsList.numberOfYears);
+                  yearNumber: yearsList.years.length + 1, yearCgpa: 0));
             },
             tooltip: 'Increment',
             child: Icon(Icons.add),

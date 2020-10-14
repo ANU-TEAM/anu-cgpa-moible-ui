@@ -8,15 +8,15 @@ class YearsListModel extends ChangeNotifier {
 
   UnmodifiableListView<YearCard> get years => UnmodifiableListView(_years);
 
-  int get numberOfYears => _years.length;
-
   void add(YearCard year) {
     _years.add(year);
     notifyListeners();
   }
 
   void remove(int index) {
-    _years.removeAt(index);
-    notifyListeners();
+    if (index == _years.length - 1) {
+      _years.removeAt(index);
+      notifyListeners();
+    }
   }
 }
