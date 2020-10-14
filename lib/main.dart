@@ -1,8 +1,9 @@
-import 'package:animated_splash/animated_splash.dart';
 import 'package:anucgpa/models/YearsListModel.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import './screens/YearsScreen.dart';
+import 'package:animated_splash_screen/animated_splash_screen.dart';
+import 'package:page_transition/page_transition.dart';
 
 void main() {
   runApp(MyApp());
@@ -21,11 +22,13 @@ class MyApp extends StatelessWidget {
         primaryColor: Colors.yellow[800],
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: AnimatedSplash(
-        imagePath: 'assets/images/anulogo.png',
-        duration: 2500,
-        type: AnimatedSplashType.StaticDuration,
-        home: ChangeNotifierProvider(
+      home: AnimatedSplashScreen(
+        duration: 3000,
+        splash: AssetImage("assets/images/anulogo.png"),
+        splashTransition: SplashTransition.fadeTransition,
+        pageTransitionType: PageTransitionType.scale,
+        backgroundColor: Colors.yellow[800],
+        nextScreen: ChangeNotifierProvider(
           create: (context) => YearsListModel(),
           child: YearsScreen(),
         ),
