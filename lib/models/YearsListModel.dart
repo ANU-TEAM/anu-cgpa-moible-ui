@@ -2,6 +2,7 @@ import 'dart:collection';
 
 import 'package:anucgpa/components/YearCard.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 
 class YearsListModel extends ChangeNotifier {
   final List<YearCard> _years = [];
@@ -9,8 +10,10 @@ class YearsListModel extends ChangeNotifier {
   UnmodifiableListView<YearCard> get years => UnmodifiableListView(_years);
 
   void add(YearCard year) {
-    _years.add(year);
-    notifyListeners();
+    if (_years.length < 5) {
+      _years.add(year);
+      notifyListeners();
+    }
   }
 
   void remove(int index) {
