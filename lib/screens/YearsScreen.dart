@@ -79,7 +79,11 @@ class YearsScreen extends StatelessWidget {
                   yearNumber: yearsList.years.length + 1, yearCgpa: 0));
             },
             tooltip: 'Increment',
-            child: Icon(Icons.add),
+            child: Icon(
+              Icons.add,
+              size: 32,
+              color: Colors.white,
+            ),
           ),
         ),
       ),
