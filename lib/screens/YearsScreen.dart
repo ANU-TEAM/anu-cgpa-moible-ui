@@ -29,7 +29,157 @@ class YearsScreen extends StatelessWidget {
             ],
           ),
           drawer: Drawer(
-            child: Text('Hello'),
+                child: Container(
+                  color: Colors.green[300],
+                    child: ListView(
+                      children: [
+                        ListTile(
+                          contentPadding: EdgeInsets.only(top: 20),
+                          leading: Icon(
+                            Icons.person,
+                            size: 45,
+                            color: Colors.white,
+                          ),
+                          title: Text(
+                            'Owusu Victor',
+                            style: TextStyle(
+                                fontWeight: FontWeight.w500,
+                                color: Colors.white,
+                                fontSize: 20),
+                          ),
+                          subtitle: Text(
+                            'vitech180@gmail.com',
+                            style: TextStyle(
+                                fontWeight: FontWeight.w500,
+                                color: Colors.white,
+                                fontSize: 20),
+                          ),
+                          onTap: (){},
+                        ),
+
+                        //Overview
+                        ListTile(
+                          contentPadding: EdgeInsets.only(top: 20),
+                          leading: Icon(
+                            Icons.trending_up,
+                            size: 45,
+                            color: Colors.white,
+                          ),
+                          title: Text(
+                            'Overview',
+                            style: TextStyle(
+                                fontWeight: FontWeight.w500,
+                                color: Colors.white,
+                                fontSize: 20),
+                          ),
+                        ),
+
+                        //years
+                        ListTile(
+                          contentPadding: EdgeInsets.only(top: 20),
+                          leading: Icon(
+                            Icons.school,
+                            size: 45,
+                            color: Colors.white,
+                          ),
+                          title: Text(
+                            'Year',
+                            style: TextStyle(
+                                fontWeight: FontWeight.w500,
+                                color: Colors.white,
+                                fontSize: 20),
+                          ),
+                        ),
+
+                        //Compare
+                        ListTile(
+                          contentPadding: EdgeInsets.only(top: 20),
+                          leading: Icon(
+                            Icons.compare_arrows,
+                            size: 45,
+                            color: Colors.white,
+                          ),
+                          title: Text(
+                            'Compare',
+                            style: TextStyle(
+                                fontWeight: FontWeight.w500,
+                                color: Colors.white,
+                                fontSize: 20),
+                          ),
+                        ),
+
+                        //Profile
+                        ListTile(
+                          contentPadding: EdgeInsets.only(top: 20),
+                          leading: Icon(
+                            Icons.person,
+                            size: 45,
+                            color: Colors.white,
+                          ),
+                          title: Text(
+                            'Profile',
+                            style: TextStyle(
+                                fontWeight: FontWeight.w500,
+                                color: Colors.white,
+                                fontSize: 20),
+                          ),
+                        ),
+
+                        //Synch
+                        ListTile(
+                          contentPadding: EdgeInsets.only(top: 20),
+                          leading: Icon(
+                            Icons.sync,
+                            size: 45,
+                            color: Colors.white,
+                          ),
+                          title: Text(
+                            'Synch',
+                            style: TextStyle(
+                                fontWeight: FontWeight.w500,
+                                color: Colors.white,
+                                fontSize: 20),
+                          ),
+                        ),
+
+                        //About
+                        ListTile(
+                          contentPadding: EdgeInsets.only(top: 20),
+                          leading: Icon(
+                            Icons.info_outline,
+                            size: 45,
+                            color: Colors.white,
+                          ),
+                          title: Text(
+                            'About',
+                            style: TextStyle(
+                                fontWeight: FontWeight.w500,
+                                color: Colors.white,
+                                fontSize: 20),
+                          ),
+                        ),
+
+                        //Logout
+                        ListTile(
+                          contentPadding: EdgeInsets.only(top: 20),
+                          leading: Icon(
+                            Icons.exit_to_app,
+                            size: 45,
+                            color: Colors.white,
+                          ),
+                          title: Text(
+                            'Logout',
+                            style: TextStyle(
+                                fontWeight: FontWeight.w500,
+                                color: Colors.white,
+                                fontSize: 20),
+                          ),
+                        ),
+                      ],
+                    )
+                ),
+            //Name
+
           ),
           body: Container(
             child: Consumer<YearsListModel>(
@@ -73,6 +223,7 @@ class YearsScreen extends StatelessWidget {
               },
             ),
           ),
+
           floatingActionButton: FloatingActionButton(
             onPressed: () {
               yearsList.add(YearCard(
