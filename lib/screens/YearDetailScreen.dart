@@ -1,3 +1,4 @@
+import 'package:anucgpa/components/SemesterCgpaCard.dart';
 import 'package:anucgpa/components/YearCard.dart';
 import 'package:anucgpa/models/SemesterModel.dart';
 import 'package:flutter/material.dart';
@@ -58,13 +59,43 @@ class YearDetailScreen extends StatelessWidget {
               child: TabBarView(
                 children: [
                   Center(
-                    child: Text("${semesters[0].grade}"),
+                    child: ListView(
+                      children: [
+                        Container(
+                          padding: EdgeInsets.all(15),
+                          height: 230,
+                          child: SemesterCgpaCard(
+                            semestercgpa: semesters[0].grade,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                   Center(
-                    child: Text("${semesters[1].grade}"),
+                    child: ListView(
+                      children: [
+                        Container(
+                          padding: EdgeInsets.all(15),
+                          height: 230,
+                          child: SemesterCgpaCard(
+                            semestercgpa: semesters[1].grade,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                   Center(
-                    child: Text("${semesters[2].grade}"),
+                    child: ListView(
+                      children: [
+                        Container(
+                          padding: EdgeInsets.all(15),
+                          height: 230,
+                          child: SemesterCgpaCard(
+                            semestercgpa: semesters[2].grade,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),
