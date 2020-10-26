@@ -4,12 +4,20 @@ import 'package:anucgpa/screens/YearDetailScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+//import 'OverviewScreen.dart';
+import 'AboutScreen.dart';
+import 'CompareScreen.dart';
+import 'LogOutScreen.dart';
+import 'NavScreens.dart';
+import 'OverviewScreen.dart';
+import 'ProfileScreen.dart';
+import 'SyncScreen.dart';
+
 
 class YearsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final yearsList = context.watch<YearsListModel>();
-
     return Drawer(
       child: SafeArea(
         child: Scaffold(
@@ -28,158 +36,164 @@ class YearsScreen extends StatelessWidget {
               ),
             ],
           ),
-          drawer: Drawer(
-                child: Container(
-                  color: Colors.green[300],
-                    child: ListView(
-                      children: [
-                        ListTile(
-                          contentPadding: EdgeInsets.only(top: 20),
-                          leading: Icon(
-                            Icons.person,
-                            size: 45,
-                            color: Colors.white,
-                          ),
-                          title: Text(
-                            'Owusu Victor',
-                            style: TextStyle(
-                                fontWeight: FontWeight.w500,
-                                color: Colors.white,
-                                fontSize: 20),
-                          ),
-                          subtitle: Text(
-                            'vitech180@gmail.com',
-                            style: TextStyle(
-                                fontWeight: FontWeight.w500,
-                                color: Colors.white,
-                                fontSize: 20),
-                          ),
-                          onTap: (){},
-                        ),
-
-                        //Overview
-                        ListTile(
-                          contentPadding: EdgeInsets.only(top: 20),
-                          leading: Icon(
-                            Icons.trending_up,
-                            size: 45,
-                            color: Colors.white,
-                          ),
-                          title: Text(
-                            'Overview',
-                            style: TextStyle(
-                                fontWeight: FontWeight.w500,
-                                color: Colors.white,
-                                fontSize: 20),
-                          ),
-                        ),
-
-                        //years
-                        ListTile(
-                          contentPadding: EdgeInsets.only(top: 20),
-                          leading: Icon(
-                            Icons.school,
-                            size: 45,
-                            color: Colors.white,
-                          ),
-                          title: Text(
-                            'Year',
-                            style: TextStyle(
-                                fontWeight: FontWeight.w500,
-                                color: Colors.white,
-                                fontSize: 20),
-                          ),
-                        ),
-
-                        //Compare
-                        ListTile(
-                          contentPadding: EdgeInsets.only(top: 20),
-                          leading: Icon(
-                            Icons.compare_arrows,
-                            size: 45,
-                            color: Colors.white,
-                          ),
-                          title: Text(
-                            'Compare',
-                            style: TextStyle(
-                                fontWeight: FontWeight.w500,
-                                color: Colors.white,
-                                fontSize: 20),
-                          ),
-                        ),
-
-                        //Profile
-                        ListTile(
-                          contentPadding: EdgeInsets.only(top: 20),
-                          leading: Icon(
-                            Icons.person,
-                            size: 45,
-                            color: Colors.white,
-                          ),
-                          title: Text(
-                            'Profile',
-                            style: TextStyle(
-                                fontWeight: FontWeight.w500,
-                                color: Colors.white,
-                                fontSize: 20),
-                          ),
-                        ),
-
-                        //Synch
-                        ListTile(
-                          contentPadding: EdgeInsets.only(top: 20),
-                          leading: Icon(
-                            Icons.sync,
-                            size: 45,
-                            color: Colors.white,
-                          ),
-                          title: Text(
-                            'Synch',
-                            style: TextStyle(
-                                fontWeight: FontWeight.w500,
-                                color: Colors.white,
-                                fontSize: 20),
-                          ),
-                        ),
-
-                        //About
-                        ListTile(
-                          contentPadding: EdgeInsets.only(top: 20),
-                          leading: Icon(
-                            Icons.info_outline,
-                            size: 45,
-                            color: Colors.white,
-                          ),
-                          title: Text(
-                            'About',
-                            style: TextStyle(
-                                fontWeight: FontWeight.w500,
-                                color: Colors.white,
-                                fontSize: 20),
-                          ),
-                        ),
-
-                        //Logout
-                        ListTile(
-                          contentPadding: EdgeInsets.only(top: 20),
-                          leading: Icon(
-                            Icons.exit_to_app,
-                            size: 45,
-                            color: Colors.white,
-                          ),
-                          title: Text(
-                            'Logout',
-                            style: TextStyle(
-                                fontWeight: FontWeight.w500,
-                                color: Colors.white,
-                                fontSize: 20),
-                          ),
-                        ),
-                      ],
-                    )
+            //body: list[index],
+          drawer:(
+          Container(
+            child: ListView(
+              children: [
+                ListTile(
+                  contentPadding: EdgeInsets.only(top: 20),
+                  leading: Icon(
+                    Icons.person,
+                    size: 45,
+                    color: Colors.white,
+                  ),
+                  title: Text(
+                    'Owusu Victor',
+                    style: TextStyle(
+                        fontWeight: FontWeight.w500,
+                        color: Colors.white,
+                        fontSize: 20),
+                  ),
+                  subtitle: Text(
+                    'vitech180@gmail.com',
+                    style: TextStyle(
+                        fontWeight: FontWeight.w500,
+                        color: Colors.white,
+                        fontSize: 20),
+                  ),
                 ),
-            //Name
 
+                //Overview
+                ListTile(
+                  contentPadding: EdgeInsets.only(top: 20),
+                  leading: Icon(
+                    Icons.trending_up,
+                    size: 45,
+                    color: Colors.white,
+                  ),
+                  title: Text(
+                    'Overview',
+                    style: TextStyle(
+                        fontWeight: FontWeight.w500,
+                        color: Colors.white,
+                        fontSize: 20),
+                  ),
+                  onTap: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (BuildContext context)=>OverviewScreen(),),);
+                  },
+                ),
+
+                //years
+                ListTile(
+                  contentPadding: EdgeInsets.only(top: 20),
+                  leading: Icon(
+                    Icons.school,
+                    size: 45,
+                    color: Colors.white,
+                  ),
+                  title: Text(
+                    'Year',
+                    style: TextStyle(
+                        fontWeight: FontWeight.w500,
+                        color: Colors.white,
+                        fontSize: 20),
+                  ),
+                  onTap: () { Navigator.push(context, MaterialPageRoute(builder: (BuildContext context)=>YearsScreen(),),);},
+                ),
+
+                //Compare
+                ListTile(
+                  contentPadding: EdgeInsets.only(top: 20),
+                  leading: Icon(
+                    Icons.compare_arrows,
+                    size: 45,
+                    color: Colors.white,
+                  ),
+                  title: Text(
+                    'Compare',
+                    style: TextStyle(
+                        fontWeight: FontWeight.w500,
+                        color: Colors.white,
+                        fontSize: 20),
+                  ),
+                  onTap: ()  { Navigator.push(context, MaterialPageRoute(builder: (BuildContext context)=>CompareScreen(),),);},
+                ),
+
+                //Profile
+                ListTile(
+                  contentPadding: EdgeInsets.only(top: 20),
+                  leading: Icon(
+                    Icons.person,
+                    size: 45,
+                    color: Colors.white,
+                  ),
+                  title: Text(
+                    'Profile',
+                    style: TextStyle(
+                        fontWeight: FontWeight.w500,
+                        color: Colors.white,
+                        fontSize: 20),
+                  ),
+                  onTap: ()  { Navigator.push(context, MaterialPageRoute(builder: (BuildContext context)=>ProfileScreen(),),);},
+                ),
+
+                //Synch
+                ListTile(
+                  contentPadding: EdgeInsets.only(top: 20),
+                  leading: Icon(
+                    Icons.sync,
+                    size: 45,
+                    color: Colors.white,
+                  ),
+                  title: Text(
+                    'Synch',
+                    style: TextStyle(
+                        fontWeight: FontWeight.w500,
+                        color: Colors.white,
+                        fontSize: 20),
+                  ),
+                  onTap: ()  { Navigator.push(context, MaterialPageRoute(builder: (BuildContext context)=>SyncScreen(),),);},
+                ),
+
+                //About
+                ListTile(
+                  contentPadding: EdgeInsets.only(top: 20),
+                  leading: Icon(
+                    Icons.info_outline,
+                    size: 45,
+                    color: Colors.white,
+                  ),
+                  title: Text(
+                    'About',
+                    style: TextStyle(
+                        fontWeight: FontWeight.w500,
+                        color: Colors.white,
+                        fontSize: 20),
+                  ),
+                  onTap: ()  { Navigator.push(context, MaterialPageRoute(builder: (BuildContext context)=>AboutScreen(),),);},
+                ),
+
+                //Logout
+                ListTile(
+                  contentPadding: EdgeInsets.only(top: 20),
+                  leading: Icon(
+                    Icons.exit_to_app,
+                    size: 45,
+                    color: Colors.white,
+                  ),
+                  title: Text(
+                    'Logout',
+                    style: TextStyle(
+                        fontWeight: FontWeight.w500,
+                        color: Colors.white,
+                        fontSize: 20),
+                  ),
+                  onTap: () { Navigator.push(context, MaterialPageRoute(builder: (BuildContext context)=>LodOutScreen(),),);},
+                )
+              ],
+            ),
+          )
           ),
           body: Container(
             child: Consumer<YearsListModel>(
@@ -223,7 +237,6 @@ class YearsScreen extends StatelessWidget {
               },
             ),
           ),
-
           floatingActionButton: FloatingActionButton(
             onPressed: () {
               yearsList.add(YearCard(
@@ -241,3 +254,181 @@ class YearsScreen extends StatelessWidget {
     );
   }
 }
+
+// class MyDrawer extends StatefulWidget {
+//
+//   @override
+//   _MyDrawerState createState() => _MyDrawerState();
+// }
+
+// class _MyDrawerState extends State<MyDrawer> {
+//   @override
+//   Widget build(BuildContext context) {
+//     return SizedBox(
+//       width: MediaQuery.of(context).size.width * 0.8,
+//       child: Drawer(
+//         child: Scaffold(
+//           drawer: Drawer(
+//             child: Container(
+//               color: Colors.green[300],
+//               child: ListView(
+//                 children: [
+//                   ListTile(
+//                     contentPadding: EdgeInsets.only(top: 20),
+//                     leading: Icon(
+//                       Icons.person,
+//                       size: 45,
+//                       color: Colors.white,
+//                     ),
+//                     title: Text(
+//                       'Owusu Victor',
+//                       style: TextStyle(
+//                           fontWeight: FontWeight.w500,
+//                           color: Colors.white,
+//                           fontSize: 20),
+//                     ),
+//                     subtitle: Text(
+//                       'vitech180@gmail.com',
+//                       style: TextStyle(
+//                           fontWeight: FontWeight.w500,
+//                           color: Colors.white,
+//                           fontSize: 20),
+//                     ),
+//                   ),
+//
+//                   //Overview
+//                   ListTile(
+//                       contentPadding: EdgeInsets.only(top: 20),
+//                       leading: Icon(
+//                         Icons.trending_up,
+//                         size: 45,
+//                         color: Colors.white,
+//                       ),
+//                       title: Text(
+//                         'Overview',
+//                         style: TextStyle(
+//                             fontWeight: FontWeight.w500,
+//                             color: Colors.white,
+//                             fontSize: 20),
+//                       ),
+//                       onTap: () {
+//                         Navigator.push(context, MaterialPageRoute(builder: (BuildContext context)=>OverviewScreen(),),);
+//                       },
+//                   ),
+//
+//                   //years
+//                   ListTile(
+//                       contentPadding: EdgeInsets.only(top: 20),
+//                       leading: Icon(
+//                         Icons.school,
+//                         size: 45,
+//                         color: Colors.white,
+//                       ),
+//                       title: Text(
+//                         'Year',
+//                         style: TextStyle(
+//                             fontWeight: FontWeight.w500,
+//                             color: Colors.white,
+//                             fontSize: 20),
+//                       ),
+//                       onTap: () {},
+//                   ),
+//
+//                   //Compare
+//                   ListTile(
+//                       contentPadding: EdgeInsets.only(top: 20),
+//                       leading: Icon(
+//                         Icons.compare_arrows,
+//                         size: 45,
+//                         color: Colors.white,
+//                       ),
+//                       title: Text(
+//                         'Compare',
+//                         style: TextStyle(
+//                             fontWeight: FontWeight.w500,
+//                             color: Colors.white,
+//                             fontSize: 20),
+//                       ),
+//                       onTap: ()  {},
+//                   ),
+//
+//                   //Profile
+//                   ListTile(
+//                       contentPadding: EdgeInsets.only(top: 20),
+//                       leading: Icon(
+//                         Icons.person,
+//                         size: 45,
+//                         color: Colors.white,
+//                       ),
+//                       title: Text(
+//                         'Profile',
+//                         style: TextStyle(
+//                             fontWeight: FontWeight.w500,
+//                             color: Colors.white,
+//                             fontSize: 20),
+//                       ),
+//                       onTap: ()  {},
+//                   ),
+//
+//                   //Synch
+//                   ListTile(
+//                       contentPadding: EdgeInsets.only(top: 20),
+//                       leading: Icon(
+//                         Icons.sync,
+//                         size: 45,
+//                         color: Colors.white,
+//                       ),
+//                       title: Text(
+//                         'Synch',
+//                         style: TextStyle(
+//                             fontWeight: FontWeight.w500,
+//                             color: Colors.white,
+//                             fontSize: 20),
+//                       ),
+//                       onTap: ()  {},
+//                   ),
+//
+//                   //About
+//                   ListTile(
+//                       contentPadding: EdgeInsets.only(top: 20),
+//                       leading: Icon(
+//                         Icons.info_outline,
+//                         size: 45,
+//                         color: Colors.white,
+//                       ),
+//                       title: Text(
+//                         'About',
+//                         style: TextStyle(
+//                             fontWeight: FontWeight.w500,
+//                             color: Colors.white,
+//                             fontSize: 20),
+//                       ),
+//                       onTap: ()  {},
+//                   ),
+//
+//                   //Logout
+//                   ListTile(
+//                     contentPadding: EdgeInsets.only(top: 20),
+//                     leading: Icon(
+//                       Icons.exit_to_app,
+//                       size: 45,
+//                       color: Colors.white,
+//                     ),
+//                     title: Text(
+//                       'Logout',
+//                       style: TextStyle(
+//                           fontWeight: FontWeight.w500,
+//                           color: Colors.white,
+//                           fontSize: 20),
+//                     ),
+//                     onTap: () {},
+//                   )
+//                 ],
+//               ),
+//             ),
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+// }
