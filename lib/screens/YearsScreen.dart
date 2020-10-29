@@ -5,12 +5,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:linear_gradient/linear_gradient.dart';
-//import 'OverviewScreen.dart';
 import 'AboutScreen.dart';
 import 'CompareScreen.dart';
 import 'LogOutScreen.dart';
-import 'NavScreens.dart';
 import 'OverviewScreen.dart';
 import 'ProfileScreen.dart';
 import 'SyncScreen.dart';
@@ -18,7 +15,7 @@ import 'SyncScreen.dart';
 
 class YearsScreen extends StatelessWidget {
    //
-    Color gradientStart = Colors.yellow[500];
+    Color gradientStart = Colors.yellow[300];
     Color gradientEnd = Colors.yellow[600];
   @override
   Widget build(BuildContext context) {
@@ -46,22 +43,22 @@ class YearsScreen extends StatelessWidget {
           Container(
             padding: EdgeInsets.only(left: 50),
              decoration: new BoxDecoration(
-               gradient: LinearGradient(colors: [
-                 Colors.yellow[600], Colors.yellow[800],
-               ],
-                 begin: Alignment.topRight,
-                 end:  Alignment.bottomRight,
-                 stops: [0.1, 2.0],
-               )
+               // gradient: LinearGradient(colors: [
+               //   Colors.yellow[800], Colors.yellow[600],
+               // ],
+               //   begin: Alignment.topRight,
+               //   end:  Alignment.bottomRight,
+               //   stops: [0.1, 0.0],
+               // )
                // gradient: LinearGradientStyle.linearGradient(
                //   orientation: LinearGradientStyle.GRADIENT_TYPE_MANGO,
                //
                // )
-              // gradient: new LinearGradient(colors: [gradientStart, gradientEnd],
-              // begin: new FractionalOffset(0.6, 0.0),
-              //   end: new FractionalOffset(0.0, 5.0),
-              //   stops: [0.1, 0.1],
-              // )
+              gradient: new LinearGradient(colors: [gradientStart, gradientEnd],
+              begin: new FractionalOffset(0.0, 0.0),
+                end: new FractionalOffset(1.0, 1.0),
+                //stops: [1.1, 0.1],
+              )
 
             ),
 

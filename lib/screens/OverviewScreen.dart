@@ -4,10 +4,12 @@ import 'package:flutter/material.dart';
 class OverviewScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.white,
-      child: Center(
-        child: Text('Overview'),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Overview', style: TextStyle(
+          fontSize: 25,
+          color: Colors.white
+        ),),
       ),
     );
   }
