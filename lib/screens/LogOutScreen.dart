@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
-
-class LodOutScreen extends StatelessWidget {
+class LogOutScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -12,4 +11,3 @@ class LodOutScreen extends StatelessWidget {
     );
   }
 }
-
