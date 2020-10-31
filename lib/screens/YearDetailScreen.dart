@@ -70,58 +70,94 @@ class YearDetailScreen extends StatelessWidget {
               child: TabBarView(
                 physics: NeverScrollableScrollPhysics(),
                 children: [
-                  Center(
-                    child: ListView(
-                      children: [
-                        Container(
-                          padding: EdgeInsets.all(10),
-                          height: 230,
-                          child: SemesterCgpaCard(
-                            semestercgpa: semesters[0].grade,
+                  Scaffold(
+                    body: Center(
+                      child: ListView(
+                        children: [
+                          Container(
+                            padding: EdgeInsets.all(10),
+                            height: 230,
+                            child: SemesterCgpaCard(
+                              semestercgpa: semesters[0].grade,
+                            ),
                           ),
-                        ),
-                        Container(
-                          padding: EdgeInsets.all(10),
-                          // Course List
-                          child: SemesterCourseList(),
-                        ),
-                      ],
+                          Container(
+                            padding: EdgeInsets.all(10),
+                            // Course List
+                            child: SemesterCourseList(),
+                          ),
+                        ],
+                      ),
+                    ),
+                    floatingActionButton: FloatingActionButton(
+                      backgroundColor: Colors.yellow[600],
+                      onPressed: () {},
+                      tooltip: 'Increment',
+                      child: Icon(
+                        Icons.add,
+                        size: 32,
+                        color: Colors.white,
+                      ),
                     ),
                   ),
-                  Center(
-                    child: ListView(
-                      children: [
-                        Container(
-                          padding: EdgeInsets.all(10),
-                          height: 230,
-                          child: SemesterCgpaCard(
-                            semestercgpa: semesters[1].grade,
+                  Scaffold(
+                    body: Center(
+                      child: ListView(
+                        children: [
+                          Container(
+                            padding: EdgeInsets.all(10),
+                            height: 230,
+                            child: SemesterCgpaCard(
+                              semestercgpa: semesters[1].grade,
+                            ),
                           ),
-                        ),
-                        Container(
-                          padding: EdgeInsets.all(10),
-                          // Course List
-                          child: SemesterCourseList(),
-                        ),
-                      ],
+                          Container(
+                            padding: EdgeInsets.all(10),
+                            // Course List
+                            child: SemesterCourseList(),
+                          ),
+                        ],
+                      ),
+                    ),
+                    floatingActionButton: FloatingActionButton(
+                      backgroundColor: Colors.yellow[600],
+                      onPressed: () {},
+                      tooltip: 'Increment',
+                      child: Icon(
+                        Icons.add,
+                        size: 32,
+                        color: Colors.white,
+                      ),
                     ),
                   ),
-                  Center(
-                    child: ListView(
-                      children: [
-                        Container(
-                          padding: EdgeInsets.all(10),
-                          height: 230,
-                          child: SemesterCgpaCard(
-                            semestercgpa: semesters[2].grade,
+                  Scaffold(
+                    body: Center(
+                      child: ListView(
+                        children: [
+                          Container(
+                            padding: EdgeInsets.all(10),
+                            height: 230,
+                            child: SemesterCgpaCard(
+                              semestercgpa: semesters[2].grade,
+                            ),
                           ),
-                        ),
-                        Container(
-                          padding: EdgeInsets.all(10),
-                          // Course List
-                          child: SemesterCourseList(),
-                        ),
-                      ],
+                          Container(
+                            padding: EdgeInsets.all(10),
+                            // Course List
+                            child: SemesterCourseList(),
+                          ),
+                        ],
+                      ),
+                    ),
+                    floatingActionButton: FloatingActionButton(
+                      backgroundColor: Colors.yellow[600],
+                      onPressed: () {},
+                      tooltip: 'Increment',
+                      child: Icon(
+                        Icons.add,
+                        size: 32,
+                        color: Colors.white,
+                      ),
                     ),
                   ),
                 ],

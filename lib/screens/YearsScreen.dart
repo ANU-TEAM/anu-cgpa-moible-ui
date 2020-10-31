@@ -62,6 +62,21 @@ class YearsScreen extends StatelessWidget {
                                 icon: Icons.delete,
                                 onTap: () {
                                   yearsList.remove(index);
+                                  if (index != yearsList.years.length) {
+                                    final snackBar = SnackBar(
+                                      backgroundColor: Colors.yellow[800],
+                                      content: Container(
+                                        child: Text(
+                                          "Year ${index + 1} can't be deleted before Year ${yearsList.years.length}",
+                                          style: TextStyle(
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.w400,
+                                          ),
+                                        ),
+                                      ),
+                                    );
+                                    Scaffold.of(context).showSnackBar(snackBar);
+                                  }
                                 },
                               ),
                             ],
@@ -74,19 +89,39 @@ class YearsScreen extends StatelessWidget {
               },
             ),
           ),
-          floatingActionButton: FloatingActionButton(
-            backgroundColor: Colors.yellow[600],
-            onPressed: () {
-              yearsList.add(YearCard(
-                  yearNumber: yearsList.years.length + 1, yearCgpa: 0));
-            },
-            tooltip: 'Increment',
-            child: Icon(
-              Icons.add,
-              size: 32,
-              color: Colors.white,
-            ),
-          ),
+          floatingActionButton: Builder(builder: (BuildContext context) {
+            return FloatingActionButton(
+              backgroundColor: Colors.yellow[600],
+              onPressed: () {
+                if (yearsList.years.length < 5) {
+                  yearsList.add(
+                    YearCard(
+                        yearNumber: yearsList.years.length + 1, yearCgpa: 0),
+                  );
+                } else {
+                  final laddSnackBar = SnackBar(
+                    backgroundColor: Colors.yellow[800],
+                    content: Container(
+                      child: Text(
+                        "Oops! You can't add any more years.",
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                    ),
+                  );
+                  Scaffold.of(context).showSnackBar(laddSnackBar);
+                }
+              },
+              tooltip: 'Add a new academic year.',
+              child: Icon(
+                Icons.add,
+                size: 32,
+                color: Colors.white,
+              ),
+            );
+          }),
         ),
       ),
     );
