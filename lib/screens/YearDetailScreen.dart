@@ -1,4 +1,5 @@
 import 'package:anucgpa/components/SemesterCgpaCard.dart';
+import 'package:anucgpa/components/SemesterCourseList.dart';
 import 'package:anucgpa/components/YearCard.dart';
 import 'package:anucgpa/models/SemesterModel.dart';
 import 'package:flutter/material.dart';
@@ -62,24 +63,16 @@ class YearDetailScreen extends StatelessWidget {
                     child: ListView(
                       children: [
                         Container(
-                          padding: EdgeInsets.all(15),
+                          padding: EdgeInsets.all(10),
                           height: 230,
                           child: SemesterCgpaCard(
                             semestercgpa: semesters[0].grade,
                           ),
                         ),
-                      ],
-                    ),
-                  ),
-                  Center(
-                    child: ListView(
-                      children: [
                         Container(
-                          padding: EdgeInsets.all(15),
-                          height: 230,
-                          child: SemesterCgpaCard(
-                            semestercgpa: semesters[1].grade,
-                          ),
+                          padding: EdgeInsets.all(10),
+                          // Course List
+                          child: SemesterCourseList(),
                         ),
                       ],
                     ),
@@ -88,11 +81,34 @@ class YearDetailScreen extends StatelessWidget {
                     child: ListView(
                       children: [
                         Container(
-                          padding: EdgeInsets.all(15),
+                          padding: EdgeInsets.all(10),
+                          height: 230,
+                          child: SemesterCgpaCard(
+                            semestercgpa: semesters[1].grade,
+                          ),
+                        ),
+                        Container(
+                          padding: EdgeInsets.all(10),
+                          // Course List
+                          child: SemesterCourseList(),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Center(
+                    child: ListView(
+                      children: [
+                        Container(
+                          padding: EdgeInsets.all(10),
                           height: 230,
                           child: SemesterCgpaCard(
                             semestercgpa: semesters[2].grade,
                           ),
+                        ),
+                        Container(
+                          padding: EdgeInsets.all(10),
+                          // Course List
+                          child: SemesterCourseList(),
                         ),
                       ],
                     ),
