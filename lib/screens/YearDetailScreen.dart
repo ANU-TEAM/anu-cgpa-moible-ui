@@ -1,3 +1,4 @@
+import 'package:anucgpa/components/Drawer.dart';
 import 'package:anucgpa/components/SemesterCgpaCard.dart';
 import 'package:anucgpa/components/SemesterCourseList.dart';
 import 'package:anucgpa/components/YearCard.dart';
@@ -25,6 +26,12 @@ class YearDetailScreen extends StatelessWidget {
           length: 3,
           child: Scaffold(
             appBar: AppBar(
+              leading: GestureDetector(
+                onTap: () => Navigator.pop(context),
+                child: Icon(
+                  Icons.arrow_back,
+                ),
+              ),
               bottom: TabBar(
                 labelColor: Colors.yellow[700],
                 unselectedLabelColor: Colors.grey[600],
@@ -55,9 +62,13 @@ class YearDetailScreen extends StatelessWidget {
                 style: TextStyle(color: Colors.yellow[700]),
               ),
             ),
+            drawer: Drawer(
+              child: DrawerWidget(),
+            ),
             body: Container(
               color: Colors.white,
               child: TabBarView(
+                physics: NeverScrollableScrollPhysics(),
                 children: [
                   Center(
                     child: ListView(
