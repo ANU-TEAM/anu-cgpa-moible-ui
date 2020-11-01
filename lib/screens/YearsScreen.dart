@@ -9,7 +9,7 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 class YearsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final yearsList = context.watch<YearsListModel>();
+    var yearsList = Provider.of<YearsListModel>(context);
 
     return Drawer(
       child: SafeArea(
@@ -34,7 +34,7 @@ class YearsScreen extends StatelessWidget {
           ),
           body: Container(
             child: Consumer<YearsListModel>(
-              builder: (context, cart, child) {
+              builder: (context, data, child) {
                 return ListView.builder(
                   itemCount: yearsList.years.length,
                   itemBuilder: (BuildContext context, int index) {
