@@ -468,9 +468,7 @@ class Courses extends Table with TableInfo<Courses, Course> {
   GeneratedIntColumn get courseId => _courseId ??= _constructCourseId();
   GeneratedIntColumn _constructCourseId() {
     return GeneratedIntColumn('CourseId', $tableName, false,
-        declaredAsPrimaryKey: true,
-        hasAutoIncrement: true,
-        $customConstraints: 'PRIMARY KEY AUTOINCREMENT NOT NULL');
+        declaredAsPrimaryKey: true, $customConstraints: 'PRIMARY KEY NOT NULL');
   }
 
   final VerificationMeta _titleMeta = const VerificationMeta('title');
@@ -597,6 +595,12 @@ abstract class _$AppDb extends GeneratedDatabase {
   Semesters get semesters => _semesters ??= Semesters(this);
   Courses _courses;
   Courses get courses => _courses ??= Courses(this);
+  Selectable<Course> getSemesterCourses(int var1) {
+    return customSelect('SELECT * FROM courses WHERE SemesterId = ?',
+        variables: [Variable.withInt(var1)],
+        readsFrom: {courses}).map(courses.mapFromRow);
+  }
+
   @override
   Iterable<TableInfo> get allTables => allSchemaEntities.whereType<TableInfo>();
   @override

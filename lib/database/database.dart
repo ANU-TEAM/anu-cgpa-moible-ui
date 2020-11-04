@@ -14,6 +14,7 @@ class AppDb extends _$AppDb {
   @override
   int get schemaVersion => 1;
 
+  // Semester Functions
   Future<List<Semester>> getAllSemesters() => select(semesters).get();
   Stream<List<Semester>> watchAllSemesters() => select(semesters).watch();
 
@@ -22,6 +23,8 @@ class AppDb extends _$AppDb {
       update(semesters).replace(semester);
   Future deleteSemester(Semester semester) =>
       delete(semesters).delete(semester);
+
+  // Course Functions
 }
 
 LazyDatabase _openConnection() {
