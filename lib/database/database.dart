@@ -25,6 +25,9 @@ class AppDb extends _$AppDb {
       delete(semesters).delete(semester);
 
   // Course Functions
+  Future insertCourse(Course course) => into(courses).insert(course);
+  Future updateCourse(Course course) => update(courses).replace(course);
+  Future deleteCourse(Course course) => delete(courses).delete(course);
 }
 
 LazyDatabase _openConnection() {
