@@ -68,7 +68,7 @@ class SemesterListScreen extends StatelessWidget {
                                       backgroundColor: Colors.yellow[800],
                                       content: Container(
                                         child: Text(
-                                          "Year ${index + 1} can't be deleted before Year ${semestersList.semesters.length}",
+                                          "Semester ${index + 1} can't be deleted before Semester ${semestersList.semesters.length}",
                                           style: TextStyle(
                                             fontSize: 18,
                                             fontWeight: FontWeight.w400,
@@ -116,7 +116,7 @@ class SemesterListScreen extends StatelessWidget {
                   Scaffold.of(context).showSnackBar(laddSnackBar);
                 }
               },
-              tooltip: 'Add a new academic year.',
+              tooltip: 'Add a new academic Semester.',
               child: Icon(
                 Icons.add,
                 size: 32,

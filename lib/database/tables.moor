@@ -1,0 +1,19 @@
+CREATE TABLE "courses" (
+	CourseId INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+	Title NVARCHAR(200) NOT NULL,
+	Code NVARCHAR(100) NOT NULL,
+	Credits	INTEGER NOT NULL,
+	CourseGrade NUMERIC(10,2) NOT NULL,
+	SemesterId INTEGER NOT NULL,
+	FOREIGN KEY ([SemesterId]) REFERENCES "semesters" ([SemesterId]) ON DELETE CASCADE
+);
+
+CREATE TABLE "semesters" (
+	SemesterId INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+	SemesterCGPA NUMERIC(10,2) NOT NULL
+);
+
+
+getAllSemesters: SELECT * FROM semesters;
+
+getSemesterCourses: SELECT * FROM courses WHERE SemesterId = ?;
