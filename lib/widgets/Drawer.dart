@@ -1,4 +1,3 @@
-import 'package:anucgpa/models/SemesterListModel.dart';
 import 'package:flutter/material.dart';
 import 'package:anucgpa/screens/SemesterListScreen.dart';
 import 'package:anucgpa/screens/AboutScreen.dart';
@@ -72,18 +71,14 @@ class DrawerWidget extends StatelessWidget {
             ),
           ),
 
-          //years
+          //semesters
 
           ListTile(
             onTap: () {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (BuildContext context) =>
-                      ChangeNotifierProvider<SemesterListModel>(
-                    create: (context) => SemesterListModel(),
-                    child: SemesterListScreen(),
-                  ),
+                  builder: (BuildContext context) => SemesterListScreen(),
                 ),
               );
             },
@@ -94,7 +89,7 @@ class DrawerWidget extends StatelessWidget {
               color: Colors.white,
             ),
             title: Text(
-              'Years',
+              'Semesters',
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 24,

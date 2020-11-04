@@ -95,8 +95,8 @@ class SemestersCompanion extends UpdateCompanion<Semester> {
   });
   SemestersCompanion.insert({
     this.semesterId = const Value.absent(),
-    @required double semesterCGPA,
-  }) : semesterCGPA = Value(semesterCGPA);
+    this.semesterCGPA = const Value.absent(),
+  });
   static Insertable<Semester> custom({
     Expression<int> semesterId,
     Expression<double> semesterCGPA,
@@ -158,7 +158,8 @@ class Semesters extends Table with TableInfo<Semesters, Semester> {
       _semesterCGPA ??= _constructSemesterCGPA();
   GeneratedRealColumn _constructSemesterCGPA() {
     return GeneratedRealColumn('SemesterCGPA', $tableName, false,
-        $customConstraints: 'NOT NULL');
+        $customConstraints: 'NOT NULL DEFAULT 0',
+        defaultValue: const CustomExpression<double>('0'));
   }
 
   @override
@@ -185,8 +186,6 @@ class Semesters extends Table with TableInfo<Semesters, Semester> {
           _semesterCGPAMeta,
           semesterCGPA.isAcceptableOrUnknown(
               data['SemesterCGPA'], _semesterCGPAMeta));
-    } else if (isInserting) {
-      context.missing(_semesterCGPAMeta);
     }
     return context;
   }
@@ -598,17 +597,6 @@ abstract class _$AppDb extends GeneratedDatabase {
   Semesters get semesters => _semesters ??= Semesters(this);
   Courses _courses;
   Courses get courses => _courses ??= Courses(this);
-  Selectable<Semester> getAllSemesters() {
-    return customSelect('SELECT * FROM semesters',
-        variables: [], readsFrom: {semesters}).map(semesters.mapFromRow);
-  }
-
-  Selectable<Course> getSemesterCourses(int var1) {
-    return customSelect('SELECT * FROM courses WHERE SemesterId = ?',
-        variables: [Variable.withInt(var1)],
-        readsFrom: {courses}).map(courses.mapFromRow);
-  }
-
   @override
   Iterable<TableInfo> get allTables => allSchemaEntities.whereType<TableInfo>();
   @override

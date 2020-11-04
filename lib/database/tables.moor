@@ -10,10 +10,5 @@ CREATE TABLE "courses" (
 
 CREATE TABLE "semesters" (
 	SemesterId INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-	SemesterCGPA NUMERIC(10,2) NOT NULL
+	SemesterCGPA NUMERIC(10,2) NOT NULL DEFAULT 0
 );
-
-
-getAllSemesters: SELECT * FROM semesters;
-
-getSemesterCourses: SELECT * FROM courses WHERE SemesterId = ?;

@@ -1,8 +1,16 @@
-import 'package:anucgpa/screens/OverviewScreen.dart';
+import 'package:anucgpa/database/database.dart';
+import 'package:anucgpa/screens/SemesterListScreen.dart';
 import 'package:flutter/material.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(
+    Provider<AppDb>(
+        create: (context) => AppDb(),
+        child: MyApp(),
+        dispose: (context, db) => db.close()),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -18,7 +26,7 @@ class MyApp extends StatelessWidget {
         primaryColor: Colors.yellow[800],
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: OverviewScreen(),
+      home: SemesterListScreen(),
     );
   }
 }

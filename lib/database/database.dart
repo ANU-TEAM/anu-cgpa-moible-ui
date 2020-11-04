@@ -7,14 +7,21 @@ import 'package:path/path.dart' as path;
 
 part 'database.g.dart';
 
-@UseMoor(
-  include: {'tables.moor'},
-)
+@UseMoor(include: {'tables.moor'})
 class AppDb extends _$AppDb {
   AppDb() : super(_openConnection());
 
   @override
   int get schemaVersion => 1;
+
+  Future<List<Semester>> getAllSemesters() => select(semesters).get();
+  Stream<List<Semester>> watchAllSemesters() => select(semesters).watch();
+
+  Future insertSemester(Semester semester) => into(semesters).insert(semester);
+  Future updateSemester(Semester semester) =>
+      update(semesters).replace(semester);
+  Future deleteSemester(Semester semester) =>
+      delete(semesters).delete(semester);
 }
 
 LazyDatabase _openConnection() {
