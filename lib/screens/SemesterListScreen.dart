@@ -1,12 +1,12 @@
-import 'package:anucgpa/components/Drawer.dart';
-import 'package:anucgpa/components/YearCard.dart';
+import 'package:anucgpa/widgets/Drawer.dart';
+import 'package:anucgpa/widgets/YearCard.dart';
 import 'package:anucgpa/models/YearsListModel.dart';
-import 'package:anucgpa/screens/YearDetailScreen.dart';
+import 'package:anucgpa/screens/SemesterDetailScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
-class YearsScreen extends StatelessWidget {
+class SemesterListScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var yearsList = Provider.of<YearsListModel>(context);
@@ -45,7 +45,7 @@ class YearsScreen extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => YearDetailScreen(
+                              builder: (context) => SemesterDetailScreen(
                                   year: yearsList.years[index]),
                             ),
                           );

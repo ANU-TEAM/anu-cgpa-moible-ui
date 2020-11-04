@@ -1,4 +1,4 @@
-import 'package:anucgpa/components/Drawer.dart';
+import 'package:anucgpa/widgets/Drawer.dart';
 import 'package:flutter/material.dart';
 
 class OverviewScreen extends StatelessWidget {

@@ -1,13 +1,14 @@
 import 'dart:collection';
-import 'package:anucgpa/components/YearCard.dart';
+import 'package:anucgpa/widgets/YearCard.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
-import 'package:path/path.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
+import 'package:path/path.dart';
 
 class YearsListModel extends ChangeNotifier {
-  final List<YearCard> _years = [];
+  static final List<YearCard> _years = [];
 
   UnmodifiableListView<YearCard> get years => UnmodifiableListView(_years);
 

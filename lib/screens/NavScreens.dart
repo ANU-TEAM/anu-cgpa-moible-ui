@@ -5,7 +5,7 @@
 // import 'package:anucgpa/screens/ProfileScreen.dart';
 // import 'package:anucgpa/screens/SyncScreen.dart';
 // import 'package:flutter/material.dart';
-// import 'YearsScreen.dart';
+// import 'SemesterListScreen.dart';
 // class NavScreens extends StatefulWidget {
 //
 //   @override

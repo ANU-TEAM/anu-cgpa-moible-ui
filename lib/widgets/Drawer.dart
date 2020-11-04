@@ -1,6 +1,6 @@
 import 'package:anucgpa/models/YearsListModel.dart';
 import 'package:flutter/material.dart';
-import 'package:anucgpa/screens/YearsScreen.dart';
+import 'package:anucgpa/screens/SemesterListScreen.dart';
 import 'package:anucgpa/screens/AboutScreen.dart';
 import 'package:anucgpa/screens/CompareScreen.dart';
 import 'package:anucgpa/screens/LogOutScreen.dart';
@@ -82,7 +82,7 @@ class DrawerWidget extends StatelessWidget {
                   builder: (BuildContext context) =>
                       ChangeNotifierProvider<YearsListModel>(
                     create: (context) => YearsListModel(),
-                    child: YearsScreen(),
+                    child: SemesterListScreen(),
                   ),
                 ),
               );
