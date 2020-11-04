@@ -78,13 +78,13 @@ class SemesterListScreen extends StatelessWidget {
               itemCount: semesters.length,
               itemBuilder: (context, index) {
                 final semester = semesters[index];
-                return _buildListItem(semester, database, context);
+                return _buildListItem(semester, database, context, index);
               });
         });
   }
 
   Widget _buildListItem(
-      Semester semester, AppDb database, BuildContext context) {
+      Semester semester, AppDb database, BuildContext context, int index) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: GestureDetector(
@@ -92,8 +92,10 @@ class SemesterListScreen extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) =>
-                  SemesterDetailScreen(semesterId: semester.semesterId),
+              builder: (context) => SemesterDetailScreen(
+                displayId: index + 1,
+                currentSemester: semester,
+              ),
             ),
           );
         },
@@ -108,26 +110,11 @@ class SemesterListScreen extends StatelessWidget {
                 icon: Icons.delete,
                 onTap: () {
                   database.deleteSemester(semester);
-                  // if (index != semestersList.semesters.length) {
-                  //   final snackBar = SnackBar(
-                  //     backgroundColor: Colors.yellow[800],
-                  //     content: Container(
-                  //       child: Text(
-                  //         "Semester ${index + 1} can't be deleted before Semester ${semestersList.semesters.length}",
-                  //         style: TextStyle(
-                  //           fontSize: 18,
-                  //           fontWeight: FontWeight.w400,
-                  //         ),
-                  //       ),
-                  //     ),
-                  //   );
-                  //   Scaffold.of(context).showSnackBar(snackBar);
-                  // }
                 },
               ),
             ],
             child: SemesterCardTile(
-              semesterNumber: semester.semesterId,
+              semesterNumber: index + 1,
               semesterCgpa: semester.semesterCGPA,
             ),
           ),

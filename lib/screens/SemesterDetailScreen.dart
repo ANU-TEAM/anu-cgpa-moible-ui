@@ -1,3 +1,4 @@
+import 'package:anucgpa/database/database.dart';
 import 'package:anucgpa/widgets/Drawer.dart';
 import 'package:anucgpa/widgets/SemesterCgpaCard.dart';
 import 'package:anucgpa/widgets/CourseListWidget.dart';
@@ -5,10 +6,13 @@ import 'package:flutter/material.dart';
 
 class SemesterDetailScreen extends StatelessWidget {
   // Declare a field that holds the year
-  final int semesterId;
+  final Semester currentSemester;
+  final int displayId;
 
   // In the constructor, require a Todo.
-  SemesterDetailScreen({Key key, @required this.semesterId}) : super(key: key);
+  SemesterDetailScreen(
+      {Key key, @required this.displayId, @required this.currentSemester})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +26,7 @@ class SemesterDetailScreen extends StatelessWidget {
               backgroundColor: Color(0xFFF5F5F5),
               elevation: 0,
               title: Text(
-                "Semester $semesterId",
+                "Semester $displayId",
                 style: TextStyle(color: Colors.yellow[700]),
               ),
               actions: [
@@ -42,7 +46,7 @@ class SemesterDetailScreen extends StatelessWidget {
                     padding: EdgeInsets.all(10),
                     height: 230,
                     child: SemesterCgpaCard(
-                      semestercgpa: 3.92,
+                      semestercgpa: currentSemester.semesterCGPA,
                     ),
                   ),
                   Container(
@@ -56,7 +60,7 @@ class SemesterDetailScreen extends StatelessWidget {
             floatingActionButton: FloatingActionButton(
               backgroundColor: Colors.yellow[600],
               onPressed: () {},
-              tooltip: 'Increment',
+              tooltip: 'Add a course',
               child: Icon(
                 Icons.add,
                 size: 32,
