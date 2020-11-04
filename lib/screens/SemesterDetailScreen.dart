@@ -1,15 +1,14 @@
 import 'package:anucgpa/widgets/Drawer.dart';
 import 'package:anucgpa/widgets/SemesterCgpaCard.dart';
 import 'package:anucgpa/widgets/CourseListWidget.dart';
-import 'package:anucgpa/widgets/YearCard.dart';
 import 'package:flutter/material.dart';
 
 class SemesterDetailScreen extends StatelessWidget {
   // Declare a field that holds the year
-  final YearCard year;
+  final int semesterId;
 
   // In the constructor, require a Todo.
-  SemesterDetailScreen({Key key, @required this.year}) : super(key: key);
+  SemesterDetailScreen({Key key, @required this.semesterId}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,12 +18,19 @@ class SemesterDetailScreen extends StatelessWidget {
           length: 3,
           child: Scaffold(
             appBar: AppBar(
-              leading: GestureDetector(
-                onTap: () => Navigator.pop(context),
-                child: Icon(
-                  Icons.arrow_back,
-                ),
+              iconTheme: new IconThemeData(color: Colors.yellow[700]),
+              backgroundColor: Color(0xFFF5F5F5),
+              elevation: 0,
+              title: Text(
+                "Semester $semesterId",
+                style: TextStyle(color: Colors.yellow[700]),
               ),
+              actions: [
+                Icon(
+                  Icons.info_outline,
+                  color: Colors.yellow[700],
+                ),
+              ],
             ),
             drawer: Drawer(
               child: DrawerWidget(),

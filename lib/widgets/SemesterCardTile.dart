@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class YearCard extends StatelessWidget {
+class SemesterCardTile extends StatelessWidget {
   final String graduateSvgPath = 'assets/images/graduate.svg';
 
-  final int yearNumber;
-  final double yearCgpa;
+  final int semesterNumber;
+  final double semesterCgpa;
 
-  YearCard({this.yearNumber, this.yearCgpa});
+  SemesterCardTile({this.semesterNumber, this.semesterCgpa});
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +40,7 @@ class YearCard extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       Text(
-                        "Year",
+                        "Semester",
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 16,
@@ -48,7 +48,7 @@ class YearCard extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        "${this.yearNumber}",
+                        "${this.semesterNumber}",
                         style: TextStyle(
                             color: Colors.white,
                             fontSize: 64,
@@ -75,7 +75,7 @@ class YearCard extends StatelessWidget {
                         height: 10,
                       ),
                       Text(
-                        "${this.yearCgpa.toStringAsFixed(2)}",
+                        "${this.semesterCgpa.toStringAsFixed(2)}",
                         style: TextStyle(
                             color: Colors.yellow[700],
                             fontSize: 54,

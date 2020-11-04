@@ -1,4 +1,4 @@
-import 'package:anucgpa/models/YearsListModel.dart';
+import 'package:anucgpa/models/SemesterListModel.dart';
 import 'package:flutter/material.dart';
 import 'package:anucgpa/screens/SemesterListScreen.dart';
 import 'package:anucgpa/screens/AboutScreen.dart';
@@ -80,8 +80,8 @@ class DrawerWidget extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                   builder: (BuildContext context) =>
-                      ChangeNotifierProvider<YearsListModel>(
-                    create: (context) => YearsListModel(),
+                      ChangeNotifierProvider<SemesterListModel>(
+                    create: (context) => SemesterListModel(),
                     child: SemesterListScreen(),
                   ),
                 ),

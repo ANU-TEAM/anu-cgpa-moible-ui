@@ -1,6 +1,6 @@
 import 'package:anucgpa/widgets/Drawer.dart';
-import 'package:anucgpa/widgets/YearCard.dart';
-import 'package:anucgpa/models/YearsListModel.dart';
+import 'package:anucgpa/widgets/SemesterCardTile.dart';
+import 'package:anucgpa/models/SemesterListModel.dart';
 import 'package:anucgpa/screens/SemesterDetailScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -9,7 +9,7 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 class SemesterListScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    var yearsList = Provider.of<YearsListModel>(context);
+    var semestersList = Provider.of<SemesterListModel>(context);
 
     return Drawer(
       child: SafeArea(
@@ -19,7 +19,7 @@ class SemesterListScreen extends StatelessWidget {
             backgroundColor: Color(0xFFF5F5F5),
             elevation: 0,
             title: Text(
-              "Years",
+              "Semesters",
               style: TextStyle(color: Colors.yellow[700]),
             ),
             actions: [
@@ -33,10 +33,10 @@ class SemesterListScreen extends StatelessWidget {
             child: DrawerWidget(),
           ),
           body: Container(
-            child: Consumer<YearsListModel>(
+            child: Consumer<SemesterListModel>(
               builder: (context, data, child) {
                 return ListView.builder(
-                  itemCount: yearsList.years.length,
+                  itemCount: semestersList.semesters.length,
                   itemBuilder: (BuildContext context, int index) {
                     return Padding(
                       padding: const EdgeInsets.symmetric(vertical: 8.0),
@@ -46,7 +46,8 @@ class SemesterListScreen extends StatelessWidget {
                             context,
                             MaterialPageRoute(
                               builder: (context) => SemesterDetailScreen(
-                                  year: yearsList.years[index]),
+                                  semesterId: semestersList
+                                      .semesters[index].semesterNumber),
                             ),
                           );
                         },
@@ -54,20 +55,20 @@ class SemesterListScreen extends StatelessWidget {
                           child: Slidable(
                             actionPane: SlidableDrawerActionPane(),
                             actionExtentRatio: 0.25,
-                            child: yearsList.years[index],
+                            child: semestersList.semesters[index],
                             secondaryActions: <Widget>[
                               IconSlideAction(
                                 caption: 'Delete',
                                 color: Colors.red[700],
                                 icon: Icons.delete,
                                 onTap: () {
-                                  yearsList.remove(index);
-                                  if (index != yearsList.years.length) {
+                                  semestersList.remove(index);
+                                  if (index != semestersList.semesters.length) {
                                     final snackBar = SnackBar(
                                       backgroundColor: Colors.yellow[800],
                                       content: Container(
                                         child: Text(
-                                          "Year ${index + 1} can't be deleted before Year ${yearsList.years.length}",
+                                          "Year ${index + 1} can't be deleted before Year ${semestersList.semesters.length}",
                                           style: TextStyle(
                                             fontSize: 18,
                                             fontWeight: FontWeight.w400,
@@ -93,17 +94,18 @@ class SemesterListScreen extends StatelessWidget {
             return FloatingActionButton(
               backgroundColor: Colors.yellow[600],
               onPressed: () {
-                if (yearsList.years.length < 5) {
-                  yearsList.add(
-                    YearCard(
-                        yearNumber: yearsList.years.length + 1, yearCgpa: 0),
+                if (semestersList.semesters.length < 5) {
+                  semestersList.add(
+                    SemesterCardTile(
+                        semesterNumber: semestersList.semesters.length + 1,
+                        semesterCgpa: 0),
                   );
                 } else {
                   final laddSnackBar = SnackBar(
                     backgroundColor: Colors.yellow[800],
                     content: Container(
                       child: Text(
-                        "Oops! You can't add any more years.",
+                        "Oops! You can't add any more semesters.",
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.w400,
