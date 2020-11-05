@@ -229,6 +229,7 @@ class _NewCourseInputWidgetState extends State<NewCourseInputWidget> {
           database.insertCourse(course);
           print(course.toJson());
           resetValuesAfterSubmit();
+          Navigator.pop(context);
         },
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,

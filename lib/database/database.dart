@@ -25,6 +25,8 @@ class AppDb extends _$AppDb {
       delete(semesters).delete(semester);
 
   // Course Functions
+  Stream<List<Course>> watchSemesterCourses(int id) =>
+      getSemesterCourses(id).watch();
   Future insertCourse(Course course) => into(courses).insert(course);
   Future updateCourse(Course course) => update(courses).replace(course);
   Future deleteCourse(Course course) => delete(courses).delete(course);

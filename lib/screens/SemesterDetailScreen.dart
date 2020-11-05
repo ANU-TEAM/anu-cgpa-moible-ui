@@ -42,22 +42,7 @@ class SemesterDetailScreen extends StatelessWidget {
               child: DrawerWidget(),
             ),
             body: Center(
-              child: ListView(
-                children: [
-                  Container(
-                    padding: EdgeInsets.all(10),
-                    height: 230,
-                    child: SemesterCgpaCard(
-                      semestercgpa: currentSemester.semesterCGPA,
-                    ),
-                  ),
-                  Container(
-                    padding: EdgeInsets.all(10),
-                    // Course List
-                    child: CourseListWidget(),
-                  ),
-                ],
-              ),
+              child: _buildCourseList(context),
             ),
             floatingActionButton: FloatingActionButton(
               backgroundColor: Colors.yellow[600],
@@ -88,6 +73,132 @@ class SemesterDetailScreen extends StatelessWidget {
                 color: Colors.white,
               ),
             ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  StreamBuilder<List<Course>> _buildCourseList(BuildContext context) {
+    final database = Provider.of<AppDb>(context);
+    return StreamBuilder(
+        stream: database.watchSemesterCourses(currentSemester.semesterId),
+        builder: (context, AsyncSnapshot<List<Course>> snapshot) {
+          final courses = snapshot.data ?? List();
+          print(courses);
+          return Column(
+            children: [
+              Container(
+                height: 230,
+                child: SemesterCgpaCard(
+                  semestercgpa: currentSemester.semesterCGPA,
+                ),
+              ),
+              Container(
+                width: MediaQuery.of(context).size.width * 0.95,
+                child: Card(
+                  elevation: 6.0,
+                  child: Column(
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                          color: Colors.yellow[700],
+                          borderRadius: BorderRadius.vertical(
+                            top: Radius.circular(4),
+                          ),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(15.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                "Course",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(left: 40.0),
+                                child: Text(
+                                  "Unit",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                              ),
+                              Text(
+                                "Grade",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      SingleChildScrollView(
+                        child: ListView.builder(
+                            shrinkWrap: true,
+                            itemCount: courses.length,
+                            itemBuilder: (context, index) {
+                              final course = courses[index];
+                              return _buildCourseItem(
+                                  course, database, context, index);
+                            }),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          );
+        });
+  }
+
+  Widget _buildCourseItem(
+      Course course, AppDb database, BuildContext context, int index) {
+    return GestureDetector(
+      onTap: () {},
+      child: Container(
+        margin: EdgeInsets.symmetric(horizontal: 10),
+        color: Colors.white,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 6.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                "${course.title}",
+                style: TextStyle(
+                  color: Colors.grey[600],
+                  fontSize: 16,
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 60.0),
+                child: Text(
+                  "${course.credits}",
+                  style: TextStyle(
+                    color: Colors.grey[600],
+                    fontSize: 16,
+                  ),
+                ),
+              ),
+              Text(
+                "${course.courseGrade}",
+                style: TextStyle(
+                  color: Colors.grey[600],
+                  fontSize: 16,
+                ),
+              ),
+            ],
           ),
         ),
       ),
