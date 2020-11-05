@@ -89,86 +89,90 @@ class SemesterDetailScreen extends StatelessWidget {
         builder: (context, AsyncSnapshot<List<Course>> snapshot) {
           final courses = snapshot.data ?? List();
           print(courses);
-          return Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Container(
-                height: 230,
-                child: SemesterCgpaCard(
-                  semestercgpa: currentSemester.semesterCGPA,
-                ),
-              ),
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 10),
-                child: Card(
-                  elevation: 6.0,
-                  child: Column(
-                    children: [
-                      Container(
-                        decoration: BoxDecoration(
-                          color: Colors.yellow[700],
-                          borderRadius: BorderRadius.vertical(
-                            top: Radius.circular(4),
-                          ),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(15.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                "Course",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(left: 40.0),
-                                child: Text(
-                                  "Unit",
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                ),
-                              ),
-                              Text(
-                                "Grade",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
+          return snapshot.data.length == 0
+              ? Text('NOTHING')
+              : Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Container(
+                      height: 230,
+                      child: SemesterCgpaCard(
+                        semestercgpa: currentSemester.semesterCGPA,
                       ),
-                      SingleChildScrollView(
-                        physics: ScrollPhysics(),
+                    ),
+                    Container(
+                      padding: EdgeInsets.symmetric(horizontal: 10),
+                      child: Card(
+                        elevation: 6.0,
                         child: Column(
                           children: [
-                            ListView.builder(
-                                physics: NeverScrollableScrollPhysics(),
-                                shrinkWrap: true,
-                                itemCount: courses.length,
-                                itemBuilder: (context, index) {
-                                  final course = courses[index];
-                                  return _buildCourseItem(
-                                      course, database, context, index);
-                                }),
+                            Container(
+                              decoration: BoxDecoration(
+                                color: Colors.yellow[700],
+                                borderRadius: BorderRadius.vertical(
+                                  top: Radius.circular(4),
+                                ),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(15.0),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      "Course",
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding:
+                                          const EdgeInsets.only(left: 40.0),
+                                      child: Text(
+                                        "Unit",
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                      ),
+                                    ),
+                                    Text(
+                                      "Grade",
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            SingleChildScrollView(
+                              physics: ScrollPhysics(),
+                              child: Column(
+                                children: [
+                                  ListView.builder(
+                                      physics: NeverScrollableScrollPhysics(),
+                                      shrinkWrap: true,
+                                      itemCount: courses.length,
+                                      itemBuilder: (context, index) {
+                                        final course = courses[index];
+                                        return _buildCourseItem(
+                                            course, database, context, index);
+                                      }),
+                                ],
+                              ),
+                            ),
                           ],
                         ),
                       ),
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          );
+                    ),
+                  ],
+                );
         });
   }
 
