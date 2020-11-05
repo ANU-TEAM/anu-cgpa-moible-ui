@@ -59,7 +59,47 @@ class SemesterDetailScreen extends StatelessWidget {
             ),
             floatingActionButton: FloatingActionButton(
               backgroundColor: Colors.yellow[600],
-              onPressed: () {},
+              onPressed: () {
+                showModalBottomSheet(
+                    backgroundColor: Colors.transparent,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    context: context,
+                    builder: (BuildContext context) {
+                      return Container(
+                        height: 200,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.vertical(
+                            top: Radius.circular(20),
+                          ),
+                        ),
+                        child: Center(
+                          child: Column(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text(
+                                  "Add Course",
+                                  style: TextStyle(
+                                    color: Colors.yellow[700],
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 10),
+                                child: Text("Enter the course details below"),
+                              )
+                            ],
+                          ),
+                        ),
+                      );
+                    });
+              },
               tooltip: 'Add a course',
               child: Icon(
                 Icons.add,

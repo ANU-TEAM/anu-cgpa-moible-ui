@@ -6,7 +6,6 @@ import 'package:anucgpa/screens/LogOutScreen.dart';
 import 'package:anucgpa/screens/OverviewScreen.dart';
 import 'package:anucgpa/screens/ProfileScreen.dart';
 import 'package:anucgpa/screens/SyncScreen.dart';
-import 'package:provider/provider.dart';
 
 class DrawerWidget extends StatelessWidget {
   @override
