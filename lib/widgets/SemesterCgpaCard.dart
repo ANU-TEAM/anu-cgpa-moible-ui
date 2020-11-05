@@ -7,7 +7,8 @@ class SemesterCgpaCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: MediaQuery.of(context).size.width * 0.95,
+      padding: EdgeInsets.symmetric(horizontal: 10),
+      width: MediaQuery.of(context).size.width,
       child: Card(
         elevation: 6,
         child: Container(

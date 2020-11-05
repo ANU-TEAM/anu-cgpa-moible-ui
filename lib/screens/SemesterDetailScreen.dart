@@ -1,7 +1,7 @@
 import 'package:anucgpa/database/database.dart';
+import 'package:anucgpa/widgets/CourseListItemWidget.dart';
 import 'package:anucgpa/widgets/Drawer.dart';
 import 'package:anucgpa/widgets/SemesterCgpaCard.dart';
-import 'package:anucgpa/widgets/CourseListWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:anucgpa/widgets/NewCourseModal.dart';
@@ -41,8 +41,11 @@ class SemesterDetailScreen extends StatelessWidget {
             drawer: Drawer(
               child: DrawerWidget(),
             ),
-            body: Center(
-              child: _buildCourseList(context),
+            body: Container(
+              alignment: Alignment.topCenter,
+              child: SingleChildScrollView(
+                child: _buildCourseList(context),
+              ),
             ),
             floatingActionButton: FloatingActionButton(
               backgroundColor: Colors.yellow[600],
@@ -87,6 +90,7 @@ class SemesterDetailScreen extends StatelessWidget {
           final courses = snapshot.data ?? List();
           print(courses);
           return Column(
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Container(
                 height: 230,
@@ -95,7 +99,7 @@ class SemesterDetailScreen extends StatelessWidget {
                 ),
               ),
               Container(
-                width: MediaQuery.of(context).size.width * 0.95,
+                padding: EdgeInsets.symmetric(horizontal: 10),
                 child: Card(
                   elevation: 6.0,
                   child: Column(
@@ -144,14 +148,20 @@ class SemesterDetailScreen extends StatelessWidget {
                         ),
                       ),
                       SingleChildScrollView(
-                        child: ListView.builder(
-                            shrinkWrap: true,
-                            itemCount: courses.length,
-                            itemBuilder: (context, index) {
-                              final course = courses[index];
-                              return _buildCourseItem(
-                                  course, database, context, index);
-                            }),
+                        physics: ScrollPhysics(),
+                        child: Column(
+                          children: [
+                            ListView.builder(
+                                physics: NeverScrollableScrollPhysics(),
+                                shrinkWrap: true,
+                                itemCount: courses.length,
+                                itemBuilder: (context, index) {
+                                  final course = courses[index];
+                                  return _buildCourseItem(
+                                      course, database, context, index);
+                                }),
+                          ],
+                        ),
                       ),
                     ],
                   ),
@@ -166,41 +176,9 @@ class SemesterDetailScreen extends StatelessWidget {
       Course course, AppDb database, BuildContext context, int index) {
     return GestureDetector(
       onTap: () {},
-      child: Container(
-        margin: EdgeInsets.symmetric(horizontal: 10),
-        color: Colors.white,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 6.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                "${course.title}",
-                style: TextStyle(
-                  color: Colors.grey[600],
-                  fontSize: 16,
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 60.0),
-                child: Text(
-                  "${course.credits}",
-                  style: TextStyle(
-                    color: Colors.grey[600],
-                    fontSize: 16,
-                  ),
-                ),
-              ),
-              Text(
-                "${course.courseGrade}",
-                style: TextStyle(
-                  color: Colors.grey[600],
-                  fontSize: 16,
-                ),
-              ),
-            ],
-          ),
-        ),
+      child: CourseListItemWidget(
+        index: index,
+        courseItem: course,
       ),
     );
   }
