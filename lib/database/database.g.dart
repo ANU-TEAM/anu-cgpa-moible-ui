@@ -468,7 +468,9 @@ class Courses extends Table with TableInfo<Courses, Course> {
   GeneratedIntColumn get courseId => _courseId ??= _constructCourseId();
   GeneratedIntColumn _constructCourseId() {
     return GeneratedIntColumn('CourseId', $tableName, false,
-        declaredAsPrimaryKey: true, $customConstraints: 'PRIMARY KEY NOT NULL');
+        declaredAsPrimaryKey: true,
+        hasAutoIncrement: true,
+        $customConstraints: 'PRIMARY KEY AUTOINCREMENT NOT NULL');
   }
 
   final VerificationMeta _titleMeta = const VerificationMeta('title');
