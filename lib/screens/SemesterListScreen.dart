@@ -9,6 +9,7 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 class SemesterListScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    int semesterLength = 0;
     return Drawer(
       child: SafeArea(
         child: Scaffold(
@@ -38,22 +39,30 @@ class SemesterListScreen extends StatelessWidget {
             return FloatingActionButton(
               backgroundColor: Colors.yellow[600],
               onPressed: () {
-                final semester = Semester(semesterId: null, semesterCGPA: 0.0);
-                database.insertSemester(semester);
-                print("Value inserted");
-                // final laddSnackBar = SnackBar(
-                //   backgroundColor: Colors.yellow[800],
-                //   content: Container(
-                //     child: Text(
-                //       "Oops! You can't add any more semesters.",
-                //       style: TextStyle(
-                //         fontSize: 18,
-                //         fontWeight: FontWeight.w400,
-                //       ),
-                //     ),
-                //   ),
-                // );
-                // Scaffold.of(context).showSnackBar(laddSnackBar);
+                database
+                    .getSemesterLength()
+                    .getSingle()
+                    .then((value) => semesterLength = value);
+                if (semesterLength < 13) {
+                  final semester =
+                      Semester(semesterId: null, semesterCGPA: 0.0);
+                  database.insertSemester(semester);
+                } else {
+                  print(semesterLength);
+                  final laddSnackBar = SnackBar(
+                    backgroundColor: Colors.yellow[800],
+                    content: Container(
+                      child: Text(
+                        "Oops! You can't add any more semesters.",
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                    ),
+                  );
+                  Scaffold.of(context).showSnackBar(laddSnackBar);
+                }
               },
               tooltip: 'Add a new academic Semester.',
               child: Icon(
@@ -85,6 +94,11 @@ class SemesterListScreen extends StatelessWidget {
 
   Widget _buildListItem(
       Semester semester, AppDb database, BuildContext context, int index) {
+    int semesterCount;
+    database
+        .getSemesterLength()
+        .getSingle()
+        .then((value) => semesterCount = value);
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: GestureDetector(
@@ -109,7 +123,23 @@ class SemesterListScreen extends StatelessWidget {
                 color: Colors.red[700],
                 icon: Icons.delete,
                 onTap: () {
-                  database.deleteSemester(semester);
+                  if (index < semesterCount - 1) {
+                    final snackBar = SnackBar(
+                      backgroundColor: Colors.yellow[800],
+                      content: Container(
+                        child: Text(
+                          "Semester ${index + 1} can't be deleted before Year ${semesterCount}",
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                      ),
+                    );
+                    Scaffold.of(context).showSnackBar(snackBar);
+                  } else {
+                    database.deleteSemester(semester);
+                  }
                 },
               ),
             ],

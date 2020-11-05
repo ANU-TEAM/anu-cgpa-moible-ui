@@ -31,6 +31,12 @@ class SemesterDetailScreen extends StatelessWidget {
                 "Semester $displayId",
                 style: TextStyle(color: Colors.yellow[700]),
               ),
+              leading: GestureDetector(
+                onTap: () => Navigator.pop(context),
+                child: Icon(
+                  Icons.arrow_back,
+                ),
+              ),
               actions: [
                 Icon(
                   Icons.info_outline,

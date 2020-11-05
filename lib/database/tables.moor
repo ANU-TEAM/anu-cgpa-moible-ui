@@ -14,3 +14,5 @@ CREATE TABLE "semesters" (
 );
 
 getSemesterCourses: SELECT * FROM courses WHERE SemesterId = ?;
+
+getSemesterLength: SELECT COUNT(*) FROM semesters;

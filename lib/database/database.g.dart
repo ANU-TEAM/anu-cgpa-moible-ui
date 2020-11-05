@@ -603,6 +603,12 @@ abstract class _$AppDb extends GeneratedDatabase {
         readsFrom: {courses}).map(courses.mapFromRow);
   }
 
+  Selectable<int> getSemesterLength() {
+    return customSelect('SELECT COUNT(*) FROM semesters',
+        variables: [],
+        readsFrom: {semesters}).map((QueryRow row) => row.readInt('COUNT(*)'));
+  }
+
   @override
   Iterable<TableInfo> get allTables => allSchemaEntities.whereType<TableInfo>();
   @override
