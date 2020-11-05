@@ -13,8 +13,8 @@ class CourseListItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 10),
-      color: Colors.white,
+      padding: EdgeInsets.symmetric(horizontal: 10),
+      color: index % 2 == 0 ? Colors.white : Colors.yellow[50],
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 6.0),
         child: Row(
