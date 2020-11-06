@@ -21,7 +21,7 @@ class CourseListItemWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              "${courseItem.title}",
+              courseItem.title == null ? "-" : "${courseItem.title}",
               style: TextStyle(
                 color: Colors.grey[600],
                 fontSize: 16,

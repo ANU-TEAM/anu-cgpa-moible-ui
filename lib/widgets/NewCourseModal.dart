@@ -19,12 +19,10 @@ class _NewCourseInputWidgetState extends State<NewCourseInputWidget> {
   _NewCourseInputWidgetState({this.currentSemesterId});
 
   TextEditingController courseTitleController;
-  TextEditingController courseCodeController;
   TextEditingController courseCreditHourController;
   TextEditingController courseGradeController;
 
   String inputCourseTitle;
-  String inputCourseCode;
   int inputCourseCreditHours;
   double inputCourseGrade;
 
@@ -32,7 +30,6 @@ class _NewCourseInputWidgetState extends State<NewCourseInputWidget> {
   void initState() {
     super.initState();
     courseTitleController = TextEditingController();
-    courseCodeController = TextEditingController();
     courseCreditHourController = TextEditingController();
     courseGradeController = TextEditingController();
   }
@@ -69,7 +66,6 @@ class _NewCourseInputWidgetState extends State<NewCourseInputWidget> {
               ),
             ),
             _buildCourseTitleInput(context),
-            _buildCourseCodeInput(context),
             _buildCourseCreditHourInput(context),
             _buildCourseGradeInput(context),
             _buildAddCourseButton(context),
@@ -107,38 +103,6 @@ class _NewCourseInputWidgetState extends State<NewCourseInputWidget> {
             inputCourseTitle = courseTitle;
           });
           print(inputCourseTitle);
-        },
-      ),
-    );
-  }
-
-  _buildCourseCodeInput(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 10.0),
-      child: TextField(
-        cursorWidth: 1.5,
-        cursorColor: Colors.black54,
-        decoration: InputDecoration(
-          enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(
-              color: Colors.yellow[700],
-            ),
-          ),
-          border: OutlineInputBorder(),
-          hintStyle: TextStyle(
-            color: Colors.black54,
-          ),
-          filled: true,
-          fillColor: Color.fromRGBO(255, 193, 4, 0.1),
-          hintText: 'COURSE CODE',
-          alignLabelWithHint: true,
-        ),
-        controller: courseCodeController,
-        onChanged: (courseCode) {
-          setState(() {
-            inputCourseCode = courseCode;
-          });
-          print(inputCourseCode);
         },
       ),
     );
@@ -221,7 +185,6 @@ class _NewCourseInputWidgetState extends State<NewCourseInputWidget> {
           final course = Course(
             courseId: null,
             title: inputCourseTitle,
-            code: inputCourseCode,
             credits: inputCourseCreditHours,
             courseGrade: inputCourseGrade,
             semesterId: currentSemesterId,
@@ -289,12 +252,10 @@ class _NewCourseInputWidgetState extends State<NewCourseInputWidget> {
 
   void resetValuesAfterSubmit() {
     setState(() {
-      inputCourseTitle = null;
-      inputCourseCode = null;
+      inputCourseTitle;
       inputCourseCreditHours = null;
       inputCourseGrade = null;
       courseTitleController.clear();
-      courseCodeController.clear();
       courseCreditHourController.clear();
       courseGradeController.clear();
     });

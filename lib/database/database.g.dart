@@ -210,14 +210,12 @@ class Semesters extends Table with TableInfo<Semesters, Semester> {
 class Course extends DataClass implements Insertable<Course> {
   final int courseId;
   final String title;
-  final String code;
   final int credits;
   final double courseGrade;
   final int semesterId;
   Course(
       {@required this.courseId,
-      @required this.title,
-      @required this.code,
+      this.title,
       @required this.credits,
       @required this.courseGrade,
       @required this.semesterId});
@@ -232,7 +230,6 @@ class Course extends DataClass implements Insertable<Course> {
           intType.mapFromDatabaseResponse(data['${effectivePrefix}CourseId']),
       title:
           stringType.mapFromDatabaseResponse(data['${effectivePrefix}Title']),
-      code: stringType.mapFromDatabaseResponse(data['${effectivePrefix}Code']),
       credits:
           intType.mapFromDatabaseResponse(data['${effectivePrefix}Credits']),
       courseGrade: doubleType
@@ -249,9 +246,6 @@ class Course extends DataClass implements Insertable<Course> {
     }
     if (!nullToAbsent || title != null) {
       map['Title'] = Variable<String>(title);
-    }
-    if (!nullToAbsent || code != null) {
-      map['Code'] = Variable<String>(code);
     }
     if (!nullToAbsent || credits != null) {
       map['Credits'] = Variable<int>(credits);
@@ -272,7 +266,6 @@ class Course extends DataClass implements Insertable<Course> {
           : Value(courseId),
       title:
           title == null && nullToAbsent ? const Value.absent() : Value(title),
-      code: code == null && nullToAbsent ? const Value.absent() : Value(code),
       credits: credits == null && nullToAbsent
           ? const Value.absent()
           : Value(credits),
@@ -291,7 +284,6 @@ class Course extends DataClass implements Insertable<Course> {
     return Course(
       courseId: serializer.fromJson<int>(json['CourseId']),
       title: serializer.fromJson<String>(json['Title']),
-      code: serializer.fromJson<String>(json['Code']),
       credits: serializer.fromJson<int>(json['Credits']),
       courseGrade: serializer.fromJson<double>(json['CourseGrade']),
       semesterId: serializer.fromJson<int>(json['SemesterId']),
@@ -303,7 +295,6 @@ class Course extends DataClass implements Insertable<Course> {
     return <String, dynamic>{
       'CourseId': serializer.toJson<int>(courseId),
       'Title': serializer.toJson<String>(title),
-      'Code': serializer.toJson<String>(code),
       'Credits': serializer.toJson<int>(credits),
       'CourseGrade': serializer.toJson<double>(courseGrade),
       'SemesterId': serializer.toJson<int>(semesterId),
@@ -313,14 +304,12 @@ class Course extends DataClass implements Insertable<Course> {
   Course copyWith(
           {int courseId,
           String title,
-          String code,
           int credits,
           double courseGrade,
           int semesterId}) =>
       Course(
         courseId: courseId ?? this.courseId,
         title: title ?? this.title,
-        code: code ?? this.code,
         credits: credits ?? this.credits,
         courseGrade: courseGrade ?? this.courseGrade,
         semesterId: semesterId ?? this.semesterId,
@@ -330,7 +319,6 @@ class Course extends DataClass implements Insertable<Course> {
     return (StringBuffer('Course(')
           ..write('courseId: $courseId, ')
           ..write('title: $title, ')
-          ..write('code: $code, ')
           ..write('credits: $credits, ')
           ..write('courseGrade: $courseGrade, ')
           ..write('semesterId: $semesterId')
@@ -343,17 +331,14 @@ class Course extends DataClass implements Insertable<Course> {
       courseId.hashCode,
       $mrjc(
           title.hashCode,
-          $mrjc(
-              code.hashCode,
-              $mrjc(credits.hashCode,
-                  $mrjc(courseGrade.hashCode, semesterId.hashCode))))));
+          $mrjc(credits.hashCode,
+              $mrjc(courseGrade.hashCode, semesterId.hashCode)))));
   @override
   bool operator ==(dynamic other) =>
       identical(this, other) ||
       (other is Course &&
           other.courseId == this.courseId &&
           other.title == this.title &&
-          other.code == this.code &&
           other.credits == this.credits &&
           other.courseGrade == this.courseGrade &&
           other.semesterId == this.semesterId);
@@ -362,34 +347,28 @@ class Course extends DataClass implements Insertable<Course> {
 class CoursesCompanion extends UpdateCompanion<Course> {
   final Value<int> courseId;
   final Value<String> title;
-  final Value<String> code;
   final Value<int> credits;
   final Value<double> courseGrade;
   final Value<int> semesterId;
   const CoursesCompanion({
     this.courseId = const Value.absent(),
     this.title = const Value.absent(),
-    this.code = const Value.absent(),
     this.credits = const Value.absent(),
     this.courseGrade = const Value.absent(),
     this.semesterId = const Value.absent(),
   });
   CoursesCompanion.insert({
     this.courseId = const Value.absent(),
-    @required String title,
-    @required String code,
+    this.title = const Value.absent(),
     @required int credits,
     @required double courseGrade,
     @required int semesterId,
-  })  : title = Value(title),
-        code = Value(code),
-        credits = Value(credits),
+  })  : credits = Value(credits),
         courseGrade = Value(courseGrade),
         semesterId = Value(semesterId);
   static Insertable<Course> custom({
     Expression<int> courseId,
     Expression<String> title,
-    Expression<String> code,
     Expression<int> credits,
     Expression<double> courseGrade,
     Expression<int> semesterId,
@@ -397,7 +376,6 @@ class CoursesCompanion extends UpdateCompanion<Course> {
     return RawValuesInsertable({
       if (courseId != null) 'CourseId': courseId,
       if (title != null) 'Title': title,
-      if (code != null) 'Code': code,
       if (credits != null) 'Credits': credits,
       if (courseGrade != null) 'CourseGrade': courseGrade,
       if (semesterId != null) 'SemesterId': semesterId,
@@ -407,14 +385,12 @@ class CoursesCompanion extends UpdateCompanion<Course> {
   CoursesCompanion copyWith(
       {Value<int> courseId,
       Value<String> title,
-      Value<String> code,
       Value<int> credits,
       Value<double> courseGrade,
       Value<int> semesterId}) {
     return CoursesCompanion(
       courseId: courseId ?? this.courseId,
       title: title ?? this.title,
-      code: code ?? this.code,
       credits: credits ?? this.credits,
       courseGrade: courseGrade ?? this.courseGrade,
       semesterId: semesterId ?? this.semesterId,
@@ -429,9 +405,6 @@ class CoursesCompanion extends UpdateCompanion<Course> {
     }
     if (title.present) {
       map['Title'] = Variable<String>(title.value);
-    }
-    if (code.present) {
-      map['Code'] = Variable<String>(code.value);
     }
     if (credits.present) {
       map['Credits'] = Variable<int>(credits.value);
@@ -450,7 +423,6 @@ class CoursesCompanion extends UpdateCompanion<Course> {
     return (StringBuffer('CoursesCompanion(')
           ..write('courseId: $courseId, ')
           ..write('title: $title, ')
-          ..write('code: $code, ')
           ..write('credits: $credits, ')
           ..write('courseGrade: $courseGrade, ')
           ..write('semesterId: $semesterId')
@@ -477,16 +449,8 @@ class Courses extends Table with TableInfo<Courses, Course> {
   GeneratedTextColumn _title;
   GeneratedTextColumn get title => _title ??= _constructTitle();
   GeneratedTextColumn _constructTitle() {
-    return GeneratedTextColumn('Title', $tableName, false,
-        $customConstraints: 'NOT NULL');
-  }
-
-  final VerificationMeta _codeMeta = const VerificationMeta('code');
-  GeneratedTextColumn _code;
-  GeneratedTextColumn get code => _code ??= _constructCode();
-  GeneratedTextColumn _constructCode() {
-    return GeneratedTextColumn('Code', $tableName, false,
-        $customConstraints: 'NOT NULL');
+    return GeneratedTextColumn('Title', $tableName, true,
+        $customConstraints: '');
   }
 
   final VerificationMeta _creditsMeta = const VerificationMeta('credits');
@@ -517,7 +481,7 @@ class Courses extends Table with TableInfo<Courses, Course> {
 
   @override
   List<GeneratedColumn> get $columns =>
-      [courseId, title, code, credits, courseGrade, semesterId];
+      [courseId, title, credits, courseGrade, semesterId];
   @override
   Courses get asDslTable => this;
   @override
@@ -536,14 +500,6 @@ class Courses extends Table with TableInfo<Courses, Course> {
     if (data.containsKey('Title')) {
       context.handle(
           _titleMeta, title.isAcceptableOrUnknown(data['Title'], _titleMeta));
-    } else if (isInserting) {
-      context.missing(_titleMeta);
-    }
-    if (data.containsKey('Code')) {
-      context.handle(
-          _codeMeta, code.isAcceptableOrUnknown(data['Code'], _codeMeta));
-    } else if (isInserting) {
-      context.missing(_codeMeta);
     }
     if (data.containsKey('Credits')) {
       context.handle(_creditsMeta,

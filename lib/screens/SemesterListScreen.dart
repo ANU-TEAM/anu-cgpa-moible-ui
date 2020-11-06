@@ -128,9 +128,9 @@ class SemesterListScreen extends StatelessWidget {
                       backgroundColor: Colors.yellow[800],
                       content: Container(
                         child: Text(
-                          "Semester ${index + 1} can't be deleted before Year ${semesterCount}",
+                          "Semester ${index + 1} can't be deleted before Semester ${semesterCount}",
                           style: TextStyle(
-                            fontSize: 18,
+                            fontSize: 16,
                             fontWeight: FontWeight.w400,
                           ),
                         ),
