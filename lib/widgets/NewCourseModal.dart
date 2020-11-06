@@ -17,6 +17,20 @@ class NewCourseInputWidget extends StatefulWidget {
 class _NewCourseInputWidgetState extends State<NewCourseInputWidget> {
   final int currentSemesterId;
   _NewCourseInputWidgetState({this.currentSemesterId});
+  final List<DropdownMenuItem> gradeOptions = [
+    DropdownMenuItem(value: 4.0, child: Container(child: Text("A"))),
+    DropdownMenuItem(value: 3.75, child: Container(child: Text("A-"))),
+    DropdownMenuItem(value: 3.50, child: Container(child: Text("B+"))),
+    DropdownMenuItem(value: 3.25, child: Container(child: Text("B"))),
+    DropdownMenuItem(value: 3.0, child: Container(child: Text("B-"))),
+    DropdownMenuItem(value: 2.75, child: Container(child: Text("C+"))),
+    DropdownMenuItem(value: 2.50, child: Container(child: Text("C"))),
+    DropdownMenuItem(value: 2.25, child: Container(child: Text("C-"))),
+    DropdownMenuItem(value: 2.0, child: Container(child: Text("D+"))),
+    DropdownMenuItem(value: 1.75, child: Container(child: Text("D"))),
+    DropdownMenuItem(value: 1.50, child: Container(child: Text("D-"))),
+    DropdownMenuItem(value: 1.0, child: Container(child: Text("F"))),
+  ];
 
   TextEditingController courseTitleController;
   TextEditingController courseCreditHourController;
@@ -38,8 +52,7 @@ class _NewCourseInputWidgetState extends State<NewCourseInputWidget> {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Container(
-        padding:
-            EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+        padding: EdgeInsets.only(bottom: 100),
         child: Column(
           children: [
             Padding(
@@ -142,34 +155,41 @@ class _NewCourseInputWidgetState extends State<NewCourseInputWidget> {
   }
 
   _buildCourseGradeInput(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 10.0),
-      child: TextField(
-        keyboardType: TextInputType.numberWithOptions(decimal: true),
-        cursorWidth: 1.5,
-        cursorColor: Colors.black54,
-        decoration: InputDecoration(
-          enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(
-              color: Colors.yellow[700],
-            ),
+    return Container(
+      decoration: BoxDecoration(
+        color: Color.fromRGBO(255, 193, 4, 0.1),
+        border: Border(
+          bottom: BorderSide(
+            color: Colors.yellow[700],
+            style: BorderStyle.solid,
+            width: 3,
           ),
-          border: OutlineInputBorder(),
-          hintStyle: TextStyle(
+        ),
+      ),
+      padding: EdgeInsets.symmetric(horizontal: 10),
+      child: DropdownButtonHideUnderline(
+        child: DropdownButton(
+          style: TextStyle(
+            fontSize: 18,
             color: Colors.black54,
           ),
-          filled: true,
-          fillColor: Color.fromRGBO(255, 193, 4, 0.1),
-          hintText: 'GRADE',
-          alignLabelWithHint: true,
+          itemHeight: 54,
+          icon: Icon(
+            Icons.arrow_drop_down_circle_rounded,
+            color: Colors.yellow[700],
+            size: 36,
+          ),
+          hint: Text("GRADE"),
+          value: inputCourseGrade,
+          dropdownColor: Colors.yellow[50],
+          items: gradeOptions,
+          isExpanded: true,
+          onChanged: (value) {
+            setState(() {
+              inputCourseGrade = value;
+            });
+          },
         ),
-        controller: courseGradeController,
-        onChanged: (courseGrade) {
-          setState(() {
-            inputCourseGrade = double.parse(courseGrade);
-          });
-          print(inputCourseGrade);
-        },
       ),
     );
   }
