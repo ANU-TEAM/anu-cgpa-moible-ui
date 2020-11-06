@@ -112,9 +112,16 @@ class _NewCourseInputWidgetState extends State<NewCourseInputWidget> {
         ),
         controller: courseTitleController,
         onChanged: (courseTitle) {
-          setState(() {
-            inputCourseTitle = courseTitle;
-          });
+          if (courseTitle.isNotEmpty) {
+            setState(() {
+              inputCourseTitle = courseTitle;
+            });
+          } else {
+            setState(() {
+              inputCourseTitle = null;
+            });
+          }
+
           print(inputCourseTitle);
         },
       ),
