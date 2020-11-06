@@ -13,6 +13,7 @@ class CourseListItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: EdgeInsets.all(1),
       padding: EdgeInsets.symmetric(horizontal: 10),
       color: index % 2 == 0 ? Colors.white : Colors.yellow[50],
       child: Padding(
@@ -21,7 +22,9 @@ class CourseListItemWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              courseItem.title == null ? "-" : "${courseItem.title}",
+              courseItem.title == null
+                  ? "Course ${index + 1}"
+                  : "${courseItem.title}",
               style: TextStyle(
                 color: Colors.grey[600],
                 fontSize: 16,
