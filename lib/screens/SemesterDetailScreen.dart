@@ -125,17 +125,19 @@ class SemesterDetailScreen extends StatelessWidget {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Text(
-                                      "Course",
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.w600,
+                                    Expanded(
+                                      flex: 4,
+                                      child: Text(
+                                        "Course",
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w600,
+                                        ),
                                       ),
                                     ),
-                                    Padding(
-                                      padding:
-                                          const EdgeInsets.only(left: 40.0),
+                                    Expanded(
+                                      flex: 2,
                                       child: Text(
                                         "Unit",
                                         style: TextStyle(
@@ -145,12 +147,15 @@ class SemesterDetailScreen extends StatelessWidget {
                                         ),
                                       ),
                                     ),
-                                    Text(
-                                      "Grade",
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.w600,
+                                    Expanded(
+                                      flex: 1,
+                                      child: Text(
+                                        "Grade",
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w600,
+                                        ),
                                       ),
                                     ),
                                   ],

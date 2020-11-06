@@ -130,7 +130,7 @@ class _NewCourseInputWidgetState extends State<NewCourseInputWidget> {
 
   _buildCourseCreditHourInput(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 10.0),
+      padding: const EdgeInsets.only(top: 5.0, bottom: 15.0),
       child: TextField(
         keyboardType: TextInputType.number,
         cursorWidth: 1.5,
@@ -163,6 +163,8 @@ class _NewCourseInputWidgetState extends State<NewCourseInputWidget> {
 
   _buildCourseGradeInput(BuildContext context) {
     return Container(
+      margin: EdgeInsets.only(bottom: 20.0),
+      padding: EdgeInsets.symmetric(horizontal: 10),
       decoration: BoxDecoration(
         color: Color.fromRGBO(255, 193, 4, 0.1),
         border: Border(
@@ -173,7 +175,6 @@ class _NewCourseInputWidgetState extends State<NewCourseInputWidget> {
           ),
         ),
       ),
-      padding: EdgeInsets.symmetric(horizontal: 10),
       child: DropdownButtonHideUnderline(
         child: DropdownButton(
           style: TextStyle(
