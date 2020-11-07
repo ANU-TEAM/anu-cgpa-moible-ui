@@ -55,7 +55,7 @@ class SemesterListScreen extends StatelessWidget {
                       child: Text(
                         "Oops! You can't add any more semesters.",
                         style: TextStyle(
-                          fontSize: 18,
+                          fontSize: 17,
                           fontWeight: FontWeight.w400,
                         ),
                       ),
@@ -130,7 +130,7 @@ class SemesterListScreen extends StatelessWidget {
                         child: Text(
                           "Semester ${index + 1} can't be deleted before Semester ${semesterCount}",
                           style: TextStyle(
-                            fontSize: 16,
+                            fontSize: 17,
                             fontWeight: FontWeight.w400,
                           ),
                         ),
