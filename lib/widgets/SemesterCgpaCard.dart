@@ -30,7 +30,7 @@ class SemesterCgpaCard extends StatelessWidget {
                 ),
               ),
               Text(
-                "${this.semestercgpa.toStringAsFixed(2)}",
+                "${this.semestercgpa.toStringAsFixed(4)}",
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 72,

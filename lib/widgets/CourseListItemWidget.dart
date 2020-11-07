@@ -5,9 +5,11 @@ import 'package:flutter/material.dart';
 class CourseListItemWidget extends StatelessWidget {
   final Course courseItem;
   final int index;
+  final Semester currentSemester;
   const CourseListItemWidget({
     this.courseItem,
     this.index,
+    this.currentSemester,
     Key key,
   }) : super(key: key);
 
@@ -27,6 +29,7 @@ class CourseListItemWidget extends StatelessWidget {
             builder: (BuildContext context) {
               return SafeArea(
                 child: EditCourseOptionsModal(
+                  semester: currentSemester,
                   course: courseItem,
                   courseDisplayIndex: index,
                 ),

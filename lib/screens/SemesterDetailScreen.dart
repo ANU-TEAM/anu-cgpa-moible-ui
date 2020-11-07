@@ -69,8 +69,8 @@ class SemesterDetailScreen extends StatelessWidget {
                       return SafeArea(
                         child: Container(
                           padding: EdgeInsets.symmetric(horizontal: 40),
-                          child: NewCourseInputWidget(
-                              semesterId: currentSemester.semesterId),
+                          child:
+                              NewCourseInputWidget(semester: currentSemester),
                         ),
                       );
                     });
@@ -90,6 +90,7 @@ class SemesterDetailScreen extends StatelessWidget {
 
   StreamBuilder<List<Course>> _buildCourseList(BuildContext context) {
     final database = Provider.of<AppDb>(context);
+
     return StreamBuilder(
         stream: database.watchSemesterCourses(currentSemester.semesterId),
         builder: (context, AsyncSnapshot<List<Course>> snapshot) {
@@ -102,9 +103,7 @@ class SemesterDetailScreen extends StatelessWidget {
                   children: [
                     Container(
                       height: 230,
-                      child: SemesterCgpaCard(
-                        semestercgpa: currentSemester.semesterCGPA,
-                      ),
+                      child: _buildSemesterCgpa(context),
                     ),
                     Container(
                       padding: EdgeInsets.symmetric(horizontal: 10),
@@ -175,7 +174,11 @@ class SemesterDetailScreen extends StatelessWidget {
                                         itemBuilder: (context, index) {
                                           final course = courses[index];
                                           return _buildCourseItem(
-                                              course, database, context, index);
+                                              course,
+                                              currentSemester,
+                                              database,
+                                              context,
+                                              index);
                                         }),
                                   ],
                                 ),
@@ -190,9 +193,24 @@ class SemesterDetailScreen extends StatelessWidget {
         });
   }
 
-  Widget _buildCourseItem(
-      Course course, AppDb database, BuildContext context, int index) {
+  StreamBuilder<double> _buildSemesterCgpa(BuildContext context) {
+    final database = Provider.of<AppDb>(context);
+    return StreamBuilder(
+      stream: database.watchSemesterCgpa(currentSemester.semesterId),
+      builder: (context, AsyncSnapshot<double> snapshot) {
+        return snapshot.hasData
+            ? SemesterCgpaCard(semestercgpa: snapshot.data)
+            : SemesterCgpaCard(
+                semestercgpa: 0,
+              );
+      },
+    );
+  }
+
+  Widget _buildCourseItem(Course course, Semester semester, AppDb database,
+      BuildContext context, int index) {
     return CourseListItemWidget(
+      currentSemester: semester,
       index: index,
       courseItem: course,
     );

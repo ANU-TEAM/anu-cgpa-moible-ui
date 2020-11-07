@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class EditCourseModal extends StatefulWidget {
+  final Semester currentSemester;
   final Course currentCourse;
   final int courseDisplayIndex;
   const EditCourseModal({
+    this.currentSemester,
     this.currentCourse,
     this.courseDisplayIndex,
     Key key,
@@ -13,13 +15,17 @@ class EditCourseModal extends StatefulWidget {
 
   @override
   _EditCourseModalState createState() => _EditCourseModalState(
-      currentCourse: currentCourse, displayIndex: courseDisplayIndex);
+      currentSemester: currentSemester,
+      currentCourse: currentCourse,
+      displayIndex: courseDisplayIndex);
 }
 
 class _EditCourseModalState extends State<EditCourseModal> {
+  final Semester currentSemester;
   final Course currentCourse;
   final int displayIndex;
-  _EditCourseModalState({this.currentCourse, this.displayIndex});
+  _EditCourseModalState(
+      {this.currentSemester, this.currentCourse, this.displayIndex});
   final List<DropdownMenuItem> gradeOptions = [
     DropdownMenuItem(value: 4.0, child: Container(child: Text("A"))),
     DropdownMenuItem(value: 3.75, child: Container(child: Text("A-"))),
@@ -91,7 +97,7 @@ class _EditCourseModalState extends State<EditCourseModal> {
             _buildCourseTitleInput(context),
             _buildCourseCreditHourInput(context),
             _buildCourseGradeInput(context),
-            _buildEditCourseButton(context),
+            _buildEditCourseButton(context, currentSemester),
             _buildCancelButton(context),
           ],
         ),
@@ -212,7 +218,7 @@ class _EditCourseModalState extends State<EditCourseModal> {
     );
   }
 
-  _buildEditCourseButton(BuildContext context) {
+  _buildEditCourseButton(BuildContext context, Semester currentSemester) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10.0),
       child: FlatButton(
@@ -226,6 +232,14 @@ class _EditCourseModalState extends State<EditCourseModal> {
             courseGrade: inputCourseGrade,
           );
           database.updateCourse(editedCourse);
+          database
+              .getSemesterCgpa(currentSemester.semesterId)
+              .getSingle()
+              .then((value) {
+            database.updateSemester(
+              currentSemester.copyWith(semesterCGPA: value),
+            );
+          });
           resetValuesAfterSubmit();
           print("$inputCourseTitle");
           print(editedCourse.toJson());

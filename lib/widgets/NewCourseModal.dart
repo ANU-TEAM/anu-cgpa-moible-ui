@@ -3,20 +3,20 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class NewCourseInputWidget extends StatefulWidget {
-  final int semesterId;
+  final Semester semester;
   const NewCourseInputWidget({
-    this.semesterId,
+    this.semester,
     Key key,
   }) : super(key: key);
 
   @override
   _NewCourseInputWidgetState createState() =>
-      _NewCourseInputWidgetState(currentSemesterId: semesterId);
+      _NewCourseInputWidgetState(currentSemester: semester);
 }
 
 class _NewCourseInputWidgetState extends State<NewCourseInputWidget> {
-  final int currentSemesterId;
-  _NewCourseInputWidgetState({this.currentSemesterId});
+  final Semester currentSemester;
+  _NewCourseInputWidgetState({this.currentSemester});
   final List<DropdownMenuItem> gradeOptions = [
     DropdownMenuItem(value: 4.0, child: Container(child: Text("A"))),
     DropdownMenuItem(value: 3.75, child: Container(child: Text("A-"))),
@@ -215,11 +215,19 @@ class _NewCourseInputWidgetState extends State<NewCourseInputWidget> {
             title: inputCourseTitle,
             credits: inputCourseCreditHours,
             courseGrade: inputCourseGrade,
-            semesterId: currentSemesterId,
+            semesterId: currentSemester.semesterId,
           );
           database.insertCourse(course);
           print(course.toJson());
           resetValuesAfterSubmit();
+          database
+              .getSemesterCgpa(currentSemester.semesterId)
+              .getSingle()
+              .then((value) {
+            database.updateSemester(
+              currentSemester.copyWith(semesterCGPA: value),
+            );
+          });
           Navigator.pop(context);
         },
         child: Row(

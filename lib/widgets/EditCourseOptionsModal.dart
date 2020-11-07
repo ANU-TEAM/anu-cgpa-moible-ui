@@ -4,10 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class EditCourseOptionsModal extends StatelessWidget {
+  final Semester semester;
   final Course course;
   final int courseDisplayIndex;
 
   const EditCourseOptionsModal({
+    this.semester,
     this.course,
     this.courseDisplayIndex,
     Key key,
@@ -34,10 +36,12 @@ class EditCourseOptionsModal extends StatelessWidget {
             ),
           ),
           EditButton(
+            currentSemester: semester,
             currentCourse: course,
             displayIndex: courseDisplayIndex,
           ),
           DeleteButton(
+            currentSemester: semester,
             currentCourse: course,
           ),
           CancelButton(),
@@ -48,9 +52,11 @@ class EditCourseOptionsModal extends StatelessWidget {
 }
 
 class EditButton extends StatelessWidget {
+  final Semester currentSemester;
   final Course currentCourse;
   final int displayIndex;
   const EditButton({
+    this.currentSemester,
     this.currentCourse,
     this.displayIndex,
     Key key,
@@ -74,6 +80,7 @@ class EditButton extends StatelessWidget {
                 child: Container(
                   padding: EdgeInsets.symmetric(horizontal: 40),
                   child: EditCourseModal(
+                    currentSemester: currentSemester,
                     currentCourse: currentCourse,
                     courseDisplayIndex: displayIndex,
                   ),
@@ -107,8 +114,10 @@ class EditButton extends StatelessWidget {
 }
 
 class DeleteButton extends StatelessWidget {
+  final Semester currentSemester;
   final Course currentCourse;
   const DeleteButton({
+    this.currentSemester,
     this.currentCourse,
     Key key,
   }) : super(key: key);
@@ -119,6 +128,14 @@ class DeleteButton extends StatelessWidget {
       onTap: () {
         final database = Provider.of<AppDb>(context, listen: false);
         database.deleteCourse(currentCourse);
+        database
+            .getSemesterCgpa(currentSemester.semesterId)
+            .getSingle()
+            .then((value) {
+          database.updateSemester(
+            currentSemester.copyWith(semesterCGPA: value),
+          );
+        });
         Navigator.of(context).pop();
       },
       child: Container(

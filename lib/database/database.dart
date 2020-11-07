@@ -24,6 +24,8 @@ class AppDb extends _$AppDb {
   Future deleteSemester(Semester semester) =>
       delete(semesters).delete(semester);
 
+  Stream<double> watchSemesterCgpa(int id) => getSemesterCgpa(id).watchSingle();
+
   // Course Functions
   Stream<List<Course>> watchSemesterCourses(int id) =>
       getSemesterCourses(id).watch();

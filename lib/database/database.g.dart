@@ -565,6 +565,18 @@ abstract class _$AppDb extends GeneratedDatabase {
         readsFrom: {semesters}).map((QueryRow row) => row.readInt('COUNT(*)'));
   }
 
+  Selectable<double> getSemesterCgpa(int var1) {
+    return customSelect(
+        'SELECT sum(CourseGrade * Credits) / sum(Credits) from courses WHERE SemesterId = ?',
+        variables: [
+          Variable.withInt(var1)
+        ],
+        readsFrom: {
+          courses
+        }).map((QueryRow row) =>
+        row.readDouble('sum(CourseGrade * Credits) / sum(Credits)'));
+  }
+
   @override
   Iterable<TableInfo> get allTables => allSchemaEntities.whereType<TableInfo>();
   @override

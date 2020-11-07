@@ -1,0 +1,1 @@
+1. Add snackbar for semester deleted and semester edited, and course deleted
