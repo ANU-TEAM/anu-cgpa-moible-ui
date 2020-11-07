@@ -110,75 +110,78 @@ class SemesterDetailScreen extends StatelessWidget {
                       padding: EdgeInsets.symmetric(horizontal: 10),
                       child: Card(
                         elevation: 6.0,
-                        child: Column(
-                          children: [
-                            Container(
-                              decoration: BoxDecoration(
-                                color: Colors.yellow[700],
-                                borderRadius: BorderRadius.vertical(
-                                  top: Radius.circular(4),
+                        child: Container(
+                          margin: EdgeInsets.all(5),
+                          child: Column(
+                            children: [
+                              Container(
+                                decoration: BoxDecoration(
+                                  color: Colors.yellow[700],
+                                  borderRadius: BorderRadius.vertical(
+                                    top: Radius.circular(4),
+                                  ),
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(15.0),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Expanded(
+                                        flex: 4,
+                                        child: Text(
+                                          "Course",
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.w600,
+                                          ),
+                                        ),
+                                      ),
+                                      Expanded(
+                                        flex: 2,
+                                        child: Text(
+                                          "Unit",
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.w600,
+                                          ),
+                                        ),
+                                      ),
+                                      Expanded(
+                                        flex: 1,
+                                        child: Text(
+                                          "Grade",
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.w600,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
-                              child: Padding(
-                                padding: const EdgeInsets.all(15.0),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
+                              SingleChildScrollView(
+                                physics: ScrollPhysics(),
+                                child: Column(
                                   children: [
-                                    Expanded(
-                                      flex: 4,
-                                      child: Text(
-                                        "Course",
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.w600,
-                                        ),
-                                      ),
-                                    ),
-                                    Expanded(
-                                      flex: 2,
-                                      child: Text(
-                                        "Unit",
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.w600,
-                                        ),
-                                      ),
-                                    ),
-                                    Expanded(
-                                      flex: 1,
-                                      child: Text(
-                                        "Grade",
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.w600,
-                                        ),
-                                      ),
-                                    ),
+                                    ListView.builder(
+                                        physics: NeverScrollableScrollPhysics(),
+                                        shrinkWrap: true,
+                                        itemCount: courses.length,
+                                        itemBuilder: (context, index) {
+                                          final course = courses[index];
+                                          return _buildCourseItem(
+                                              course, database, context, index);
+                                        }),
                                   ],
                                 ),
                               ),
-                            ),
-                            SingleChildScrollView(
-                              physics: ScrollPhysics(),
-                              child: Column(
-                                children: [
-                                  ListView.builder(
-                                      physics: NeverScrollableScrollPhysics(),
-                                      shrinkWrap: true,
-                                      itemCount: courses.length,
-                                      itemBuilder: (context, index) {
-                                        final course = courses[index];
-                                        return _buildCourseItem(
-                                            course, database, context, index);
-                                      }),
-                                ],
-                              ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
                     ),
@@ -189,12 +192,9 @@ class SemesterDetailScreen extends StatelessWidget {
 
   Widget _buildCourseItem(
       Course course, AppDb database, BuildContext context, int index) {
-    return GestureDetector(
-      onTap: () {},
-      child: CourseListItemWidget(
-        index: index,
-        courseItem: course,
-      ),
+    return CourseListItemWidget(
+      index: index,
+      courseItem: course,
     );
   }
 }
