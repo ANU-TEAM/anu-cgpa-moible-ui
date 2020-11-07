@@ -1,47 +1,49 @@
+import 'package:anucgpa/database/database.dart';
 import 'package:anucgpa/widgets/Drawer.dart';
+import 'package:anucgpa/widgets/SemesterCgpaCard.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class OverviewScreen extends StatelessWidget {
+  // In the constructor, require a Todo.
+  OverviewScreen({
+    Key key,
+  }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'Overview',
-          style: TextStyle(
-            fontSize: 25,
-            color: Colors.white,
-            fontWeight: FontWeight.w700,
+    return Drawer(
+      child: SafeArea(
+        child: Scaffold(
+          appBar: AppBar(
+            iconTheme: new IconThemeData(color: Colors.yellow[700]),
+            backgroundColor: Color(0xFFF5F5F5),
+            elevation: 0,
+            title: Text(
+              "Semester ",
+              style: TextStyle(color: Colors.yellow[700]),
+            ),
+            actions: [
+              Icon(
+                Icons.info_outline,
+                color: Colors.yellow[700],
+              ),
+            ],
           ),
-        ),
-        actions: [
-          Icon(
-            Icons.search,
-            color: Colors.white,
+          drawer: Drawer(
+            child: DrawerWidget(),
           ),
-          Padding(padding: EdgeInsets.all(15)),
-        ],
-      ),
-      drawer: Drawer(
-        child: DrawerWidget(),
-      ),
-      body: Container(
-        child: SafeArea(
-          child: Container(
-            child: Container(
-              padding: EdgeInsets.all(25),
-              margin: EdgeInsets.only(left: 25, right: 25, top: 20),
-              alignment: Alignment.topCenter,
-              color: Colors.yellow[800],
-              height: 200,
-              width: 300,
-              child: Text(
-                'Your CGPA',
-                style: TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.w700,
-                    fontStyle: FontStyle.normal,
-                    color: Colors.white),
+          body: Container(
+            alignment: Alignment.topCenter,
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Container(
+                    height: 230,
+                    child: _buildOverallCgpa(context),
+                  ),
+                ],
               ),
             ),
           ),
@@ -49,18 +51,18 @@ class OverviewScreen extends StatelessWidget {
       ),
     );
   }
-}
 
-// class SearchScreen extends StatefulWidget {
-//   @override
-//   _SearchScreenState createState() => _SearchScreenState();
-// }
-//
-// class _SearchScreenState extends State<SearchScreen> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container(
-//       child: ,
-//     );
-//   }
-//}
+  StreamBuilder<double> _buildOverallCgpa(BuildContext context) {
+    final database = Provider.of<AppDb>(context);
+    return StreamBuilder(
+      stream: database.watchOverallCgpa(),
+      builder: (context, AsyncSnapshot<double> snapshot) {
+        return snapshot.hasData
+            ? SemesterCgpaCard(semestercgpa: snapshot.data)
+            : SemesterCgpaCard(
+                semestercgpa: 0,
+              );
+      },
+    );
+  }
+}

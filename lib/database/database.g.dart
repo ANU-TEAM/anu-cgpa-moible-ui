@@ -577,6 +577,12 @@ abstract class _$AppDb extends GeneratedDatabase {
         row.readDouble('sum(CourseGrade * Credits) / sum(Credits)'));
   }
 
+  Selectable<double> getOverallCgpa() {
+    return customSelect('SELECT avg(SemesterCGPA) FROM semesters',
+            variables: [], readsFrom: {semesters})
+        .map((QueryRow row) => row.readDouble('avg(SemesterCGPA)'));
+  }
+
   @override
   Iterable<TableInfo> get allTables => allSchemaEntities.whereType<TableInfo>();
   @override
