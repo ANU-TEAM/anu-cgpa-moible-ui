@@ -578,8 +578,10 @@ abstract class _$AppDb extends GeneratedDatabase {
   }
 
   Selectable<double> getOverallCgpa() {
-    return customSelect('SELECT avg(SemesterCGPA) FROM semesters',
-            variables: [], readsFrom: {semesters})
+    return customSelect(
+            'SELECT avg(SemesterCGPA) FROM semesters WHERE (SemesterCGPA != 0)',
+            variables: [],
+            readsFrom: {semesters})
         .map((QueryRow row) => row.readDouble('avg(SemesterCGPA)'));
   }
 

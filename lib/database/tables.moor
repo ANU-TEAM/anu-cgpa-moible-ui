@@ -18,4 +18,4 @@ getSemesterLength: SELECT COUNT(*) FROM semesters;
 
 getSemesterCgpa: SELECT sum(CourseGrade * Credits) / sum(Credits) from courses WHERE SemesterId = ?;
 
-getOverallCgpa: SELECT avg(SemesterCGPA) FROM semesters;
+getOverallCgpa: SELECT avg(SemesterCGPA) FROM semesters WHERE (SemesterCGPA != 0);
