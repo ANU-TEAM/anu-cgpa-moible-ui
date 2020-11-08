@@ -21,29 +21,29 @@ class DrawerWidget extends StatelessWidget {
       child: ListView(
         padding: EdgeInsets.only(left: 30),
         children: [
-          ListTile(
-            contentPadding: EdgeInsets.only(top: 50, bottom: 30),
-            leading: Icon(
-              Icons.person_outline,
-              size: 60,
-              color: Colors.white,
-            ),
-            title: Text(
-              'Owusu Victor',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 28,
-              ),
-            ),
-            subtitle: Text(
-              'vitech180@gmail.com',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 16,
-              ),
-            ),
-            onTap: () {},
-          ),
+          // ListTile(
+          //   contentPadding: EdgeInsets.only(top: 50, bottom: 30),
+          //   leading: Icon(
+          //     Icons.person_outline,
+          //     size: 60,
+          //     color: Colors.white,
+          //   ),
+          //   title: Text(
+          //     'Owusu Victor',
+          //     style: TextStyle(
+          //       color: Colors.white,
+          //       fontSize: 28,
+          //     ),
+          //   ),
+          //   subtitle: Text(
+          //     'vitech180@gmail.com',
+          //     style: TextStyle(
+          //       color: Colors.white,
+          //       fontSize: 16,
+          //     ),
+          //   ),
+          //   onTap: () {},
+          // ),
 
           //Overview
           ListTile(

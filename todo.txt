@@ -1,1 +1,10 @@
-1. Add snackbar for semester deleted and semester edited, and course deleted
+1. Add snackbar for semester deleted and semester edited, and course deleted.
+2. Auto navigate to semester detail page after addition.
+3. Add margin to semester swipe to delete.
+4. Do not calculate semester cgpa when semester cgpa is zero.
+5. Make default value of credit hour addition of semester 3.
+6. Remove to overscroll color in semester list.
+7. Display course grade letter instead of course grade balue.
+8. Display classes based on cgpa value.
+9. Make semester list item a card.
+10. Add no course exists yet and not semester exists yet placeholders.
