@@ -37,14 +37,15 @@ class _NewCourseInputWidgetState extends State<NewCourseInputWidget> {
   TextEditingController courseGradeController;
 
   String inputCourseTitle;
-  int inputCourseCreditHours;
+  int inputCourseCreditHours = 3;
   double inputCourseGrade;
 
   @override
   void initState() {
     super.initState();
     courseTitleController = TextEditingController();
-    courseCreditHourController = TextEditingController();
+    courseCreditHourController =
+        TextEditingController(text: inputCourseCreditHours.toString());
     courseGradeController = TextEditingController();
   }
 
