@@ -25,7 +25,8 @@ class SemesterDetailScreen extends StatelessWidget {
           child: Scaffold(
             appBar: AppBar(
               iconTheme: new IconThemeData(color: Colors.yellow[700]),
-              backgroundColor: Color(0xFFF5F5F5),
+              backgroundColor: Colors.white,
+              shadowColor: Colors.white,
               elevation: 0,
               title: Text(
                 "Semester $displayId",
@@ -49,6 +50,7 @@ class SemesterDetailScreen extends StatelessWidget {
             ),
             body: Container(
               alignment: Alignment.topCenter,
+              color: Colors.white,
               child: ListView(
                 physics: BouncingScrollPhysics(),
                 shrinkWrap: true,

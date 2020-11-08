@@ -15,7 +15,8 @@ class SemesterListScreen extends StatelessWidget {
         child: Scaffold(
           appBar: AppBar(
             iconTheme: new IconThemeData(color: Colors.yellow[700]),
-            backgroundColor: Color(0xFFF5F5F5),
+            backgroundColor: Colors.white,
+            shadowColor: Colors.white,
             elevation: 0,
             title: Text(
               "Semesters",
@@ -32,6 +33,7 @@ class SemesterListScreen extends StatelessWidget {
             child: DrawerWidget(),
           ),
           body: Container(
+            color: Colors.white,
             child: _buildSemesterList(context),
           ),
           floatingActionButton: Builder(builder: (BuildContext context) {

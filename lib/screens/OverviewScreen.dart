@@ -17,10 +17,11 @@ class OverviewScreen extends StatelessWidget {
         child: Scaffold(
           appBar: AppBar(
             iconTheme: new IconThemeData(color: Colors.yellow[700]),
-            backgroundColor: Color(0xFFF5F5F5),
+            backgroundColor: Colors.white,
+            shadowColor: Colors.white,
             elevation: 0,
             title: Text(
-              "Semester ",
+              "Overview",
               style: TextStyle(color: Colors.yellow[700]),
             ),
             actions: [
@@ -41,6 +42,7 @@ class OverviewScreen extends StatelessWidget {
                 children: [
                   Container(
                     height: 230,
+                    color: Colors.white,
                     child: _buildOverallCgpa(context),
                   ),
                 ],
