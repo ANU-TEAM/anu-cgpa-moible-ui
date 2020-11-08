@@ -49,8 +49,10 @@ class SemesterDetailScreen extends StatelessWidget {
             ),
             body: Container(
               alignment: Alignment.topCenter,
-              child: SingleChildScrollView(
-                child: _buildCourseList(context),
+              child: ListView(
+                physics: BouncingScrollPhysics(),
+                shrinkWrap: true,
+                children: [_buildCourseList(context)],
               ),
             ),
             floatingActionButton: FloatingActionButton(

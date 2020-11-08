@@ -84,7 +84,9 @@ class SemesterListScreen extends StatelessWidget {
         builder: (context, AsyncSnapshot<List<Semester>> snapshot) {
           final semesters = snapshot.data ?? List();
           return ListView.builder(
+              physics: BouncingScrollPhysics(),
               itemCount: semesters.length,
+              shrinkWrap: true,
               itemBuilder: (context, index) {
                 final semester = semesters[index];
                 return _buildListItem(semester, database, context, index);
