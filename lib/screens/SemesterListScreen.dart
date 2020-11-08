@@ -120,29 +120,32 @@ class SemesterListScreen extends StatelessWidget {
             actionPane: SlidableDrawerActionPane(),
             actionExtentRatio: 0.25,
             secondaryActions: <Widget>[
-              IconSlideAction(
-                caption: 'Delete',
-                color: Colors.red[700],
-                icon: Icons.delete,
-                onTap: () {
-                  if (index < semesterCount - 1) {
-                    final snackBar = SnackBar(
-                      backgroundColor: Colors.yellow[800],
-                      content: Container(
-                        child: Text(
-                          "Semester ${index + 1} can't be deleted before Semester ${semesterCount}",
-                          style: TextStyle(
-                            fontSize: 17,
-                            fontWeight: FontWeight.w400,
+              Padding(
+                padding: const EdgeInsets.only(right: 10.0),
+                child: IconSlideAction(
+                  caption: 'Delete',
+                  color: Colors.red[700],
+                  icon: Icons.delete,
+                  onTap: () {
+                    if (index < semesterCount - 1) {
+                      final snackBar = SnackBar(
+                        backgroundColor: Colors.yellow[800],
+                        content: Container(
+                          child: Text(
+                            "Semester ${index + 1} can't be deleted before Semester ${semesterCount}",
+                            style: TextStyle(
+                              fontSize: 17,
+                              fontWeight: FontWeight.w400,
+                            ),
                           ),
                         ),
-                      ),
-                    );
-                    Scaffold.of(context).showSnackBar(snackBar);
-                  } else {
-                    database.deleteSemester(semester);
-                  }
-                },
+                      );
+                      Scaffold.of(context).showSnackBar(snackBar);
+                    } else {
+                      database.deleteSemester(semester);
+                    }
+                  },
+                ),
               ),
             ],
             child: SemesterCardTile(
