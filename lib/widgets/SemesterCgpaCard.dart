@@ -66,6 +66,8 @@ class SemesterCgpaCard extends StatelessWidget {
       return "PASS";
     } else if (cgpa >= 1.00 && cgpa < 2.00) {
       return "FAIL";
+    } else if (cgpa == 0) {
+      return "- - -";
     } else {
       return "ATTEMPTED DEGREE";
     }
