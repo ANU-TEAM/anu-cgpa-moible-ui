@@ -14,6 +14,7 @@ class SemesterCardTile extends StatelessWidget {
     return Center(
       child: Card(
         elevation: 8.0,
+        shadowColor: Colors.grey[200],
         child: Container(
           height: 140,
           width: MediaQuery.of(context).size.width * 0.90,

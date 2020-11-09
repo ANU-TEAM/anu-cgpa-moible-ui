@@ -10,7 +10,8 @@ class SemesterCgpaCard extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 10),
       width: MediaQuery.of(context).size.width,
       child: Card(
-        elevation: 6,
+        elevation: 8.0,
+        shadowColor: Colors.grey[200],
         child: Container(
           decoration: BoxDecoration(
             color: Colors.yellow[700],

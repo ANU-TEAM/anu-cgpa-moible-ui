@@ -3,6 +3,7 @@ import 'package:anucgpa/widgets/CourseListItemWidget.dart';
 import 'package:anucgpa/widgets/Drawer.dart';
 import 'package:anucgpa/widgets/SemesterCgpaCard.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import 'package:anucgpa/widgets/NewCourseModal.dart';
 
@@ -10,6 +11,7 @@ class SemesterDetailScreen extends StatelessWidget {
   // Declare a field that holds the year
   final Semester currentSemester;
   final int displayId;
+  final String noentrySvgPath = 'assets/images/noentries.svg';
 
   // In the constructor, require a Todo.
   SemesterDetailScreen(
@@ -101,7 +103,19 @@ class SemesterDetailScreen extends StatelessWidget {
           final courses = snapshot.data ?? List();
           print(courses);
           return snapshot.data.length == 0
-              ? Text('NOTHING')
+              ? Container(
+                  height: MediaQuery.of(context).size.height * 0.5,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SvgPicture.asset(
+                        noentrySvgPath,
+                        height: 180,
+                      )
+                    ],
+                  ),
+                )
               : Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
@@ -112,7 +126,8 @@ class SemesterDetailScreen extends StatelessWidget {
                     Container(
                       padding: EdgeInsets.symmetric(horizontal: 10),
                       child: Card(
-                        elevation: 6.0,
+                        elevation: 8.0,
+                        shadowColor: Colors.grey[200],
                         child: Container(
                           margin: EdgeInsets.all(5),
                           child: Column(
