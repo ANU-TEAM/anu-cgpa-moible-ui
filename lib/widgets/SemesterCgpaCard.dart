@@ -39,7 +39,7 @@ class SemesterCgpaCard extends StatelessWidget {
                 ),
               ),
               Text(
-                "SECOND CLASS UPPER",
+                _calculateCgpaClass(this.semestercgpa),
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 16,
@@ -51,5 +51,23 @@ class SemesterCgpaCard extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  String _calculateCgpaClass(double cgpa) {
+    if (cgpa >= 3.60 && cgpa <= 4.00) {
+      return "FIRST CLASS";
+    } else if (cgpa >= 3.20 && cgpa <= 3.59) {
+      return "SECOND CLASS UPPER";
+    } else if (cgpa >= 2.80 && cgpa <= 3.19) {
+      return "SECOND CLASS LOWER";
+    } else if (cgpa >= 2.40 && cgpa <= 2.79) {
+      return "THIRD CLASS";
+    } else if (cgpa >= 2.00 && cgpa <= 2.39) {
+      return "PASS";
+    } else if (cgpa >= 1.00 && cgpa < 2.00) {
+      return "FAIL";
+    } else {
+      return "ATTEMPTED DEGREE";
+    }
   }
 }
