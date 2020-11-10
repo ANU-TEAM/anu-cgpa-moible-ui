@@ -27,6 +27,7 @@ class HomeScreen extends StatelessWidget {
                 child: Container(
                   width: MediaQuery.of(context).size.width * 0.6,
                   child: FlatButton(
+                    highlightColor: Colors.yellow[900],
                     onPressed: () async {
                       bool weCanCheckBiometrics =
                           await localAuth.canCheckBiometrics;

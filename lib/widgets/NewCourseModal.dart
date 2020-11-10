@@ -207,6 +207,7 @@ class _NewCourseInputWidgetState extends State<NewCourseInputWidget> {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10.0),
       child: FlatButton(
+        highlightColor: Colors.yellow[800],
         height: 55,
         color: Colors.yellow[700],
         onPressed: () {
@@ -258,6 +259,7 @@ class _NewCourseInputWidgetState extends State<NewCourseInputWidget> {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10.0),
       child: FlatButton(
+        highlightColor: Colors.red[100],
         height: 55,
         color: Colors.red.withAlpha(50),
         onPressed: () {
