@@ -1,11 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:anucgpa/screens/SemesterListScreen.dart';
-import 'package:anucgpa/screens/AboutScreen.dart';
-import 'package:anucgpa/screens/CompareScreen.dart';
-import 'package:anucgpa/screens/LogOutScreen.dart';
 import 'package:anucgpa/screens/OverviewScreen.dart';
-import 'package:anucgpa/screens/ProfileScreen.dart';
-import 'package:anucgpa/screens/SyncScreen.dart';
 
 class DrawerWidget extends StatelessWidget {
   @override
@@ -97,129 +92,129 @@ class DrawerWidget extends StatelessWidget {
           ),
 
           //Compare
-          ListTile(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (BuildContext context) => CompareScreen(),
-                ),
-              );
-            },
-            contentPadding: EdgeInsets.only(top: 20),
-            leading: Icon(
-              Icons.compare_arrows,
-              size: 35,
-              color: Colors.white,
-            ),
-            title: Text(
-              'Comapare',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 24,
-              ),
-            ),
-          ),
+          // ListTile(
+          //   onTap: () {
+          //     Navigator.push(
+          //       context,
+          //       MaterialPageRoute(
+          //         builder: (BuildContext context) => CompareScreen(),
+          //       ),
+          //     );
+          //   },
+          //   contentPadding: EdgeInsets.only(top: 20),
+          //   leading: Icon(
+          //     Icons.compare_arrows,
+          //     size: 35,
+          //     color: Colors.white,
+          //   ),
+          //   title: Text(
+          //     'Comapare',
+          //     style: TextStyle(
+          //       color: Colors.white,
+          //       fontSize: 24,
+          //     ),
+          //   ),
+          // ),
 
-          //Profile
-          ListTile(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (BuildContext context) => ProfileScreen(),
-                ),
-              );
-            },
-            contentPadding: EdgeInsets.only(top: 20),
-            leading: Icon(
-              Icons.person,
-              size: 35,
-              color: Colors.white,
-            ),
-            title: Text(
-              'Profile',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 24,
-              ),
-            ),
-          ),
+          // //Profile
+          // ListTile(
+          //   onTap: () {
+          //     Navigator.push(
+          //       context,
+          //       MaterialPageRoute(
+          //         builder: (BuildContext context) => ProfileScreen(),
+          //       ),
+          //     );
+          //   },
+          //   contentPadding: EdgeInsets.only(top: 20),
+          //   leading: Icon(
+          //     Icons.person,
+          //     size: 35,
+          //     color: Colors.white,
+          //   ),
+          //   title: Text(
+          //     'Profile',
+          //     style: TextStyle(
+          //       color: Colors.white,
+          //       fontSize: 24,
+          //     ),
+          //   ),
+          // ),
 
-          //Sync
-          ListTile(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (BuildContext context) => SyncScreen(),
-                ),
-              );
-            },
-            contentPadding: EdgeInsets.only(top: 20),
-            leading: Icon(
-              Icons.sync,
-              size: 35,
-              color: Colors.white,
-            ),
-            title: Text(
-              'Sync',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 24,
-              ),
-            ),
-          ),
+          // //Sync
+          // ListTile(
+          //   onTap: () {
+          //     Navigator.push(
+          //       context,
+          //       MaterialPageRoute(
+          //         builder: (BuildContext context) => SyncScreen(),
+          //       ),
+          //     );
+          //   },
+          //   contentPadding: EdgeInsets.only(top: 20),
+          //   leading: Icon(
+          //     Icons.sync,
+          //     size: 35,
+          //     color: Colors.white,
+          //   ),
+          //   title: Text(
+          //     'Sync',
+          //     style: TextStyle(
+          //       color: Colors.white,
+          //       fontSize: 24,
+          //     ),
+          //   ),
+          // ),
 
-          //About
-          ListTile(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (BuildContext context) => AboutScreen(),
-                ),
-              );
-            },
-            contentPadding: EdgeInsets.only(top: 20),
-            leading: Icon(
-              Icons.info_outline,
-              size: 35,
-              color: Colors.white,
-            ),
-            title: Text(
-              'About',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 24,
-              ),
-            ),
-          ),
+          // //About
+          // ListTile(
+          //   onTap: () {
+          //     Navigator.push(
+          //       context,
+          //       MaterialPageRoute(
+          //         builder: (BuildContext context) => AboutScreen(),
+          //       ),
+          //     );
+          //   },
+          //   contentPadding: EdgeInsets.only(top: 20),
+          //   leading: Icon(
+          //     Icons.info_outline,
+          //     size: 35,
+          //     color: Colors.white,
+          //   ),
+          //   title: Text(
+          //     'About',
+          //     style: TextStyle(
+          //       color: Colors.white,
+          //       fontSize: 24,
+          //     ),
+          //   ),
+          // ),
 
-          //Logout
-          ListTile(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (BuildContext context) => LogOutScreen(),
-                ),
-              );
-            },
-            contentPadding: EdgeInsets.only(top: 20),
-            leading: Icon(
-              Icons.logout,
-              size: 35,
-              color: Colors.white,
-            ),
-            title: Text(
-              'Logout',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 24,
-              ),
-            ),
-          ),
+          // //Logout
+          // ListTile(
+          //   onTap: () {
+          //     Navigator.push(
+          //       context,
+          //       MaterialPageRoute(
+          //         builder: (BuildContext context) => LogOutScreen(),
+          //       ),
+          //     );
+          //   },
+          //   contentPadding: EdgeInsets.only(top: 20),
+          //   leading: Icon(
+          //     Icons.logout,
+          //     size: 35,
+          //     color: Colors.white,
+          //   ),
+          //   title: Text(
+          //     'Logout',
+          //     style: TextStyle(
+          //       color: Colors.white,
+          //       fontSize: 24,
+          //     ),
+          //   ),
+          // ),
         ],
       ),
     );

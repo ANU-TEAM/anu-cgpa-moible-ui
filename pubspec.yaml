@@ -34,6 +34,7 @@ dependencies:
   moor_flutter: ^3.1.0
   sqlite3_flutter_libs: ^0.2.0
   local_auth: ^0.6.3+4
+  get_it: ^1.0.3+2
 
 dev_dependencies:
   moor_generator: ^3.4.0
