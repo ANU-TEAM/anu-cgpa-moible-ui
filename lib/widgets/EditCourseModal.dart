@@ -88,9 +88,11 @@ class _EditCourseModalState extends State<EditCourseModal> {
             Padding(
               padding: const EdgeInsets.only(top: 8, bottom: 25),
               child: Text(
-                "Enter the course details below",
+                currentCourse.title == null
+                    ? "Course ${displayIndex + 1}"
+                    : "${currentCourse.title}",
                 style: TextStyle(
-                  fontSize: 17,
+                  fontSize: 19,
                 ),
               ),
             ),
