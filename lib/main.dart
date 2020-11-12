@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 void main() {
+  Paint.enableDithering = true;
   runApp(
     Provider<AppDb>(
         create: (context) => AppDb(),
