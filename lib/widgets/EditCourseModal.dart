@@ -98,7 +98,7 @@ class _EditCourseModalState extends State<EditCourseModal> {
             _buildCourseCreditHourInput(context),
             _buildCourseGradeInput(context),
             _buildEditCourseButton(context, currentSemester),
-            _buildCancelButton(context),
+            _buildDeleteButton(context),
           ],
         ),
       ),
@@ -245,7 +245,6 @@ class _EditCourseModalState extends State<EditCourseModal> {
           print("$inputCourseTitle");
           print(editedCourse.toJson());
           Navigator.pop(context);
-          Navigator.pop(context);
         },
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -270,7 +269,7 @@ class _EditCourseModalState extends State<EditCourseModal> {
     );
   }
 
-  _buildCancelButton(BuildContext context) {
+  _buildDeleteButton(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10.0),
       child: FlatButton(
@@ -280,14 +279,21 @@ class _EditCourseModalState extends State<EditCourseModal> {
         onPressed: () {
           final database = Provider.of<AppDb>(context, listen: false);
           database.deleteCourse(currentCourse);
-          database
-              .getSemesterCgpa(currentSemester.semesterId)
-              .getSingle()
-              .then((value) {
-            database.updateSemester(
-              currentSemester.copyWith(semesterCGPA: value),
-            );
-          });
+          database.getSemesterCgpa(currentSemester.semesterId).getSingle().then(
+            (value) {
+              if (value == null) {
+                database.updateSemester(
+                  currentSemester.copyWith(semesterCGPA: 0),
+                );
+                print(value);
+              } else {
+                database.updateSemester(
+                  currentSemester.copyWith(semesterCGPA: value),
+                );
+                print(value);
+              }
+            },
+          );
           Navigator.of(context).pop();
         },
         child: Row(

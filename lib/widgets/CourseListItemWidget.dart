@@ -1,6 +1,5 @@
 import 'package:anucgpa/database/database.dart';
 import 'package:anucgpa/widgets/EditCourseModal.dart';
-import 'package:anucgpa/widgets/EditCourseOptionsModal.dart';
 import 'package:flutter/material.dart';
 
 class CourseListItemWidget extends StatelessWidget {
@@ -29,10 +28,13 @@ class CourseListItemWidget extends StatelessWidget {
             context: context,
             builder: (BuildContext context) {
               return SafeArea(
-                child: EditCourseModal(
-                  currentSemester: currentSemester,
-                  currentCourse: courseItem,
-                  courseDisplayIndex: index,
+                child: Container(
+                  padding: EdgeInsets.symmetric(horizontal: 40),
+                  child: EditCourseModal(
+                    currentSemester: currentSemester,
+                    currentCourse: courseItem,
+                    courseDisplayIndex: index,
+                  ),
                 ),
               );
             });
