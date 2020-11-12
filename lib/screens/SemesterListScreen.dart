@@ -89,7 +89,7 @@ class SemesterListScreen extends StatelessWidget {
               ? ListView.builder(
                   physics: BouncingScrollPhysics(),
                   itemCount: semesters.length,
-                  shrinkWrap: true,
+                  // shrinkWrap: true,
                   itemBuilder: (context, index) {
                     final semester = semesters[index];
                     return _buildListItem(semester, database, context, index);
