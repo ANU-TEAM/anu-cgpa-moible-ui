@@ -559,6 +559,12 @@ abstract class _$AppDb extends GeneratedDatabase {
         readsFrom: {courses}).map(courses.mapFromRow);
   }
 
+  Selectable<int> getSemesterCoursesLength(int var1) {
+    return customSelect('SELECT COUNT(*) FROM courses WHERE SemesterId = ?',
+        variables: [Variable.withInt(var1)],
+        readsFrom: {courses}).map((QueryRow row) => row.readInt('COUNT(*)'));
+  }
+
   Selectable<int> getSemesterLength() {
     return customSelect('SELECT COUNT(*) FROM semesters',
         variables: [],

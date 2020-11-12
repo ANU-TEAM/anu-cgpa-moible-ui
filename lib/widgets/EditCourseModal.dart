@@ -278,8 +278,17 @@ class _EditCourseModalState extends State<EditCourseModal> {
         height: 55,
         color: Colors.red.withAlpha(50),
         onPressed: () {
-          resetValuesAfterSubmit();
-          Navigator.pop(context);
+          final database = Provider.of<AppDb>(context, listen: false);
+          database.deleteCourse(currentCourse);
+          database
+              .getSemesterCgpa(currentSemester.semesterId)
+              .getSingle()
+              .then((value) {
+            database.updateSemester(
+              currentSemester.copyWith(semesterCGPA: value),
+            );
+          });
+          Navigator.of(context).pop();
         },
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -287,12 +296,12 @@ class _EditCourseModalState extends State<EditCourseModal> {
             Padding(
               padding: const EdgeInsets.only(right: 8.0),
               child: Icon(
-                Icons.close,
+                Icons.delete,
                 color: Colors.red,
               ),
             ),
             Text(
-              "CANCEL",
+              "DELETE",
               style: TextStyle(
                 color: Colors.red,
                 fontSize: 17,
