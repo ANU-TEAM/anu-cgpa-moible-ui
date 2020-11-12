@@ -104,7 +104,8 @@ class SemesterDetailScreen extends StatelessWidget {
           print(courses);
           return snapshot.data.length == 0
               ? Container(
-                  height: MediaQuery.of(context).size.height * 0.5,
+                  alignment: Alignment.center,
+                  height: MediaQuery.of(context).size.height * 0.8,
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -112,7 +113,22 @@ class SemesterDetailScreen extends StatelessWidget {
                       SvgPicture.asset(
                         noentrySvgPath,
                         height: 180,
-                      )
+                      ),
+                      Container(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 20,
+                          vertical: 20,
+                        ),
+                        alignment: Alignment.center,
+                        child: Text(
+                          "You have not added any course for this semester yet. \nClick on the button below to add one.",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: Colors.black87,
+                            fontSize: 18,
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                 )

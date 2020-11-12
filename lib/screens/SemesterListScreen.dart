@@ -3,16 +3,19 @@ import 'package:anucgpa/widgets/Drawer.dart';
 import 'package:anucgpa/widgets/SemesterCardTile.dart';
 import 'package:anucgpa/screens/SemesterDetailScreen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
 class SemesterListScreen extends StatelessWidget {
+  final String noentrySvgPath = 'assets/images/noentries.svg';
   @override
   Widget build(BuildContext context) {
     int semesterLength = 0;
     return Drawer(
       child: SafeArea(
         child: Scaffold(
+          backgroundColor: Colors.white,
           appBar: AppBar(
             iconTheme: new IconThemeData(color: Colors.yellow[700]),
             backgroundColor: Colors.white,
@@ -32,10 +35,7 @@ class SemesterListScreen extends StatelessWidget {
           drawer: Drawer(
             child: DrawerWidget(),
           ),
-          body: Container(
-            color: Colors.white,
-            child: _buildSemesterList(context),
-          ),
+          body: _buildSemesterList(context),
           floatingActionButton: Builder(builder: (BuildContext context) {
             final database = Provider.of<AppDb>(context);
             return FloatingActionButton(
@@ -85,14 +85,44 @@ class SemesterListScreen extends StatelessWidget {
         stream: database.watchAllSemesters(),
         builder: (context, AsyncSnapshot<List<Semester>> snapshot) {
           final semesters = snapshot.data ?? List();
-          return ListView.builder(
-              physics: BouncingScrollPhysics(),
-              itemCount: semesters.length,
-              shrinkWrap: true,
-              itemBuilder: (context, index) {
-                final semester = semesters[index];
-                return _buildListItem(semester, database, context, index);
-              });
+          return snapshot.data.length != 0
+              ? ListView.builder(
+                  physics: BouncingScrollPhysics(),
+                  itemCount: semesters.length,
+                  shrinkWrap: true,
+                  itemBuilder: (context, index) {
+                    final semester = semesters[index];
+                    return _buildListItem(semester, database, context, index);
+                  })
+              : Container(
+                  alignment: Alignment.center,
+                  height: MediaQuery.of(context).size.height * 0.8,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SvgPicture.asset(
+                        noentrySvgPath,
+                        height: 180,
+                      ),
+                      Container(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 20,
+                          vertical: 20,
+                        ),
+                        alignment: Alignment.center,
+                        child: Text(
+                          "You have not added any semester yet. \nClick on the button below to add one.",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: Colors.black87,
+                            fontSize: 18,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                );
         });
   }
 
