@@ -117,74 +117,79 @@ class SemesterListScreen extends StatelessWidget {
             ),
           );
         },
-        child: Container(
-          child: Slidable(
-            actionPane: SlidableDrawerActionPane(),
-            actionExtentRatio: 0.25,
-            secondaryActions: <Widget>[
-              Padding(
-                padding: const EdgeInsets.only(right: 15.0),
-                child: Card(
-                  color: Colors.red[100],
-                  elevation: 8.0,
-                  shadowColor: Colors.grey[200],
-                  child: Container(
-                    margin: EdgeInsets.all(2),
-                    decoration: BoxDecoration(
-                      color: Color.fromRGBO(255, 193, 4, 0.2),
-                      borderRadius: BorderRadius.horizontal(
-                        left: Radius.circular(4),
-                        right: Radius.circular(4),
+        child: Theme(
+          data: ThemeData(
+            highlightColor: Colors.red.withAlpha(60),
+          ),
+          child: Container(
+            child: Slidable(
+              actionPane: SlidableDrawerActionPane(),
+              actionExtentRatio: 0.25,
+              secondaryActions: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.only(right: 15.0),
+                  child: Card(
+                    color: Colors.red[100],
+                    elevation: 8.0,
+                    shadowColor: Colors.grey[200],
+                    child: Container(
+                      margin: EdgeInsets.all(2),
+                      decoration: BoxDecoration(
+                        color: Color.fromRGBO(255, 193, 4, 0.2),
+                        borderRadius: BorderRadius.horizontal(
+                          left: Radius.circular(4),
+                          right: Radius.circular(4),
+                        ),
                       ),
-                    ),
-                    child: IconSlideAction(
-                      iconWidget: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.delete,
-                            color: Colors.red[600],
-                            size: 32,
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Text(
-                            "Delete",
-                            style:
-                                TextStyle(fontSize: 17, color: Colors.red[600]),
-                          ),
-                        ],
-                      ),
-                      color: Colors.red[100],
-                      // icon: Icons.delete,
-                      onTap: () {
-                        if (index < semesterCount - 1) {
-                          final snackBar = SnackBar(
-                            backgroundColor: Colors.yellow[800],
-                            content: Container(
-                              child: Text(
-                                "Semester ${index + 1} can't be deleted before Semester ${semesterCount}",
-                                style: TextStyle(
-                                  fontSize: 17,
-                                  fontWeight: FontWeight.w400,
+                      child: IconSlideAction(
+                        iconWidget: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.delete,
+                              color: Colors.red[600],
+                              size: 32,
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Text(
+                              "Delete",
+                              style: TextStyle(
+                                  fontSize: 17, color: Colors.red[600]),
+                            ),
+                          ],
+                        ),
+                        color: Colors.red[100],
+                        // icon: Icons.delete,
+                        onTap: () {
+                          if (index < semesterCount - 1) {
+                            final snackBar = SnackBar(
+                              backgroundColor: Colors.yellow[800],
+                              content: Container(
+                                child: Text(
+                                  "Semester ${index + 1} can't be deleted before Semester ${semesterCount}",
+                                  style: TextStyle(
+                                    fontSize: 17,
+                                    fontWeight: FontWeight.w400,
+                                  ),
                                 ),
                               ),
-                            ),
-                          );
-                          Scaffold.of(context).showSnackBar(snackBar);
-                        } else {
-                          database.deleteSemester(semester);
-                        }
-                      },
+                            );
+                            Scaffold.of(context).showSnackBar(snackBar);
+                          } else {
+                            database.deleteSemester(semester);
+                          }
+                        },
+                      ),
                     ),
                   ),
                 ),
+              ],
+              child: SemesterCardTile(
+                semesterNumber: index + 1,
+                semesterCgpa: semester.semesterCGPA,
               ),
-            ],
-            child: SemesterCardTile(
-              semesterNumber: index + 1,
-              semesterCgpa: semester.semesterCGPA,
             ),
           ),
         ),
