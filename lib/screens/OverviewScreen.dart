@@ -1,6 +1,6 @@
 import 'package:anucgpa/database/database.dart';
 import 'package:anucgpa/widgets/Drawer.dart';
-import 'package:anucgpa/widgets/SemesterCgpaCard.dart';
+import 'package:anucgpa/widgets/FgpaCard.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -60,8 +60,8 @@ class OverviewScreen extends StatelessWidget {
       stream: database.watchOverallCgpa(),
       builder: (context, AsyncSnapshot<double> snapshot) {
         return snapshot.hasData
-            ? SemesterCgpaCard(semestercgpa: snapshot.data)
-            : SemesterCgpaCard(
+            ? FgpaCard(semestercgpa: snapshot.data)
+            : FgpaCard(
                 semestercgpa: 0,
               );
       },
