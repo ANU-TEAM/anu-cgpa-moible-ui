@@ -12,42 +12,37 @@ class OverviewScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Drawer(
-      child: SafeArea(
-        child: Scaffold(
-          appBar: AppBar(
-            iconTheme: new IconThemeData(color: Colors.yellow[700]),
-            backgroundColor: Colors.white,
-            shadowColor: Colors.white,
-            elevation: 0,
-            title: Text(
-              "Overview",
-              style: TextStyle(color: Colors.yellow[700]),
-            ),
-            actions: [
-              Icon(
-                Icons.info_outline,
-                color: Colors.yellow[700],
+    return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        centerTitle: true,
+        iconTheme: new IconThemeData(color: Colors.yellow[700]),
+        backgroundColor: Colors.white,
+        shadowColor: Colors.white,
+        elevation: 0,
+        title: Text(
+          "Overview",
+          style: TextStyle(color: Colors.yellow[700]),
+        ),
+        actions: [
+          Icon(
+            Icons.info_outline,
+            color: Colors.yellow[700],
+          ),
+        ],
+      ),
+      body: Container(
+        alignment: Alignment.topCenter,
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Container(
+                height: 230,
+                color: Colors.white,
+                child: _buildOverallCgpa(context),
               ),
             ],
-          ),
-          drawer: Drawer(
-            child: DrawerWidget(),
-          ),
-          body: Container(
-            alignment: Alignment.topCenter,
-            child: SingleChildScrollView(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Container(
-                    height: 230,
-                    color: Colors.white,
-                    child: _buildOverallCgpa(context),
-                  ),
-                ],
-              ),
-            ),
           ),
         ),
       ),

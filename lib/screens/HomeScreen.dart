@@ -1,4 +1,5 @@
 import 'package:anucgpa/screens/OverviewScreen.dart';
+import 'package:anucgpa/screens/TabBarContainer.dart';
 import 'package:flutter/material.dart';
 import 'package:local_auth/local_auth.dart';
 
@@ -38,16 +39,16 @@ class HomeScreen extends StatelessWidget {
                         );
 
                         if (authenticated) {
-                          Navigator.push(
+                          Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => OverviewScreen()));
+                                  builder: (context) => TabBarContainer()));
                         }
                       } else {
-                        Navigator.push(
+                        Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => OverviewScreen()));
+                                builder: (context) => TabBarContainer()));
                       }
                     },
                     height: 55,
