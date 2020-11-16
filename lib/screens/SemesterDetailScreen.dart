@@ -1,6 +1,5 @@
 import 'package:anucgpa/database/database.dart';
 import 'package:anucgpa/widgets/CourseListItemWidget.dart';
-import 'package:anucgpa/widgets/Drawer.dart';
 import 'package:anucgpa/widgets/SemesterCgpaCard.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -22,71 +21,53 @@ class SemesterDetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Drawer(
       child: SafeArea(
-        child: DefaultTabController(
-          length: 3,
-          child: Scaffold(
-            appBar: AppBar(
-              iconTheme: new IconThemeData(color: Colors.yellow[700]),
-              backgroundColor: Colors.white,
-              shadowColor: Colors.white,
-              elevation: 0,
-              title: Text(
-                "Semester $displayId",
-                style: TextStyle(color: Colors.yellow[700]),
-              ),
-              leading: GestureDetector(
-                onTap: () => Navigator.pop(context),
-                child: Icon(
-                  Icons.arrow_back,
-                ),
-              ),
-              actions: [
-                Icon(
-                  Icons.info_outline,
-                  color: Colors.yellow[700],
-                ),
-              ],
+        child: Scaffold(
+          backgroundColor: Colors.white,
+          appBar: AppBar(
+            iconTheme: new IconThemeData(color: Colors.yellow[700]),
+            backgroundColor: Colors.white,
+            shadowColor: Colors.white,
+            elevation: 0,
+            title: Text(
+              "Semester $displayId",
+              style: TextStyle(color: Colors.yellow[700]),
             ),
-            drawer: Drawer(
-              child: DrawerWidget(),
+          ),
+          body: Container(
+            alignment: Alignment.topCenter,
+            color: Colors.white,
+            child: ListView(
+              physics: BouncingScrollPhysics(),
+              shrinkWrap: true,
+              children: [_buildCourseList(context)],
             ),
-            body: Container(
-              alignment: Alignment.topCenter,
-              color: Colors.white,
-              child: ListView(
-                physics: BouncingScrollPhysics(),
-                shrinkWrap: true,
-                children: [_buildCourseList(context)],
-              ),
-            ),
-            floatingActionButton: FloatingActionButton(
-              backgroundColor: Colors.yellow[600],
-              onPressed: () {
-                showModalBottomSheet(
-                    isScrollControlled: true,
-                    backgroundColor: Color(0xFFF5F5F5),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.vertical(
-                        top: Radius.circular(25.0),
-                      ),
+          ),
+          floatingActionButton: FloatingActionButton(
+            backgroundColor: Colors.yellow[600],
+            onPressed: () {
+              showModalBottomSheet(
+                  isScrollControlled: true,
+                  backgroundColor: Color(0xFFF5F5F5),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.vertical(
+                      top: Radius.circular(25.0),
                     ),
-                    context: context,
-                    builder: (BuildContext context) {
-                      return SafeArea(
-                        child: Container(
-                          padding: EdgeInsets.symmetric(horizontal: 40),
-                          child:
-                              NewCourseInputWidget(semester: currentSemester),
-                        ),
-                      );
-                    });
-              },
-              tooltip: 'Add a course',
-              child: Icon(
-                Icons.add,
-                size: 32,
-                color: Colors.white,
-              ),
+                  ),
+                  context: context,
+                  builder: (BuildContext context) {
+                    return SafeArea(
+                      child: Container(
+                        padding: EdgeInsets.symmetric(horizontal: 40),
+                        child: NewCourseInputWidget(semester: currentSemester),
+                      ),
+                    );
+                  });
+            },
+            tooltip: 'Add a course',
+            child: Icon(
+              Icons.add,
+              size: 32,
+              color: Colors.white,
             ),
           ),
         ),
@@ -101,8 +82,7 @@ class SemesterDetailScreen extends StatelessWidget {
         stream: database.watchSemesterCourses(currentSemester.semesterId),
         builder: (context, AsyncSnapshot<List<Course>> snapshot) {
           final courses = snapshot.data ?? List();
-          print(courses);
-          return snapshot.data.length == 0
+          return courses.isEmpty
               ? Container(
                   alignment: Alignment.center,
                   height: MediaQuery.of(context).size.height * 0.8,
@@ -136,7 +116,7 @@ class SemesterDetailScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Container(
-                      height: 230,
+                      height: 220,
                       child: _buildSemesterCgpa(context),
                     ),
                     Container(

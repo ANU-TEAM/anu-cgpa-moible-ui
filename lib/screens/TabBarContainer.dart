@@ -1,5 +1,5 @@
 import 'package:anucgpa/screens/OverviewScreen.dart';
-import 'package:anucgpa/screens/ProfileScreen.dart';
+import 'package:anucgpa/screens/SemesterListScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
@@ -14,13 +14,7 @@ class _TabBarContainerState extends State<TabBarContainer> {
 
   List<Widget> _screens = [
     OverviewScreen(),
-    ProfileScreen(),
-    Text(
-      'Index 2: Search',
-    ),
-    Text(
-      'Index 3: Profile',
-    ),
+    SemesterListScreen(),
   ];
 
   @override
@@ -61,16 +55,8 @@ class _TabBarContainerState extends State<TabBarContainer> {
                   text: 'Overview',
                 ),
                 GButton(
-                  icon: Icons.headset,
-                  text: 'Likes',
-                ),
-                GButton(
-                  icon: Icons.search,
-                  text: 'Search',
-                ),
-                GButton(
-                  icon: Icons.verified_user,
-                  text: 'Profile',
+                  icon: Icons.addchart,
+                  text: 'Semesters',
                 ),
               ],
             ),

@@ -1,5 +1,4 @@
 import 'package:anucgpa/database/database.dart';
-import 'package:anucgpa/widgets/Drawer.dart';
 import 'package:anucgpa/widgets/FgpaCard.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -22,14 +21,11 @@ class OverviewScreen extends StatelessWidget {
         elevation: 0,
         title: Text(
           "Overview",
-          style: TextStyle(color: Colors.yellow[700]),
-        ),
-        actions: [
-          Icon(
-            Icons.info_outline,
+          style: TextStyle(
             color: Colors.yellow[700],
+            fontSize: 24,
           ),
-        ],
+        ),
       ),
       body: Container(
         alignment: Alignment.topCenter,
@@ -38,7 +34,7 @@ class OverviewScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Container(
-                height: 230,
+                height: 220,
                 color: Colors.white,
                 child: _buildOverallCgpa(context),
               ),
