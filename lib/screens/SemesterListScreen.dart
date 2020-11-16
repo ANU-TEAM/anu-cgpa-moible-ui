@@ -20,6 +20,7 @@ class _SemesterListScreenState extends State<SemesterListScreen>
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     int semesterLength = 0;
     return Scaffold(
       backgroundColor: Colors.white,
