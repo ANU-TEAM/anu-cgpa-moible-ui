@@ -23,7 +23,6 @@ class OverviewScreen extends StatelessWidget {
           "Overview",
           style: TextStyle(
             color: Colors.yellow[700],
-            fontSize: 24,
           ),
         ),
       ),

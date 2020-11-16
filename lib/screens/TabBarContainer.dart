@@ -1,3 +1,4 @@
+import 'package:anucgpa/screens/InfoScreen.dart';
 import 'package:anucgpa/screens/OverviewScreen.dart';
 import 'package:anucgpa/screens/SemesterListScreen.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +16,7 @@ class _TabBarContainerState extends State<TabBarContainer> {
   List<Widget> _screens = [
     OverviewScreen(),
     SemesterListScreen(),
+    InfoScreen(),
   ];
 
   @override
@@ -57,6 +59,10 @@ class _TabBarContainerState extends State<TabBarContainer> {
                 GButton(
                   icon: Icons.addchart,
                   text: 'Semesters',
+                ),
+                GButton(
+                  icon: Icons.info_outline_rounded,
+                  text: 'About',
                 ),
               ],
             ),

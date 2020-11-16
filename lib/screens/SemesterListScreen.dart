@@ -33,7 +33,6 @@ class _SemesterListScreenState extends State<SemesterListScreen>
           "Semesters",
           style: TextStyle(
             color: Colors.yellow[700],
-            fontSize: 24,
           ),
         ),
       ),
