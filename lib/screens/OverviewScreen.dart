@@ -44,7 +44,8 @@ class OverviewScreen extends StatelessWidget {
             ),
           ),
           Container(
-            height: 220,
+            margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+            height: 240,
             child: _buildChart(context),
           )
         ],
@@ -74,17 +75,19 @@ class OverviewScreen extends StatelessWidget {
         if (snapshot.hasData) {
           var seriesList = charts.Series<Semester, String>(
             id: 'Semesters',
+            displayName: "Semesters",
             domainFn: (Semester semester, _) =>
                 ((semester.semesterId + 1) - snapshot.data.first.semesterId)
                     .toString(),
             measureFn: (Semester semester, _) => semester.semesterCGPA,
             data: snapshot.data,
             fillColorFn: (Semester semester, _) {
-              return charts.MaterialPalette.blue.shadeDefault;
+              return charts.MaterialPalette.yellow.shadeDefault;
             },
           );
           return charts.BarChart(
             [seriesList],
+            animate: true,
           );
         } else {
           return Container();
