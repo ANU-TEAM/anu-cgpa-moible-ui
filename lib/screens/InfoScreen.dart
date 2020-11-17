@@ -43,8 +43,8 @@ class InfoScreen extends StatelessWidget {
           Container(
             margin: EdgeInsets.only(top: 50),
             child: GestureDetector(
-              onTap: () => launch(
-                  'https://docs.flutter.io/flutter/services/UrlLauncher-class.html'),
+              onTap: () =>
+                  launch('https://dsc.community.dev/all-nations-university/'),
               child: Text(
                 "Join Us",
                 style: new TextStyle(color: Colors.yellow[700], fontSize: 20),
