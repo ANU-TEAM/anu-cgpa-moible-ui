@@ -1,6 +1,6 @@
 import 'package:anucgpa/screens/TabBarContainer.dart';
 import 'package:flutter/material.dart';
-import 'package:local_auth/local_auth.dart';
+import 'package:local_auth_device_credentials/local_auth.dart';
 
 class HomeScreen extends StatelessWidget {
   final LocalAuthentication localAuth = LocalAuthentication();
