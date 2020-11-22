@@ -53,7 +53,7 @@ class _NewCourseInputWidgetState extends State<NewCourseInputWidget> {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Container(
-        padding: EdgeInsets.only(bottom: 100),
+        // padding: EdgeInsets.only(bottom: 100),
         child: Column(
           children: [
             Padding(
