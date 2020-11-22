@@ -76,7 +76,8 @@ class CourseListItemWidget extends StatelessWidget {
                 Expanded(
                   flex: 1,
                   child: Text(
-                    _calculateGradeLetter(courseItem.courseGrade.toStringAsFixed(2).toString()),
+                    _calculateGradeLetter(
+                        courseItem.courseGrade.toStringAsFixed(2).toString()),
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
                       color: Colors.grey[600],
@@ -95,68 +96,83 @@ class CourseListItemWidget extends StatelessWidget {
 }
 
 String _calculateGradeLetter(String grade) {
-  switch(grade) {
-    case "4.00": {
-      return "A";
-    }
-    break;
+  switch (grade) {
+    case "4.00":
+      {
+        return "A";
+      }
+      break;
 
-    case "3.75": {
-      return "A-";
-    }
-    break;
+    case "3.75":
+      {
+        return "A-";
+      }
+      break;
 
-    case "3.50": {
-      return "B+";
-    }
-    break;
+    case "3.50":
+      {
+        return "B+";
+      }
+      break;
 
-    case "3.25": {
-      return "B";
-    }
-    break;
+    case "3.25":
+      {
+        return "B";
+      }
+      break;
 
-    case "3.00": {
-      return "B-";
-    }
-    break;
+    case "3.00":
+      {
+        return "B-";
+      }
+      break;
 
-    case "2.75": {
-      return "C+";
-    }
-    break;
+    case "2.75":
+      {
+        return "C+";
+      }
+      break;
 
-    case "2.50": {
-      return "C";
-    }
-    break;
+    case "2.50":
+      {
+        return "C";
+      }
+      break;
 
-    case "2.25": {
-      return "C-";
-    }
-    break;
+    case "2.25":
+      {
+        return "C-";
+      }
+      break;
 
-    case "2.00": {
-      return "D+";
-    }
-    break;
+    case "2.00":
+      {
+        return "D+";
+      }
+      break;
 
-    case "1.75": {
-      return "D";
-    }
-    break;
+    case "1.75":
+      {
+        return "D";
+      }
+      break;
 
-    case "1.50": {
-      return "D-";
-    }
-    break;
+    case "1.50":
+      {
+        return "D-";
+      }
+      break;
 
-    case "1.00": {
-      return "F";
-    }
-    break;
+    case "1.00":
+      {
+        return "F";
+      }
+      break;
 
-    default: { print("--"); }
-    break;
+    default:
+      {
+        return ("--");
+      }
+      break;
   }
 }
