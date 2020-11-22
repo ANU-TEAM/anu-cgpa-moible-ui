@@ -153,7 +153,7 @@ class SemesterDetailScreen extends StatelessWidget {
                                         ),
                                       ),
                                       Expanded(
-                                        flex: 2,
+                                        flex: 1,
                                         child: Text(
                                           "Unit",
                                           style: TextStyle(
@@ -164,9 +164,10 @@ class SemesterDetailScreen extends StatelessWidget {
                                         ),
                                       ),
                                       Expanded(
-                                        flex: 1,
+                                        flex: 2,
                                         child: Text(
                                           "Grade",
+                                          textAlign: TextAlign.right,
                                           style: TextStyle(
                                             color: Colors.white,
                                             fontSize: 18,

@@ -76,9 +76,7 @@ class OverviewScreen extends StatelessWidget {
           var seriesList = charts.Series<Semester, String>(
             id: 'Semesters',
             displayName: "Semesters",
-            domainFn: (Semester semester, _) =>
-                ((semester.semesterId + 1) - snapshot.data.first.semesterId)
-                    .toString(),
+            domainFn: (Semester semester, index) => (index + 1).toString(),
             measureFn: (Semester semester, _) => semester.semesterCGPA,
             data: snapshot.data,
             fillColorFn: (Semester semester, _) {
