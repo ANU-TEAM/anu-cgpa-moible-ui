@@ -26,29 +26,32 @@ class OverviewScreen extends StatelessWidget {
           ),
         ),
       ),
-      body: Column(
-        children: [
-          Container(
-            alignment: Alignment.topCenter,
-            child: SingleChildScrollView(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Container(
-                    height: 220,
-                    color: Colors.white,
-                    child: _buildOverallCgpa(context),
-                  ),
-                ],
+      body: SingleChildScrollView(
+        physics: BouncingScrollPhysics(),
+        child: Column(
+          children: [
+            Container(
+              alignment: Alignment.topCenter,
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Container(
+                      height: 220,
+                      color: Colors.white,
+                      child: _buildOverallCgpa(context),
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
-          Container(
-            margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-            height: 240,
-            child: _buildChart(context),
-          )
-        ],
+            Container(
+              margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+              height: 240,
+              child: _buildChart(context),
+            )
+          ],
+        ),
       ),
     );
   }
