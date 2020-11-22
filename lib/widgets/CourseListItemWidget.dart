@@ -75,15 +75,19 @@ class CourseListItemWidget extends StatelessWidget {
                 ),
                 Expanded(
                   flex: 1,
-                  child: Text(
-                    _calculateGradeLetter(
-                        courseItem.courseGrade.toStringAsFixed(2).toString()),
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
-                      color: Colors.grey[600],
-                      fontSize: 16,
+                  child: Tooltip(
+                    message:
+                        courseItem.courseGrade.toStringAsFixed(2).toString(),
+                    child: Text(
+                      _calculateGradeLetter(
+                          courseItem.courseGrade.toStringAsFixed(2).toString()),
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                        color: Colors.grey[600],
+                        fontSize: 16,
+                      ),
+                      textAlign: TextAlign.left,
                     ),
-                    textAlign: TextAlign.left,
                   ),
                 ),
               ],
