@@ -51,7 +51,6 @@ class _SemesterListScreenState extends State<SemesterListScreen>
               final semester = Semester(semesterId: null, semesterCGPA: 0.0);
               database.insertSemester(semester);
             } else {
-              print(semesterLength);
               final laddSnackBar = SnackBar(
                 backgroundColor: Colors.yellow[800],
                 content: Container(

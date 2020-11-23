@@ -139,7 +139,6 @@ class _EditCourseModalState extends State<EditCourseModal> {
               inputCourseTitle = null;
             });
           }
-          print(inputCourseTitle);
         },
       ),
     );
@@ -172,7 +171,6 @@ class _EditCourseModalState extends State<EditCourseModal> {
           setState(() {
             inputCourseCreditHours = int.parse(courseCreditHour);
           });
-          print(inputCourseCreditHours);
         },
       ),
     );
@@ -213,7 +211,6 @@ class _EditCourseModalState extends State<EditCourseModal> {
             setState(() {
               inputCourseGrade = value;
             });
-            print("$inputCourseGrade");
           },
         ),
       ),
@@ -244,8 +241,6 @@ class _EditCourseModalState extends State<EditCourseModal> {
             );
           });
           resetValuesAfterSubmit();
-          print("$inputCourseTitle");
-          print(editedCourse.toJson());
           Navigator.pop(context);
         },
         child: Row(
@@ -287,12 +282,10 @@ class _EditCourseModalState extends State<EditCourseModal> {
                 database.updateSemester(
                   currentSemester.copyWith(semesterCGPA: 0),
                 );
-                print(value);
               } else {
                 database.updateSemester(
                   currentSemester.copyWith(semesterCGPA: value),
                 );
-                print(value);
               }
             },
           );

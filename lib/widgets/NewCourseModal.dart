@@ -122,8 +122,6 @@ class _NewCourseInputWidgetState extends State<NewCourseInputWidget> {
               inputCourseTitle = null;
             });
           }
-
-          print(inputCourseTitle);
         },
       ),
     );
@@ -156,7 +154,6 @@ class _NewCourseInputWidgetState extends State<NewCourseInputWidget> {
           setState(() {
             inputCourseCreditHours = int.parse(courseCreditHour);
           });
-          print(inputCourseCreditHours);
         },
       ),
     );
@@ -220,7 +217,6 @@ class _NewCourseInputWidgetState extends State<NewCourseInputWidget> {
             semesterId: currentSemester.semesterId,
           );
           database.insertCourse(course);
-          print(course.toJson());
           resetValuesAfterSubmit();
           database
               .getSemesterCgpa(currentSemester.semesterId)
