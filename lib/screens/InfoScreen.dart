@@ -47,9 +47,17 @@ class InfoScreen extends StatelessWidget {
               // ),
 
               Container(
+                child: Image.asset("assets/images/anulogo.png",
+                  height: 80,
+                  width: 80,
+                  fit: BoxFit.fill,),),
+                SizedBox(
+                  height: 15,
+                ),
+              Container(
                 child: Text(
-                  "Cumulative Grade Point Average refers to the average "
-                  "of all of a student's semester GPAs during tertiary education. "
+                  "Cumulative Grade Point Average is the average "
+                  "of your semester GPAs during tertiary education. "
                   "It is an average of averages that combines these semester GPAs "
                   "into one representative GPA. While a semester GPA refers to "
                   "your GPA for that one semester, a Cumulative GPA refers to "
@@ -58,11 +66,11 @@ class InfoScreen extends StatelessWidget {
                   "addition to other determining factors, Employers use your "
                   "Cumulative GPA to determine if you would be a good fit for their "
                   "company as it allows them to make a direct comparison to other "
-                  "applicants during their CV review process. To calculate your CGPA: "
-                  "Calculating your CGPA is a hurdle for most student and this is "
-                  "what the ANUCGPA App has come to help. The ANUCGPA App helps you to "
-                  "determine your CGPA before hand. This way, you will know your"
-                  "stand and make the right decision concerning your academics",
+                  "applicants during their CV review process. Calculating your "
+                      "CGPA is a hurdle for most student and this is what the "
+                      "ANUCGPA App has come to help. The ANUCGPA App helps you to "
+                      "determine your CGPA before hand. This way, you will know your "
+                      "stand and make the right decision concerning your academics",
                   textAlign: TextAlign.justify,
                   style: TextStyle(
                     color: Colors.black,
