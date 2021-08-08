@@ -1,6 +1,5 @@
 import 'dart:ui';
 
-import 'package:flat_icons_flutter/flat_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -47,13 +46,16 @@ class InfoScreen extends StatelessWidget {
               // ),
 
               Container(
-                child: Image.asset("assets/images/anulogo.png",
+                child: Image.asset(
+                  "assets/images/anulogo.png",
                   height: 80,
                   width: 80,
-                  fit: BoxFit.fill,),),
-                SizedBox(
-                  height: 15,
+                  fit: BoxFit.fill,
                 ),
+              ),
+              SizedBox(
+                height: 15,
+              ),
               Container(
                 child: Text(
                   "Cumulative Grade Point Average is the average "
@@ -67,10 +69,10 @@ class InfoScreen extends StatelessWidget {
                   "Cumulative GPA to determine if you would be a good fit for their "
                   "company as it allows them to make a direct comparison to other "
                   "applicants during their CV review process. Calculating your "
-                      "CGPA is a hurdle for most student and this is what the "
-                      "ANUCGPA App has come to help. The ANUCGPA App helps you to "
-                      "determine your CGPA before hand. This way, you will know your "
-                      "stand and make the right decision concerning your academics",
+                  "CGPA is a hurdle for most student and this is what the "
+                  "ANUCGPA App has come to help. The ANUCGPA App helps you to "
+                  "determine your CGPA before hand. This way, you will know your "
+                  "stand and make the right decision concerning your academics",
                   textAlign: TextAlign.justify,
                   style: TextStyle(
                     color: Colors.black,
@@ -85,18 +87,23 @@ class InfoScreen extends StatelessWidget {
                 padding: EdgeInsets.only(bottom: 10, left: 220),
                 child: Row(
                   children: [
-                    Image.asset("assets/images/finger.png",
-                    width: 30,
-                    height: 30,
-                    fit: BoxFit.cover,),
-                    SizedBox(width: 8,),
+                    Image.asset(
+                      "assets/images/finger.png",
+                      width: 30,
+                      height: 30,
+                      fit: BoxFit.cover,
+                    ),
+                    SizedBox(
+                      width: 8,
+                    ),
                     Container(
                       child: GestureDetector(
-                        onTap: () =>
-                            launch('https://dsc.community.dev/all-nations-university/'),
+                        onTap: () => launch(
+                            'https://dsc.community.dev/all-nations-university/'),
                         child: Text(
                           "Join Us",
-                          style: TextStyle(color: Colors.yellow[700], fontSize: 20),
+                          style: TextStyle(
+                              color: Colors.yellow[700], fontSize: 20),
                         ),
                       ),
                     ),
