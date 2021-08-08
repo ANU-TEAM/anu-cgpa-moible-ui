@@ -81,7 +81,7 @@ class SemesterDetailScreen extends StatelessWidget {
     return StreamBuilder(
         stream: database.watchSemesterCourses(currentSemester.semesterId),
         builder: (context, AsyncSnapshot<List<Course>> snapshot) {
-          final courses = snapshot.data ?? List();
+          final courses = snapshot.data ?? List.empty();
           return courses.isEmpty
               ? Container(
                   alignment: Alignment.center,
@@ -189,12 +189,11 @@ class SemesterDetailScreen extends StatelessWidget {
                                         itemCount: courses.length,
                                         itemBuilder: (context, index) {
                                           final course = courses[index];
-                                          return _buildCourseItem(
-                                              course,
-                                              currentSemester,
-                                              database,
-                                              context,
-                                              index);
+                                          return CourseListItemWidget(
+                                            currentSemester: currentSemester,
+                                            index: index,
+                                            courseItem: course,
+                                          );
                                         }),
                                   ],
                                 ),
