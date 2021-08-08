@@ -8,39 +8,31 @@ part of 'database.dart';
 
 // ignore_for_file: unnecessary_brace_in_string_interps, unnecessary_this
 class Semester extends DataClass implements Insertable<Semester> {
-  final int? semesterId;
-  final double? semesterCGPA;
+  final int semesterId;
+  final double semesterCGPA;
   Semester({required this.semesterId, required this.semesterCGPA});
   factory Semester.fromData(Map<String, dynamic> data, GeneratedDatabase db,
       {String? prefix}) {
     final effectivePrefix = prefix ?? '';
     return Semester(
       semesterId: const IntType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}SemesterId']),
+          .mapFromDatabaseResponse(data['${effectivePrefix}SemesterId'])!,
       semesterCGPA: const RealType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}SemesterCGPA']),
+          .mapFromDatabaseResponse(data['${effectivePrefix}SemesterCGPA'])!,
     );
   }
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
-    if (!nullToAbsent || semesterId != null) {
-      map['SemesterId'] = Variable<int?>(semesterId);
-    }
-    if (!nullToAbsent || semesterCGPA != null) {
-      map['SemesterCGPA'] = Variable<double?>(semesterCGPA);
-    }
+    map['SemesterId'] = Variable<int>(semesterId);
+    map['SemesterCGPA'] = Variable<double>(semesterCGPA);
     return map;
   }
 
   SemestersCompanion toCompanion(bool nullToAbsent) {
     return SemestersCompanion(
-      semesterId: semesterId == null && nullToAbsent
-          ? const Value.absent()
-          : Value(semesterId),
-      semesterCGPA: semesterCGPA == null && nullToAbsent
-          ? const Value.absent()
-          : Value(semesterCGPA),
+      semesterId: Value(semesterId),
+      semesterCGPA: Value(semesterCGPA),
     );
   }
 
@@ -56,8 +48,8 @@ class Semester extends DataClass implements Insertable<Semester> {
   Map<String, dynamic> toJson({ValueSerializer? serializer}) {
     serializer ??= moorRuntimeOptions.defaultSerializer;
     return <String, dynamic>{
-      'SemesterId': serializer.toJson<int?>(semesterId),
-      'SemesterCGPA': serializer.toJson<double?>(semesterCGPA),
+      'SemesterId': serializer.toJson<int>(semesterId),
+      'SemesterCGPA': serializer.toJson<double>(semesterCGPA),
     };
   }
 
@@ -85,8 +77,8 @@ class Semester extends DataClass implements Insertable<Semester> {
 }
 
 class SemestersCompanion extends UpdateCompanion<Semester> {
-  final Value<int?> semesterId;
-  final Value<double?> semesterCGPA;
+  final Value<int> semesterId;
+  final Value<double> semesterCGPA;
   const SemestersCompanion({
     this.semesterId = const Value.absent(),
     this.semesterCGPA = const Value.absent(),
@@ -117,10 +109,10 @@ class SemestersCompanion extends UpdateCompanion<Semester> {
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     if (semesterId.present) {
-      map['SemesterId'] = Variable<int?>(semesterId.value);
+      map['SemesterId'] = Variable<int>(semesterId.value);
     }
     if (semesterCGPA.present) {
-      map['SemesterCGPA'] = Variable<double?>(semesterCGPA.value);
+      map['SemesterCGPA'] = Variable<double>(semesterCGPA.value);
     }
     return map;
   }
@@ -140,21 +132,19 @@ class Semesters extends Table with TableInfo<Semesters, Semester> {
   final String? _alias;
   Semesters(this._db, [this._alias]);
   final VerificationMeta _semesterIdMeta = const VerificationMeta('semesterId');
-  GeneratedColumn<int>? _semesterId;
-  GeneratedColumn<int> get semesterId =>
-      _semesterId ??= GeneratedColumn<int>('SemesterId', aliasedName, false,
-          typeName: 'INTEGER',
-          requiredDuringInsert: false,
-          $customConstraints: 'PRIMARY KEY AUTOINCREMENT NOT NULL');
+  late final GeneratedColumn<int?> semesterId = GeneratedColumn<int?>(
+      'SemesterId', aliasedName, false,
+      typeName: 'INTEGER',
+      requiredDuringInsert: false,
+      $customConstraints: 'PRIMARY KEY AUTOINCREMENT NOT NULL');
   final VerificationMeta _semesterCGPAMeta =
       const VerificationMeta('semesterCGPA');
-  GeneratedColumn<double>? _semesterCGPA;
-  GeneratedColumn<double> get semesterCGPA => _semesterCGPA ??=
-      GeneratedColumn<double>('SemesterCGPA', aliasedName, false,
-          typeName: 'REAL',
-          requiredDuringInsert: false,
-          $customConstraints: 'NOT NULL DEFAULT 0',
-          defaultValue: const CustomExpression<double>('0'));
+  late final GeneratedColumn<double?> semesterCGPA = GeneratedColumn<double?>(
+      'SemesterCGPA', aliasedName, false,
+      typeName: 'REAL',
+      requiredDuringInsert: false,
+      $customConstraints: 'NOT NULL DEFAULT 0',
+      defaultValue: const CustomExpression<double>('0'));
   @override
   List<GeneratedColumn> get $columns => [semesterId, semesterCGPA];
   @override
@@ -199,11 +189,11 @@ class Semesters extends Table with TableInfo<Semesters, Semester> {
 }
 
 class Course extends DataClass implements Insertable<Course> {
-  final int? courseId;
+  final int courseId;
   final String? title;
-  final int? credits;
-  final double? courseGrade;
-  final int? semesterId;
+  final int credits;
+  final double courseGrade;
+  final int semesterId;
   Course(
       {required this.courseId,
       this.title,
@@ -215,54 +205,38 @@ class Course extends DataClass implements Insertable<Course> {
     final effectivePrefix = prefix ?? '';
     return Course(
       courseId: const IntType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}CourseId']),
+          .mapFromDatabaseResponse(data['${effectivePrefix}CourseId'])!,
       title: const StringType()
           .mapFromDatabaseResponse(data['${effectivePrefix}Title']),
       credits: const IntType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}Credits']),
+          .mapFromDatabaseResponse(data['${effectivePrefix}Credits'])!,
       courseGrade: const RealType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}CourseGrade']),
+          .mapFromDatabaseResponse(data['${effectivePrefix}CourseGrade'])!,
       semesterId: const IntType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}SemesterId']),
+          .mapFromDatabaseResponse(data['${effectivePrefix}SemesterId'])!,
     );
   }
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
-    if (!nullToAbsent || courseId != null) {
-      map['CourseId'] = Variable<int?>(courseId);
-    }
+    map['CourseId'] = Variable<int>(courseId);
     if (!nullToAbsent || title != null) {
       map['Title'] = Variable<String?>(title);
     }
-    if (!nullToAbsent || credits != null) {
-      map['Credits'] = Variable<int?>(credits);
-    }
-    if (!nullToAbsent || courseGrade != null) {
-      map['CourseGrade'] = Variable<double?>(courseGrade);
-    }
-    if (!nullToAbsent || semesterId != null) {
-      map['SemesterId'] = Variable<int?>(semesterId);
-    }
+    map['Credits'] = Variable<int>(credits);
+    map['CourseGrade'] = Variable<double>(courseGrade);
+    map['SemesterId'] = Variable<int>(semesterId);
     return map;
   }
 
   CoursesCompanion toCompanion(bool nullToAbsent) {
     return CoursesCompanion(
-      courseId: courseId == null && nullToAbsent
-          ? const Value.absent()
-          : Value(courseId),
+      courseId: Value(courseId),
       title:
           title == null && nullToAbsent ? const Value.absent() : Value(title),
-      credits: credits == null && nullToAbsent
-          ? const Value.absent()
-          : Value(credits),
-      courseGrade: courseGrade == null && nullToAbsent
-          ? const Value.absent()
-          : Value(courseGrade),
-      semesterId: semesterId == null && nullToAbsent
-          ? const Value.absent()
-          : Value(semesterId),
+      credits: Value(credits),
+      courseGrade: Value(courseGrade),
+      semesterId: Value(semesterId),
     );
   }
 
@@ -271,7 +245,7 @@ class Course extends DataClass implements Insertable<Course> {
     serializer ??= moorRuntimeOptions.defaultSerializer;
     return Course(
       courseId: serializer.fromJson<int>(json['CourseId']),
-      title: serializer.fromJson<String>(json['Title']),
+      title: serializer.fromJson<String?>(json['Title']),
       credits: serializer.fromJson<int>(json['Credits']),
       courseGrade: serializer.fromJson<double>(json['CourseGrade']),
       semesterId: serializer.fromJson<int>(json['SemesterId']),
@@ -281,11 +255,11 @@ class Course extends DataClass implements Insertable<Course> {
   Map<String, dynamic> toJson({ValueSerializer? serializer}) {
     serializer ??= moorRuntimeOptions.defaultSerializer;
     return <String, dynamic>{
-      'CourseId': serializer.toJson<int?>(courseId),
+      'CourseId': serializer.toJson<int>(courseId),
       'Title': serializer.toJson<String?>(title),
-      'Credits': serializer.toJson<int?>(credits),
-      'CourseGrade': serializer.toJson<double?>(courseGrade),
-      'SemesterId': serializer.toJson<int?>(semesterId),
+      'Credits': serializer.toJson<int>(credits),
+      'CourseGrade': serializer.toJson<double>(courseGrade),
+      'SemesterId': serializer.toJson<int>(semesterId),
     };
   }
 
@@ -333,11 +307,11 @@ class Course extends DataClass implements Insertable<Course> {
 }
 
 class CoursesCompanion extends UpdateCompanion<Course> {
-  final Value<int?> courseId;
+  final Value<int> courseId;
   final Value<String?> title;
-  final Value<int?> credits;
-  final Value<double?> courseGrade;
-  final Value<int?> semesterId;
+  final Value<int> credits;
+  final Value<double> courseGrade;
+  final Value<int> semesterId;
   const CoursesCompanion({
     this.courseId = const Value.absent(),
     this.title = const Value.absent(),
@@ -356,7 +330,7 @@ class CoursesCompanion extends UpdateCompanion<Course> {
         semesterId = Value(semesterId);
   static Insertable<Course> custom({
     Expression<int>? courseId,
-    Expression<String>? title,
+    Expression<String?>? title,
     Expression<int>? credits,
     Expression<double>? courseGrade,
     Expression<int>? semesterId,
@@ -372,7 +346,7 @@ class CoursesCompanion extends UpdateCompanion<Course> {
 
   CoursesCompanion copyWith(
       {Value<int>? courseId,
-      Value<String>? title,
+      Value<String?>? title,
       Value<int>? credits,
       Value<double>? courseGrade,
       Value<int>? semesterId}) {
@@ -389,19 +363,19 @@ class CoursesCompanion extends UpdateCompanion<Course> {
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     if (courseId.present) {
-      map['CourseId'] = Variable<int?>(courseId.value);
+      map['CourseId'] = Variable<int>(courseId.value);
     }
     if (title.present) {
       map['Title'] = Variable<String?>(title.value);
     }
     if (credits.present) {
-      map['Credits'] = Variable<int?>(credits.value);
+      map['Credits'] = Variable<int>(credits.value);
     }
     if (courseGrade.present) {
-      map['CourseGrade'] = Variable<double?>(courseGrade.value);
+      map['CourseGrade'] = Variable<double>(courseGrade.value);
     }
     if (semesterId.present) {
-      map['SemesterId'] = Variable<int?>(semesterId.value);
+      map['SemesterId'] = Variable<int>(semesterId.value);
     }
     return map;
   }
@@ -424,41 +398,34 @@ class Courses extends Table with TableInfo<Courses, Course> {
   final String? _alias;
   Courses(this._db, [this._alias]);
   final VerificationMeta _courseIdMeta = const VerificationMeta('courseId');
-  GeneratedColumn<int>? _courseId;
-  GeneratedColumn<int> get courseId =>
-      _courseId ??= GeneratedColumn<int>('CourseId', aliasedName, false,
-          typeName: 'INTEGER',
-          requiredDuringInsert: false,
-          $customConstraints: 'PRIMARY KEY AUTOINCREMENT NOT NULL');
+  late final GeneratedColumn<int?> courseId = GeneratedColumn<int?>(
+      'CourseId', aliasedName, false,
+      typeName: 'INTEGER',
+      requiredDuringInsert: false,
+      $customConstraints: 'PRIMARY KEY AUTOINCREMENT NOT NULL');
   final VerificationMeta _titleMeta = const VerificationMeta('title');
-  GeneratedColumn<String>? _title;
-  GeneratedColumn<String> get title =>
-      _title ??= GeneratedColumn<String>('Title', aliasedName, true,
-          typeName: 'TEXT',
-          requiredDuringInsert: false,
-          $customConstraints: '');
+  late final GeneratedColumn<String?> title = GeneratedColumn<String?>(
+      'Title', aliasedName, true,
+      typeName: 'TEXT', requiredDuringInsert: false, $customConstraints: '');
   final VerificationMeta _creditsMeta = const VerificationMeta('credits');
-  GeneratedColumn<int>? _credits;
-  GeneratedColumn<int> get credits =>
-      _credits ??= GeneratedColumn<int>('Credits', aliasedName, false,
-          typeName: 'INTEGER',
-          requiredDuringInsert: true,
-          $customConstraints: 'NOT NULL');
+  late final GeneratedColumn<int?> credits = GeneratedColumn<int?>(
+      'Credits', aliasedName, false,
+      typeName: 'INTEGER',
+      requiredDuringInsert: true,
+      $customConstraints: 'NOT NULL');
   final VerificationMeta _courseGradeMeta =
       const VerificationMeta('courseGrade');
-  GeneratedColumn<double>? _courseGrade;
-  GeneratedColumn<double> get courseGrade => _courseGrade ??=
-      GeneratedColumn<double>('CourseGrade', aliasedName, false,
-          typeName: 'REAL',
-          requiredDuringInsert: true,
-          $customConstraints: 'NOT NULL');
+  late final GeneratedColumn<double?> courseGrade = GeneratedColumn<double?>(
+      'CourseGrade', aliasedName, false,
+      typeName: 'REAL',
+      requiredDuringInsert: true,
+      $customConstraints: 'NOT NULL');
   final VerificationMeta _semesterIdMeta = const VerificationMeta('semesterId');
-  GeneratedColumn<int>? _semesterId;
-  GeneratedColumn<int> get semesterId =>
-      _semesterId ??= GeneratedColumn<int>('SemesterId', aliasedName, false,
-          typeName: 'INTEGER',
-          requiredDuringInsert: true,
-          $customConstraints: 'NOT NULL');
+  late final GeneratedColumn<int?> semesterId = GeneratedColumn<int?>(
+      'SemesterId', aliasedName, false,
+      typeName: 'INTEGER',
+      requiredDuringInsert: true,
+      $customConstraints: 'NOT NULL');
   @override
   List<GeneratedColumn> get $columns =>
       [courseId, title, credits, courseGrade, semesterId];
@@ -527,14 +494,12 @@ class Courses extends Table with TableInfo<Courses, Course> {
 
 abstract class _$AppDb extends GeneratedDatabase {
   _$AppDb(QueryExecutor e) : super(SqlTypeSystem.defaultInstance, e);
-  Semesters? _semesters;
-  Semesters get semesters => _semesters ??= Semesters(this);
-  Courses? _courses;
-  Courses get courses => _courses ??= Courses(this);
-  Selectable<Course> getSemesterCourses(int? var1) {
+  late final Semesters semesters = Semesters(this);
+  late final Courses courses = Courses(this);
+  Selectable<Course> getSemesterCourses(int var1) {
     return customSelect('SELECT * FROM courses WHERE SemesterId = ?',
         variables: [
-          Variable<int?>(var1)
+          Variable<int>(var1)
         ],
         readsFrom: {
           courses,
@@ -559,11 +524,11 @@ abstract class _$AppDb extends GeneratedDatabase {
         }).map((QueryRow row) => row.read<int>('COUNT(*)'));
   }
 
-  Selectable<double> getSemesterCgpa(int? var1) {
+  Selectable<double> getSemesterCgpa(int var1) {
     return customSelect(
         'SELECT sum(CourseGrade * Credits) / sum(Credits) from courses WHERE SemesterId = ?',
         variables: [
-          Variable<int?>(var1)
+          Variable<int>(var1)
         ],
         readsFrom: {
           courses,
