@@ -36,9 +36,10 @@ class _NewCourseInputWidgetState extends State<NewCourseInputWidget> {
   TextEditingController? courseCreditHourController;
   late TextEditingController courseGradeController;
 
-  String? inputCourseTitle;
-  int? inputCourseCreditHours = 3;
-  double? inputCourseGrade;
+  String inputCourseTitle = "";
+  int inputCourseCreditHours = 3;
+  double inputCourseGrade = 4.0;
+  int semesterCoursesLength = 0;
 
   @override
   void initState() {
@@ -47,6 +48,11 @@ class _NewCourseInputWidgetState extends State<NewCourseInputWidget> {
     courseCreditHourController =
         TextEditingController(text: inputCourseCreditHours.toString());
     courseGradeController = TextEditingController();
+    final database = Provider.of<AppDb>(context, listen: false);
+    database
+        .getSemesterCoursesLength(currentSemester!.semesterId)
+        .getSingle()
+        .then((value) => semesterCoursesLength = value);
   }
 
   @override
@@ -116,10 +122,6 @@ class _NewCourseInputWidgetState extends State<NewCourseInputWidget> {
           if (courseTitle.isNotEmpty) {
             setState(() {
               inputCourseTitle = courseTitle;
-            });
-          } else {
-            setState(() {
-              inputCourseTitle = null;
             });
           }
 
@@ -212,8 +214,9 @@ class _NewCourseInputWidgetState extends State<NewCourseInputWidget> {
         color: Colors.yellow[700],
         onPressed: () {
           final database = Provider.of<AppDb>(context, listen: false);
+
           final course = Course(
-            courseId: null,
+            courseId: semesterCoursesLength,
             title: inputCourseTitle,
             credits: inputCourseCreditHours,
             courseGrade: inputCourseGrade,
@@ -291,9 +294,9 @@ class _NewCourseInputWidgetState extends State<NewCourseInputWidget> {
 
   void resetValuesAfterSubmit() {
     setState(() {
-      inputCourseTitle;
-      inputCourseCreditHours = null;
-      inputCourseGrade = null;
+      inputCourseTitle = "";
+      inputCourseCreditHours = 0;
+      inputCourseGrade = 4.0;
       courseTitleController!.clear();
       courseCreditHourController!.clear();
       courseGradeController.clear();
