@@ -53,7 +53,7 @@ class CourseListItemWidget extends StatelessWidget {
                 Expanded(
                   flex: 6,
                   child: Text(
-                    courseItem!.title == null
+                    courseItem!.title!.isEmpty
                         ? "Course ${index! + 1}"
                         : "${courseItem!.title}",
                     style: TextStyle(
@@ -77,10 +77,11 @@ class CourseListItemWidget extends StatelessWidget {
                   flex: 1,
                   child: Tooltip(
                     message:
-                        courseItem!.courseGrade!.toStringAsFixed(2).toString(),
+                        courseItem!.courseGrade.toStringAsFixed(2).toString(),
                     child: Text(
-                      _calculateGradeLetter(
-                          courseItem!.courseGrade!.toStringAsFixed(2).toString()),
+                      _calculateGradeLetter(courseItem!.courseGrade
+                          .toStringAsFixed(2)
+                          .toString()),
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
                         color: Colors.grey[600],
@@ -100,83 +101,86 @@ class CourseListItemWidget extends StatelessWidget {
 }
 
 String _calculateGradeLetter(String grade) {
+  String gradeLetter;
   switch (grade) {
     case "4.00":
       {
-        return "A";
+        gradeLetter = "A";
       }
       break;
 
     case "3.75":
       {
-        return "A-";
+        gradeLetter = "A-";
       }
       break;
 
     case "3.50":
       {
-        return "B+";
+        gradeLetter = "B+";
       }
       break;
 
     case "3.25":
       {
-        return "B";
+        gradeLetter = "B";
       }
       break;
 
     case "3.00":
       {
-        return "B-";
+        gradeLetter = "B-";
       }
       break;
 
     case "2.75":
       {
-        return "C+";
+        gradeLetter = "C+";
       }
       break;
 
     case "2.50":
       {
-        return "C";
+        gradeLetter = "C";
       }
       break;
 
     case "2.25":
       {
-        return "C-";
+        gradeLetter = "C-";
       }
       break;
 
     case "2.00":
       {
-        return "D+";
+        gradeLetter = "D+";
       }
       break;
 
     case "1.75":
       {
-        return "D";
+        gradeLetter = "D";
       }
       break;
 
     case "1.50":
       {
-        return "D-";
+        gradeLetter = "D-";
       }
       break;
 
     case "1.00":
       {
-        return "F";
+        gradeLetter = "F";
       }
       break;
 
     default:
       {
-        return ("--");
+        gradeLetter = ("--");
       }
       break;
   }
+
+  return gradeLetter;
 }
