@@ -14,12 +14,10 @@ class Semester extends DataClass implements Insertable<Semester> {
   factory Semester.fromData(Map<String, dynamic> data, GeneratedDatabase db,
       {String prefix}) {
     final effectivePrefix = prefix ?? '';
-    final intType = db.typeSystem.forDartType<int>();
-    final doubleType = db.typeSystem.forDartType<double>();
     return Semester(
-      semesterId:
-          intType.mapFromDatabaseResponse(data['${effectivePrefix}SemesterId']),
-      semesterCGPA: doubleType
+      semesterId: const IntType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}SemesterId']),
+      semesterCGPA: const RealType()
           .mapFromDatabaseResponse(data['${effectivePrefix}SemesterCGPA']),
     );
   }
@@ -79,7 +77,7 @@ class Semester extends DataClass implements Insertable<Semester> {
   @override
   int get hashCode => $mrjf($mrjc(semesterId.hashCode, semesterCGPA.hashCode));
   @override
-  bool operator ==(dynamic other) =>
+  bool operator ==(Object other) =>
       identical(this, other) ||
       (other is Semester &&
           other.semesterId == this.semesterId &&
@@ -142,34 +140,27 @@ class Semesters extends Table with TableInfo<Semesters, Semester> {
   final String _alias;
   Semesters(this._db, [this._alias]);
   final VerificationMeta _semesterIdMeta = const VerificationMeta('semesterId');
-  GeneratedIntColumn _semesterId;
-  GeneratedIntColumn get semesterId => _semesterId ??= _constructSemesterId();
-  GeneratedIntColumn _constructSemesterId() {
-    return GeneratedIntColumn('SemesterId', $tableName, false,
-        declaredAsPrimaryKey: true,
-        hasAutoIncrement: true,
-        $customConstraints: 'PRIMARY KEY AUTOINCREMENT NOT NULL');
-  }
-
+  GeneratedColumn<int> _semesterId;
+  GeneratedColumn<int> get semesterId =>
+      _semesterId ??= GeneratedColumn<int>('SemesterId', aliasedName, false,
+          typeName: 'INTEGER',
+          requiredDuringInsert: false,
+          $customConstraints: 'PRIMARY KEY AUTOINCREMENT NOT NULL');
   final VerificationMeta _semesterCGPAMeta =
       const VerificationMeta('semesterCGPA');
-  GeneratedRealColumn _semesterCGPA;
-  GeneratedRealColumn get semesterCGPA =>
-      _semesterCGPA ??= _constructSemesterCGPA();
-  GeneratedRealColumn _constructSemesterCGPA() {
-    return GeneratedRealColumn('SemesterCGPA', $tableName, false,
-        $customConstraints: 'NOT NULL DEFAULT 0',
-        defaultValue: const CustomExpression<double>('0'));
-  }
-
+  GeneratedColumn<double> _semesterCGPA;
+  GeneratedColumn<double> get semesterCGPA => _semesterCGPA ??=
+      GeneratedColumn<double>('SemesterCGPA', aliasedName, false,
+          typeName: 'REAL',
+          requiredDuringInsert: false,
+          $customConstraints: 'NOT NULL DEFAULT 0',
+          defaultValue: const CustomExpression<double>('0'));
   @override
   List<GeneratedColumn> get $columns => [semesterId, semesterCGPA];
   @override
-  Semesters get asDslTable => this;
+  String get aliasedName => _alias ?? 'semesters';
   @override
-  String get $tableName => _alias ?? 'semesters';
-  @override
-  final String actualTableName = 'semesters';
+  String get actualTableName => 'semesters';
   @override
   VerificationContext validateIntegrity(Insertable<Semester> instance,
       {bool isInserting = false}) {
@@ -194,8 +185,8 @@ class Semesters extends Table with TableInfo<Semesters, Semester> {
   Set<GeneratedColumn> get $primaryKey => {semesterId};
   @override
   Semester map(Map<String, dynamic> data, {String tablePrefix}) {
-    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : null;
-    return Semester.fromData(data, _db, prefix: effectivePrefix);
+    return Semester.fromData(data, _db,
+        prefix: tablePrefix != null ? '$tablePrefix.' : null);
   }
 
   @override
@@ -222,20 +213,17 @@ class Course extends DataClass implements Insertable<Course> {
   factory Course.fromData(Map<String, dynamic> data, GeneratedDatabase db,
       {String prefix}) {
     final effectivePrefix = prefix ?? '';
-    final intType = db.typeSystem.forDartType<int>();
-    final stringType = db.typeSystem.forDartType<String>();
-    final doubleType = db.typeSystem.forDartType<double>();
     return Course(
-      courseId:
-          intType.mapFromDatabaseResponse(data['${effectivePrefix}CourseId']),
-      title:
-          stringType.mapFromDatabaseResponse(data['${effectivePrefix}Title']),
-      credits:
-          intType.mapFromDatabaseResponse(data['${effectivePrefix}Credits']),
-      courseGrade: doubleType
+      courseId: const IntType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}CourseId']),
+      title: const StringType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}Title']),
+      credits: const IntType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}Credits']),
+      courseGrade: const RealType()
           .mapFromDatabaseResponse(data['${effectivePrefix}CourseGrade']),
-      semesterId:
-          intType.mapFromDatabaseResponse(data['${effectivePrefix}SemesterId']),
+      semesterId: const IntType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}SemesterId']),
     );
   }
   @override
@@ -334,7 +322,7 @@ class Course extends DataClass implements Insertable<Course> {
           $mrjc(credits.hashCode,
               $mrjc(courseGrade.hashCode, semesterId.hashCode)))));
   @override
-  bool operator ==(dynamic other) =>
+  bool operator ==(Object other) =>
       identical(this, other) ||
       (other is Course &&
           other.courseId == this.courseId &&
@@ -436,58 +424,48 @@ class Courses extends Table with TableInfo<Courses, Course> {
   final String _alias;
   Courses(this._db, [this._alias]);
   final VerificationMeta _courseIdMeta = const VerificationMeta('courseId');
-  GeneratedIntColumn _courseId;
-  GeneratedIntColumn get courseId => _courseId ??= _constructCourseId();
-  GeneratedIntColumn _constructCourseId() {
-    return GeneratedIntColumn('CourseId', $tableName, false,
-        declaredAsPrimaryKey: true,
-        hasAutoIncrement: true,
-        $customConstraints: 'PRIMARY KEY AUTOINCREMENT NOT NULL');
-  }
-
+  GeneratedColumn<int> _courseId;
+  GeneratedColumn<int> get courseId =>
+      _courseId ??= GeneratedColumn<int>('CourseId', aliasedName, false,
+          typeName: 'INTEGER',
+          requiredDuringInsert: false,
+          $customConstraints: 'PRIMARY KEY AUTOINCREMENT NOT NULL');
   final VerificationMeta _titleMeta = const VerificationMeta('title');
-  GeneratedTextColumn _title;
-  GeneratedTextColumn get title => _title ??= _constructTitle();
-  GeneratedTextColumn _constructTitle() {
-    return GeneratedTextColumn('Title', $tableName, true,
-        $customConstraints: '');
-  }
-
+  GeneratedColumn<String> _title;
+  GeneratedColumn<String> get title =>
+      _title ??= GeneratedColumn<String>('Title', aliasedName, true,
+          typeName: 'TEXT',
+          requiredDuringInsert: false,
+          $customConstraints: '');
   final VerificationMeta _creditsMeta = const VerificationMeta('credits');
-  GeneratedIntColumn _credits;
-  GeneratedIntColumn get credits => _credits ??= _constructCredits();
-  GeneratedIntColumn _constructCredits() {
-    return GeneratedIntColumn('Credits', $tableName, false,
-        $customConstraints: 'NOT NULL');
-  }
-
+  GeneratedColumn<int> _credits;
+  GeneratedColumn<int> get credits =>
+      _credits ??= GeneratedColumn<int>('Credits', aliasedName, false,
+          typeName: 'INTEGER',
+          requiredDuringInsert: true,
+          $customConstraints: 'NOT NULL');
   final VerificationMeta _courseGradeMeta =
       const VerificationMeta('courseGrade');
-  GeneratedRealColumn _courseGrade;
-  GeneratedRealColumn get courseGrade =>
-      _courseGrade ??= _constructCourseGrade();
-  GeneratedRealColumn _constructCourseGrade() {
-    return GeneratedRealColumn('CourseGrade', $tableName, false,
-        $customConstraints: 'NOT NULL');
-  }
-
+  GeneratedColumn<double> _courseGrade;
+  GeneratedColumn<double> get courseGrade => _courseGrade ??=
+      GeneratedColumn<double>('CourseGrade', aliasedName, false,
+          typeName: 'REAL',
+          requiredDuringInsert: true,
+          $customConstraints: 'NOT NULL');
   final VerificationMeta _semesterIdMeta = const VerificationMeta('semesterId');
-  GeneratedIntColumn _semesterId;
-  GeneratedIntColumn get semesterId => _semesterId ??= _constructSemesterId();
-  GeneratedIntColumn _constructSemesterId() {
-    return GeneratedIntColumn('SemesterId', $tableName, false,
-        $customConstraints: 'NOT NULL');
-  }
-
+  GeneratedColumn<int> _semesterId;
+  GeneratedColumn<int> get semesterId =>
+      _semesterId ??= GeneratedColumn<int>('SemesterId', aliasedName, false,
+          typeName: 'INTEGER',
+          requiredDuringInsert: true,
+          $customConstraints: 'NOT NULL');
   @override
   List<GeneratedColumn> get $columns =>
       [courseId, title, credits, courseGrade, semesterId];
   @override
-  Courses get asDslTable => this;
+  String get aliasedName => _alias ?? 'courses';
   @override
-  String get $tableName => _alias ?? 'courses';
-  @override
-  final String actualTableName = 'courses';
+  String get actualTableName => 'courses';
   @override
   VerificationContext validateIntegrity(Insertable<Course> instance,
       {bool isInserting = false}) {
@@ -530,8 +508,8 @@ class Courses extends Table with TableInfo<Courses, Course> {
   Set<GeneratedColumn> get $primaryKey => {courseId};
   @override
   Course map(Map<String, dynamic> data, {String tablePrefix}) {
-    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : null;
-    return Course.fromData(data, _db, prefix: effectivePrefix);
+    return Course.fromData(data, _db,
+        prefix: tablePrefix != null ? '$tablePrefix.' : null);
   }
 
   @override
@@ -555,40 +533,51 @@ abstract class _$AppDb extends GeneratedDatabase {
   Courses get courses => _courses ??= Courses(this);
   Selectable<Course> getSemesterCourses(int var1) {
     return customSelect('SELECT * FROM courses WHERE SemesterId = ?',
-        variables: [Variable.withInt(var1)],
-        readsFrom: {courses}).map(courses.mapFromRow);
+        variables: [
+          Variable<int>(var1)
+        ],
+        readsFrom: {
+          courses,
+        }).map(courses.mapFromRow);
   }
 
   Selectable<int> getSemesterCoursesLength(int var1) {
     return customSelect('SELECT COUNT(*) FROM courses WHERE SemesterId = ?',
-        variables: [Variable.withInt(var1)],
-        readsFrom: {courses}).map((QueryRow row) => row.readInt('COUNT(*)'));
+        variables: [
+          Variable<int>(var1)
+        ],
+        readsFrom: {
+          courses,
+        }).map((QueryRow row) => row.read<int>('COUNT(*)'));
   }
 
   Selectable<int> getSemesterLength() {
     return customSelect('SELECT COUNT(*) FROM semesters',
         variables: [],
-        readsFrom: {semesters}).map((QueryRow row) => row.readInt('COUNT(*)'));
+        readsFrom: {
+          semesters,
+        }).map((QueryRow row) => row.read<int>('COUNT(*)'));
   }
 
   Selectable<double> getSemesterCgpa(int var1) {
     return customSelect(
         'SELECT sum(CourseGrade * Credits) / sum(Credits) from courses WHERE SemesterId = ?',
         variables: [
-          Variable.withInt(var1)
+          Variable<int>(var1)
         ],
         readsFrom: {
-          courses
+          courses,
         }).map((QueryRow row) =>
-        row.readDouble('sum(CourseGrade * Credits) / sum(Credits)'));
+        row.read<double>('sum(CourseGrade * Credits) / sum(Credits)'));
   }
 
   Selectable<double> getOverallCgpa() {
     return customSelect(
-            'SELECT avg(SemesterCGPA) FROM semesters WHERE (SemesterCGPA != 0)',
-            variables: [],
-            readsFrom: {semesters})
-        .map((QueryRow row) => row.readDouble('avg(SemesterCGPA)'));
+        'SELECT avg(SemesterCGPA) FROM semesters WHERE (SemesterCGPA != 0)',
+        variables: [],
+        readsFrom: {
+          semesters,
+        }).map((QueryRow row) => row.read<double>('avg(SemesterCGPA)'));
   }
 
   @override
