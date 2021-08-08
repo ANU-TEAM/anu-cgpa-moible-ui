@@ -4,8 +4,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 class SemesterCardTile extends StatelessWidget {
   final String graduateSvgPath = 'assets/images/graduate.svg';
 
-  final int semesterNumber;
-  final double semesterCgpa;
+  final int? semesterNumber;
+  final double? semesterCgpa;
 
   SemesterCardTile({this.semesterNumber, this.semesterCgpa});
 
@@ -92,7 +92,7 @@ class SemesterCardTile extends StatelessWidget {
                           height: 10,
                         ),
                         Text(
-                          "${this.semesterCgpa.toStringAsFixed(3)}",
+                          "${this.semesterCgpa!.toStringAsFixed(3)}",
                           style: TextStyle(
                               color: Colors.yellow[700],
                               fontSize: 54,

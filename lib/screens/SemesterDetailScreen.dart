@@ -14,7 +14,7 @@ class SemesterDetailScreen extends StatelessWidget {
 
   // In the constructor, require a Todo.
   SemesterDetailScreen(
-      {Key key, @required this.displayId, @required this.currentSemester})
+      {Key? key, required this.displayId, required this.currentSemester})
       : super(key: key);
 
   @override

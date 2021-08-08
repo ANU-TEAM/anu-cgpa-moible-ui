@@ -130,7 +130,7 @@ class _SemesterListScreenState extends State<SemesterListScreen>
 
   Widget _buildListItem(
       Semester semester, AppDb database, BuildContext context, int index) {
-    int semesterCount;
+    late int semesterCount;
     database
         .getSemesterLength()
         .getSingle()

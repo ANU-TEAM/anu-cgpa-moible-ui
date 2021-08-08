@@ -49,7 +49,7 @@ class _TabBarContainerState extends State<TabBarContainer> {
               iconSize: 24,
               padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
               duration: Duration(milliseconds: 800),
-              tabBackgroundColor: Colors.yellow[700],
+              tabBackgroundColor: Colors.yellow[700]!,
               color: Colors.yellow[700],
               tabs: [
                 GButton(

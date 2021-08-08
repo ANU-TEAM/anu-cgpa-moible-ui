@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class SemesterCgpaCard extends StatelessWidget {
-  final double semestercgpa;
+  final double? semestercgpa;
   SemesterCgpaCard({this.semestercgpa});
 
   @override
@@ -31,7 +31,7 @@ class SemesterCgpaCard extends StatelessWidget {
                 ),
               ),
               Text(
-                "${this.semestercgpa.toStringAsFixed(4)}",
+                "${this.semestercgpa!.toStringAsFixed(4)}",
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 72,
@@ -39,7 +39,7 @@ class SemesterCgpaCard extends StatelessWidget {
                 ),
               ),
               Text(
-                _calculateCgpaClass(this.semestercgpa),
+                _calculateCgpaClass(this.semestercgpa!),
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 16,

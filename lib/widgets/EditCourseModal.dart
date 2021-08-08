@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class EditCourseModal extends StatefulWidget {
-  final Semester currentSemester;
-  final Course currentCourse;
-  final int courseDisplayIndex;
+  final Semester? currentSemester;
+  final Course? currentCourse;
+  final int? courseDisplayIndex;
   const EditCourseModal({
     this.currentSemester,
     this.currentCourse,
     this.courseDisplayIndex,
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override
@@ -21,9 +21,9 @@ class EditCourseModal extends StatefulWidget {
 }
 
 class _EditCourseModalState extends State<EditCourseModal> {
-  final Semester currentSemester;
-  final Course currentCourse;
-  final int displayIndex;
+  final Semester? currentSemester;
+  final Course? currentCourse;
+  final int? displayIndex;
   _EditCourseModalState(
       {this.currentSemester, this.currentCourse, this.displayIndex});
   final List<DropdownMenuItem> gradeOptions = [
@@ -41,26 +41,26 @@ class _EditCourseModalState extends State<EditCourseModal> {
     DropdownMenuItem(value: 1.0, child: Container(child: Text("F"))),
   ];
 
-  TextEditingController courseTitleController;
-  TextEditingController courseCreditHourController;
-  TextEditingController courseGradeController;
+  TextEditingController? courseTitleController;
+  TextEditingController? courseCreditHourController;
+  late TextEditingController courseGradeController;
 
-  String inputCourseTitle;
-  int inputCourseCreditHours;
-  double inputCourseGrade;
+  String? inputCourseTitle;
+  int? inputCourseCreditHours;
+  double? inputCourseGrade;
 
   @override
   void initState() {
     super.initState();
-    inputCourseTitle = currentCourse.title;
-    inputCourseCreditHours = currentCourse.credits;
-    inputCourseGrade = currentCourse.courseGrade;
+    inputCourseTitle = currentCourse!.title;
+    inputCourseCreditHours = currentCourse!.credits;
+    inputCourseGrade = currentCourse!.courseGrade;
     courseTitleController = TextEditingController(
-        text: currentCourse.title == null
-            ? "Course ${displayIndex + 1}"
-            : "${currentCourse.title}");
+        text: currentCourse!.title == null
+            ? "Course ${displayIndex! + 1}"
+            : "${currentCourse!.title}");
     courseCreditHourController =
-        TextEditingController(text: currentCourse.credits.toString());
+        TextEditingController(text: currentCourse!.credits.toString());
     courseGradeController = TextEditingController();
   }
 
@@ -88,9 +88,9 @@ class _EditCourseModalState extends State<EditCourseModal> {
             Padding(
               padding: const EdgeInsets.only(top: 8, bottom: 25),
               child: Text(
-                currentCourse.title == null
-                    ? "Course ${displayIndex + 1}"
-                    : "${currentCourse.title}",
+                currentCourse!.title == null
+                    ? "Course ${displayIndex! + 1}"
+                    : "${currentCourse!.title}",
                 style: TextStyle(
                   fontSize: 19,
                 ),
@@ -116,7 +116,7 @@ class _EditCourseModalState extends State<EditCourseModal> {
         decoration: InputDecoration(
           enabledBorder: OutlineInputBorder(
             borderSide: BorderSide(
-              color: Colors.yellow[700],
+              color: Colors.yellow[700]!,
             ),
           ),
           border: OutlineInputBorder(),
@@ -155,7 +155,7 @@ class _EditCourseModalState extends State<EditCourseModal> {
         decoration: InputDecoration(
           enabledBorder: OutlineInputBorder(
             borderSide: BorderSide(
-              color: Colors.yellow[700],
+              color: Colors.yellow[700]!,
             ),
           ),
           border: OutlineInputBorder(),
@@ -186,7 +186,7 @@ class _EditCourseModalState extends State<EditCourseModal> {
         color: Color.fromRGBO(255, 193, 4, 0.1),
         border: Border(
           bottom: BorderSide(
-            color: Colors.yellow[700],
+            color: Colors.yellow[700]!,
             style: BorderStyle.solid,
             width: 3,
           ),
@@ -209,7 +209,7 @@ class _EditCourseModalState extends State<EditCourseModal> {
           dropdownColor: Colors.yellow[50],
           items: gradeOptions,
           isExpanded: true,
-          onChanged: (value) {
+          onChanged: (dynamic value) {
             setState(() {
               inputCourseGrade = value;
             });
@@ -220,7 +220,7 @@ class _EditCourseModalState extends State<EditCourseModal> {
     );
   }
 
-  _buildEditCourseButton(BuildContext context, Semester currentSemester) {
+  _buildEditCourseButton(BuildContext context, Semester? currentSemester) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10.0),
       child: FlatButton(
@@ -229,14 +229,14 @@ class _EditCourseModalState extends State<EditCourseModal> {
         color: Colors.yellow[700],
         onPressed: () {
           final database = Provider.of<AppDb>(context, listen: false);
-          Course editedCourse = currentCourse.copyWith(
+          Course editedCourse = currentCourse!.copyWith(
             title: inputCourseTitle,
             credits: inputCourseCreditHours,
             courseGrade: inputCourseGrade,
           );
           database.updateCourse(editedCourse);
           database
-              .getSemesterCgpa(currentSemester.semesterId)
+              .getSemesterCgpa(currentSemester!.semesterId)
               .getSingle()
               .then((value) {
             database.updateSemester(
@@ -280,17 +280,17 @@ class _EditCourseModalState extends State<EditCourseModal> {
         color: Colors.red.withAlpha(50),
         onPressed: () {
           final database = Provider.of<AppDb>(context, listen: false);
-          database.deleteCourse(currentCourse);
-          database.getSemesterCgpa(currentSemester.semesterId).getSingle().then(
+          database.deleteCourse(currentCourse!);
+          database.getSemesterCgpa(currentSemester!.semesterId).getSingle().then(
             (value) {
               if (value == null) {
                 database.updateSemester(
-                  currentSemester.copyWith(semesterCGPA: 0),
+                  currentSemester!.copyWith(semesterCGPA: 0),
                 );
                 print(value);
               } else {
                 database.updateSemester(
-                  currentSemester.copyWith(semesterCGPA: value),
+                  currentSemester!.copyWith(semesterCGPA: value),
                 );
                 print(value);
               }
@@ -323,8 +323,8 @@ class _EditCourseModalState extends State<EditCourseModal> {
 
   void resetValuesAfterSubmit() {
     setState(() {
-      courseTitleController.clear();
-      courseCreditHourController.clear();
+      courseTitleController!.clear();
+      courseCreditHourController!.clear();
       courseGradeController.clear();
     });
   }

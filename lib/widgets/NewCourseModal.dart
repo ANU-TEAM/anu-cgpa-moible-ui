@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class NewCourseInputWidget extends StatefulWidget {
-  final Semester semester;
+  final Semester? semester;
   const NewCourseInputWidget({
     this.semester,
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override
@@ -15,7 +15,7 @@ class NewCourseInputWidget extends StatefulWidget {
 }
 
 class _NewCourseInputWidgetState extends State<NewCourseInputWidget> {
-  final Semester currentSemester;
+  final Semester? currentSemester;
   _NewCourseInputWidgetState({this.currentSemester});
   final List<DropdownMenuItem> gradeOptions = [
     DropdownMenuItem(value: 4.0, child: Container(child: Text("A"))),
@@ -32,13 +32,13 @@ class _NewCourseInputWidgetState extends State<NewCourseInputWidget> {
     DropdownMenuItem(value: 1.0, child: Container(child: Text("F"))),
   ];
 
-  TextEditingController courseTitleController;
-  TextEditingController courseCreditHourController;
-  TextEditingController courseGradeController;
+  TextEditingController? courseTitleController;
+  TextEditingController? courseCreditHourController;
+  late TextEditingController courseGradeController;
 
-  String inputCourseTitle;
-  int inputCourseCreditHours = 3;
-  double inputCourseGrade;
+  String? inputCourseTitle;
+  int? inputCourseCreditHours = 3;
+  double? inputCourseGrade;
 
   @override
   void initState() {
@@ -99,7 +99,7 @@ class _NewCourseInputWidgetState extends State<NewCourseInputWidget> {
         decoration: InputDecoration(
           enabledBorder: OutlineInputBorder(
             borderSide: BorderSide(
-              color: Colors.yellow[700],
+              color: Colors.yellow[700]!,
             ),
           ),
           border: OutlineInputBorder(),
@@ -139,7 +139,7 @@ class _NewCourseInputWidgetState extends State<NewCourseInputWidget> {
         decoration: InputDecoration(
           enabledBorder: OutlineInputBorder(
             borderSide: BorderSide(
-              color: Colors.yellow[700],
+              color: Colors.yellow[700]!,
             ),
           ),
           border: OutlineInputBorder(),
@@ -170,7 +170,7 @@ class _NewCourseInputWidgetState extends State<NewCourseInputWidget> {
         color: Color.fromRGBO(255, 193, 4, 0.1),
         border: Border(
           bottom: BorderSide(
-            color: Colors.yellow[700],
+            color: Colors.yellow[700]!,
             style: BorderStyle.solid,
             width: 3,
           ),
@@ -193,7 +193,7 @@ class _NewCourseInputWidgetState extends State<NewCourseInputWidget> {
           dropdownColor: Colors.yellow[50],
           items: gradeOptions,
           isExpanded: true,
-          onChanged: (value) {
+          onChanged: (dynamic value) {
             setState(() {
               inputCourseGrade = value;
             });
@@ -217,17 +217,17 @@ class _NewCourseInputWidgetState extends State<NewCourseInputWidget> {
             title: inputCourseTitle,
             credits: inputCourseCreditHours,
             courseGrade: inputCourseGrade,
-            semesterId: currentSemester.semesterId,
+            semesterId: currentSemester!.semesterId,
           );
           database.insertCourse(course);
           print(course.toJson());
           resetValuesAfterSubmit();
           database
-              .getSemesterCgpa(currentSemester.semesterId)
+              .getSemesterCgpa(currentSemester!.semesterId)
               .getSingle()
               .then((value) {
             database.updateSemester(
-              currentSemester.copyWith(semesterCGPA: value),
+              currentSemester!.copyWith(semesterCGPA: value),
             );
           });
           Navigator.pop(context);
@@ -294,8 +294,8 @@ class _NewCourseInputWidgetState extends State<NewCourseInputWidget> {
       inputCourseTitle;
       inputCourseCreditHours = null;
       inputCourseGrade = null;
-      courseTitleController.clear();
-      courseCreditHourController.clear();
+      courseTitleController!.clear();
+      courseCreditHourController!.clear();
       courseGradeController.clear();
     });
   }

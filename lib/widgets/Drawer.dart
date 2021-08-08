@@ -8,7 +8,7 @@ class DrawerWidget extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         gradient: new LinearGradient(
-          colors: [Colors.yellow[700], Colors.yellow[800]],
+          colors: [Colors.yellow[700]!, Colors.yellow[800]!],
           begin: new FractionalOffset(0.0, 0.0),
           end: new FractionalOffset(1.0, 1.0),
         ),

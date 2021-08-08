@@ -6,7 +6,7 @@ import 'package:charts_flutter/flutter.dart' as charts;
 
 class OverviewScreen extends StatelessWidget {
   OverviewScreen({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override
@@ -79,9 +79,9 @@ class OverviewScreen extends StatelessWidget {
           var seriesList = charts.Series<Semester, String>(
             id: 'Semesters',
             displayName: "Semesters",
-            domainFn: (Semester semester, index) => (index + 1).toString(),
+            domainFn: (Semester semester, index) => (index! + 1).toString(),
             measureFn: (Semester semester, _) => semester.semesterCGPA,
-            data: snapshot.data,
+            data: snapshot.data!,
             fillColorFn: (Semester semester, _) {
               return charts.MaterialPalette.yellow.shadeDefault;
             },
