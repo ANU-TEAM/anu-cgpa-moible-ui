@@ -67,7 +67,7 @@ class Semester extends DataClass implements Insertable<Semester> {
   }
 
   @override
-  int get hashCode => $mrjf($mrjc(semesterId.hashCode, semesterCGPA.hashCode));
+  int get hashCode => Object.hash(semesterId, semesterCGPA);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -134,14 +134,14 @@ class Semesters extends Table with TableInfo<Semesters, Semester> {
   final VerificationMeta _semesterIdMeta = const VerificationMeta('semesterId');
   late final GeneratedColumn<int?> semesterId = GeneratedColumn<int?>(
       'SemesterId', aliasedName, false,
-      typeName: 'INTEGER',
+      type: const IntType(),
       requiredDuringInsert: false,
       $customConstraints: 'PRIMARY KEY AUTOINCREMENT NOT NULL');
   final VerificationMeta _semesterCGPAMeta =
       const VerificationMeta('semesterCGPA');
   late final GeneratedColumn<double?> semesterCGPA = GeneratedColumn<double?>(
       'SemesterCGPA', aliasedName, false,
-      typeName: 'REAL',
+      type: const RealType(),
       requiredDuringInsert: false,
       $customConstraints: 'NOT NULL DEFAULT 0',
       defaultValue: const CustomExpression<double>('0'));
@@ -289,12 +289,8 @@ class Course extends DataClass implements Insertable<Course> {
   }
 
   @override
-  int get hashCode => $mrjf($mrjc(
-      courseId.hashCode,
-      $mrjc(
-          title.hashCode,
-          $mrjc(credits.hashCode,
-              $mrjc(courseGrade.hashCode, semesterId.hashCode)))));
+  int get hashCode =>
+      Object.hash(courseId, title, credits, courseGrade, semesterId);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -400,30 +396,32 @@ class Courses extends Table with TableInfo<Courses, Course> {
   final VerificationMeta _courseIdMeta = const VerificationMeta('courseId');
   late final GeneratedColumn<int?> courseId = GeneratedColumn<int?>(
       'CourseId', aliasedName, false,
-      typeName: 'INTEGER',
+      type: const IntType(),
       requiredDuringInsert: false,
       $customConstraints: 'PRIMARY KEY AUTOINCREMENT NOT NULL');
   final VerificationMeta _titleMeta = const VerificationMeta('title');
   late final GeneratedColumn<String?> title = GeneratedColumn<String?>(
       'Title', aliasedName, true,
-      typeName: 'TEXT', requiredDuringInsert: false, $customConstraints: '');
+      type: const StringType(),
+      requiredDuringInsert: false,
+      $customConstraints: '');
   final VerificationMeta _creditsMeta = const VerificationMeta('credits');
   late final GeneratedColumn<int?> credits = GeneratedColumn<int?>(
       'Credits', aliasedName, false,
-      typeName: 'INTEGER',
+      type: const IntType(),
       requiredDuringInsert: true,
       $customConstraints: 'NOT NULL');
   final VerificationMeta _courseGradeMeta =
       const VerificationMeta('courseGrade');
   late final GeneratedColumn<double?> courseGrade = GeneratedColumn<double?>(
       'CourseGrade', aliasedName, false,
-      typeName: 'REAL',
+      type: const RealType(),
       requiredDuringInsert: true,
       $customConstraints: 'NOT NULL');
   final VerificationMeta _semesterIdMeta = const VerificationMeta('semesterId');
   late final GeneratedColumn<int?> semesterId = GeneratedColumn<int?>(
       'SemesterId', aliasedName, false,
-      typeName: 'INTEGER',
+      type: const IntType(),
       requiredDuringInsert: true,
       $customConstraints: 'NOT NULL');
   @override

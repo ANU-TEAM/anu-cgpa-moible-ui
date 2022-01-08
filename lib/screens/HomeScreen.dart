@@ -1,6 +1,6 @@
 import 'package:anucgpa/screens/TabBarContainer.dart';
 import 'package:flutter/material.dart';
-import 'package:local_auth_device_credentials/local_auth.dart';
+import 'package:local_auth/local_auth.dart';
 
 class HomeScreen extends StatelessWidget {
   final LocalAuthentication localAuth = LocalAuthentication();
@@ -29,13 +29,12 @@ class HomeScreen extends StatelessWidget {
                   child: FlatButton(
                     highlightColor: Colors.yellow[900],
                     onPressed: () async {
-                      bool weCanCheckBiometrics =
+                      bool canCheckBiometrics =
                           await localAuth.canCheckBiometrics;
-                      if (weCanCheckBiometrics) {
-                        bool authenticated =
-                            await localAuth.authenticateWithBiometrics(
-                          localizedReason: "",
-                        );
+                      if (canCheckBiometrics) {
+                        bool authenticated = await localAuth.authenticate(
+                            localizedReason: 'Please authenticate to view CGPA',
+                            biometricOnly: true);
 
                         if (authenticated) {
                           Navigator.pushReplacement(

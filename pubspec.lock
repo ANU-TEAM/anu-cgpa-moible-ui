@@ -338,13 +338,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.4.0"
-  local_auth_device_credentials:
+  local_auth:
     dependency: "direct main"
     description:
-      name: local_auth_device_credentials
+      name: local_auth
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.0"
+    version: "1.1.9"
   logging:
     dependency: transitive
     description:
