@@ -48,7 +48,8 @@ class _SemesterListScreenState extends State<SemesterListScreen>
                 .getSingle()
                 .then((value) => semesterLength = value);
             if (semesterLength < 13) {
-              final semester = Semester(semesterId: null, semesterCGPA: 0.0);
+              final semester = Semester(
+                  semesterId: null ?? semesterLength, semesterCGPA: 0.0);
               database.insertSemester(semester);
             } else {
               print(semesterLength);
@@ -83,7 +84,7 @@ class _SemesterListScreenState extends State<SemesterListScreen>
     return StreamBuilder(
         stream: database.watchAllSemesters(),
         builder: (context, AsyncSnapshot<List<Semester>> snapshot) {
-          final semesters = snapshot.data ?? List();
+          final semesters = snapshot.data ?? [];
           if (semesters.isEmpty) {
             return Container(
               alignment: Alignment.center,
