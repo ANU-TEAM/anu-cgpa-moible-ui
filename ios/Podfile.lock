@@ -3,7 +3,7 @@ PODS:
   - FMDB (2.7.5):
     - FMDB/standard (= 2.7.5)
   - FMDB/standard (2.7.5)
-  - local_auth_device_credentials (0.0.1):
+  - local_auth (0.0.1):
     - Flutter
   - path_provider_ios (0.0.1):
     - Flutter
@@ -33,7 +33,7 @@ PODS:
 
 DEPENDENCIES:
   - Flutter (from `Flutter`)
-  - local_auth_device_credentials (from `.symlinks/plugins/local_auth_device_credentials/ios`)
+  - local_auth (from `.symlinks/plugins/local_auth/ios`)
   - path_provider_ios (from `.symlinks/plugins/path_provider_ios/ios`)
   - sqflite (from `.symlinks/plugins/sqflite/ios`)
   - sqlite3_flutter_libs (from `.symlinks/plugins/sqlite3_flutter_libs/ios`)
@@ -47,8 +47,8 @@ SPEC REPOS:
 EXTERNAL SOURCES:
   Flutter:
     :path: Flutter
-  local_auth_device_credentials:
-    :path: ".symlinks/plugins/local_auth_device_credentials/ios"
+  local_auth:
+    :path: ".symlinks/plugins/local_auth/ios"
   path_provider_ios:
     :path: ".symlinks/plugins/path_provider_ios/ios"
   sqflite:
@@ -61,13 +61,13 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   Flutter: 50d75fe2f02b26cc09d224853bb45737f8b3214a
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
-  local_auth_device_credentials: 7ea08f7e3a5cd32bd628d1f8ee60e22f9d78f668
+  local_auth: ef62030a2731330b95df7ef1331bd15f6a64b8a6
   path_provider_ios: 7d7ce634493af4477d156294792024ec3485acd5
   sqflite: 6d358c025f5b867b29ed92fc697fd34924e11904
   sqlite3: c0ed2889f1853952214f34195c4a081a7a7a8015
   sqlite3_flutter_libs: 83a1fbbabdcee09e4e34511bb246136a8a97c9d6
   url_launcher_ios: 02f1989d4e14e998335b02b67a7590fa34f971af
 
-PODFILE CHECKSUM: aafe91acc616949ddb318b77800a7f51bffa2a4c
+PODFILE CHECKSUM: 8c946cb652435eaa8361b801f3240d92f9f41975
 
 COCOAPODS: 1.11.2
