@@ -33,8 +33,9 @@ class HomeScreen extends StatelessWidget {
                           await localAuth.canCheckBiometrics;
                       if (canCheckBiometrics) {
                         bool authenticated = await localAuth.authenticate(
-                            localizedReason: 'Please authenticate to view CGPA',
-                            biometricOnly: true);
+                          localizedReason: 'Please authenticate to view CGPA',
+                          biometricOnly: true,
+                        );
 
                         if (authenticated) {
                           Navigator.pushReplacement(
