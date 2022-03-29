@@ -50,7 +50,6 @@ class _SemesterListScreenState extends State<SemesterListScreen>
               );
               database.insertSemester(semester);
             } else {
-              print(semesterLength);
               final laddSnackBar = SnackBar(
                 backgroundColor: Colors.yellow[800],
                 content: Container(
