@@ -522,6 +522,14 @@ abstract class _$AppDb extends GeneratedDatabase {
         }).map((QueryRow row) => row.read<int>('COUNT(*)'));
   }
 
+  Selectable<int> getCoursesLength() {
+    return customSelect('SELECT COUNT(*) FROM courses',
+        variables: [],
+        readsFrom: {
+          courses,
+        }).map((QueryRow row) => row.read<int>('COUNT(*)'));
+  }
+
   Selectable<double> getSemesterCgpa(int var1) {
     return customSelect(
         'SELECT sum(CourseGrade * Credits) / sum(Credits) from courses WHERE SemesterId = ?',

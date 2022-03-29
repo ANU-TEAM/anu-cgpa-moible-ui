@@ -36,7 +36,7 @@ dependencies:
   sqflite: ^2.0.0+3
   sqlite3_flutter_libs: ^0.5.0
   url_launcher: ^6.0.9
-  local_auth: ^1.1.9
+  local_auth: ^1.1.11
 
 dev_dependencies:
   flutter_test:
