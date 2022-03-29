@@ -39,7 +39,6 @@ class _NewCourseInputWidgetState extends State<NewCourseInputWidget> {
   String inputCourseTitle = "";
   int inputCourseCreditHours = 3;
   double inputCourseGrade = 4.0;
-  int semesterCoursesLength = 0;
 
   @override
   void initState() {
@@ -48,11 +47,6 @@ class _NewCourseInputWidgetState extends State<NewCourseInputWidget> {
     courseCreditHourController =
         TextEditingController(text: inputCourseCreditHours.toString());
     courseGradeController = TextEditingController();
-    final database = Provider.of<AppDb>(context, listen: false);
-    database
-        .getSemesterCoursesLength(currentSemester!.semesterId)
-        .getSingle()
-        .then((value) => semesterCoursesLength = value);
   }
 
   @override
@@ -212,8 +206,11 @@ class _NewCourseInputWidgetState extends State<NewCourseInputWidget> {
         highlightColor: Colors.yellow[800],
         height: 55,
         color: Colors.yellow[700],
-        onPressed: () {
+        onPressed: () async {
           final database = Provider.of<AppDb>(context, listen: false);
+
+          int semesterCoursesLength =
+              await database.getCoursesLength().getSingle();
 
           final course = Course(
             courseId: semesterCoursesLength,

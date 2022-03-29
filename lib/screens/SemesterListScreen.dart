@@ -21,7 +21,6 @@ class _SemesterListScreenState extends State<SemesterListScreen>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    int semesterLength = 0;
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -42,14 +41,13 @@ class _SemesterListScreenState extends State<SemesterListScreen>
         final database = Provider.of<AppDb>(context);
         return FloatingActionButton(
           backgroundColor: Colors.yellow[600],
-          onPressed: () {
-            database
-                .getSemesterLength()
-                .getSingle()
-                .then((value) => semesterLength = value);
+          onPressed: () async {
+            int semesterLength = await database.getSemesterLength().getSingle();
             if (semesterLength < 13) {
               final semester = Semester(
-                  semesterId: null ?? semesterLength, semesterCGPA: 0.0);
+                semesterId: semesterLength + 1,
+                semesterCGPA: 0.0,
+              );
               database.insertSemester(semester);
             } else {
               print(semesterLength);
